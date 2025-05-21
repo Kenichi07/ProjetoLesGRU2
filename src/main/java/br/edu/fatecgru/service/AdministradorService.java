@@ -2,12 +2,12 @@ package br.edu.fatecgru.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import br.edu.fatecgru.model.entity.repository.UsuarioRepository;
+import br.edu.fatecgru.model.entity.repository.AdministradorRepository;
 
 @Service
-public class UsuarioService {
+public class AdministradorService {
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private AdministradorRepository administradorRepository;
 	
 }

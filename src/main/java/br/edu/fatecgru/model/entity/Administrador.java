@@ -3,6 +3,6 @@ package br.edu.fatecgru.model.entity;
 import jakarta.persistence.Entity;
 
 @Entity
-public class Consumidor extends Usuario{
-
+public class Administrador extends Usuario {
+  
 }
