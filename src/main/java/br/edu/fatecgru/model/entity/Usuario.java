@@ -1,11 +1,16 @@
 package br.edu.fatecgru.model.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn; 
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -17,6 +22,15 @@ public abstract class Usuario {
 	private String email;
 	private String senha;
 	private String tipoUsuario;
+	
+	@ManyToMany
+    @JoinTable(
+        name = "CURSOS_FAVORITOS",
+        joinColumns = @JoinColumn(name = "CUFA_USU_id"),
+        inverseJoinColumns = @JoinColumn(name = "CUFA_CUR_id")
+    )
+	
+	private List<Curso> cursosFavoritos;
 	
 	public Usuario() {
 		super();
