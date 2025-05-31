@@ -1,9 +1,12 @@
 package br.edu.fatecgru.model.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -16,17 +19,21 @@ public class Cidade {
 	
 	@ManyToOne
 	private Estado estado;
-
+	
+	@ManyToMany(mappedBy = "servicoCidade")
+	private List<Servico> servicoCidade;
+	
 	public Cidade() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cidade(int id, String nome, Estado estado) {
+	public Cidade(int id, String nome, Estado estado, List<Servico> servicoCidade) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.estado = estado;
+		this.servicoCidade = servicoCidade;
 	}
 
 	public int getId() {
@@ -51,6 +58,14 @@ public class Cidade {
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+
+	public List<Servico> getServicoCidade() {
+		return servicoCidade;
+	}
+
+	public void setServicoCidade(List<Servico> servicoCidade) {
+		this.servicoCidade = servicoCidade;
 	}
 
 }

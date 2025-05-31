@@ -18,7 +18,7 @@ public class AdministradorController {
 
 	@GetMapping("/login")
     public String loginPage() {
-        return "login";
+        return "homeconsumidor";
     }
 	
 	@GetMapping("/cadastro")

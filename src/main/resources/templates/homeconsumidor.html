@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/homeconsumidor.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+					<a th:href="@{/administrador/index}">
+						<img src="/imagem/logo.png" alt="Logo">
+					</a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a th:href="@{/consumidor/home}" class="active">Home</a></li>
+                <li><a th:href="@{/consumidor/educacional}">Educacional</a></li>
+                <li><a th:href="@{/consumidor/catalogo}">Catálogo de Serviços</a></li>
+                <li><a th:href="@{/consumidor/equipe}">Sobre Nós</a></li>
+            </ul>
+        </nav>
+        <div class="profile-btn">
+					<a th:href="@{/consumidor/perfil}">
+						<img src="/imagem/Group.png" alt="Profile">
+					</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Seção de Serviços de Interesse -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Serviços que podem ser de seu interesse</h2>
+                <a th:href="@{/consumidor/catalogo}" class="link">Ver Catálogo</a>
+            </div>
+            <div class="card-grid">
+                <div class="card" th:each="servico : ${servicos}">
+                    <div class="card-header">
+                        <h3>Limpar Calha</h3>
+                        <span class="icon">🤍</span>
+                    </div>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
+                    <a href="#" class="card-link">Ver Mais...</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Serviços Favoritos -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Serviços Favoritos</h2>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Limpar Calha</h3>
+                        <span class="icon">🖤</span>
+                    </div>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
+                    <a href="#" class="card-link">Ver Mais...</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

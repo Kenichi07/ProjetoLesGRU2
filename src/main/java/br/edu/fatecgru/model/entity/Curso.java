@@ -30,13 +30,15 @@ public class Curso {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Curso(int id, String nome, String descricao, String linkCurso, Categoria categoria) {
+	public Curso(int id, String nome, String descricao, String linkCurso, Categoria categoria,
+			List<Usuario> usuariosQueFavoritaram) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.linkCurso = linkCurso;
 		this.categoria = categoria;
+		this.usuariosQueFavoritaram = usuariosQueFavoritaram;
 	}
 
 	public int getId() {
@@ -77,6 +79,14 @@ public class Curso {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public List<Usuario> getUsuariosQueFavoritaram() {
+		return usuariosQueFavoritaram;
+	}
+
+	public void setUsuariosQueFavoritaram(List<Usuario> usuariosQueFavoritaram) {
+		this.usuariosQueFavoritaram = usuariosQueFavoritaram;
 	}
     
 }

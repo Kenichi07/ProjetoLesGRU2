@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #f9f9ff;
+    color: #111;
+		height: 100vh;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    background-color: white;
+}
+
+.logo img {
+    width: 71px;
+    height: 69px;
+		justify-content: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #111;
+    font-weight: 500;
+		font-size: 18px;
+}
+
+.nav-links li a.active {
+    color: #0062ff;
+    font-weight: 600;
+}
+
+.profile-btn img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+		margin-right: 10px;
+}
+
+/* Container */
+.container {
+    padding: 40px;
+}
+
+.section {
+    margin-bottom: 60px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.section-header .link {
+    text-decoration: none;
+    color: #003eff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-header .icon {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.card p {
+    margin: 10px 0;
+    font-size: 13px;
+    color: #444;
+}
+
+.card-link {
+    text-decoration: none;
+    color: #003eff;
+    font-weight: 500;
+    font-size: 13px;
+    align-self: flex-start;
+}
+
+.card-link:hover {
+    text-decoration: underline;
+}

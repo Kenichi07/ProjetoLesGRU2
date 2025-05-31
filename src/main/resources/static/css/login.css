@@ -17,15 +17,11 @@ body {
     align-items: center;
     border-bottom: 1px solid #ddd;
     background-color: white;
-		height: 100px;
 }
-
 .logo img {
-    width: 81px;
-    height: 79px;
+    width: 71px;
+    height: 69px;
 		justify-content: center;
-		margin-top: 10px;
-		margin-bottom: 16px;
 }
 
 .container {

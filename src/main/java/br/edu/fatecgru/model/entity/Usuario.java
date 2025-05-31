@@ -21,7 +21,6 @@ public abstract class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
-	private String tipoUsuario;
 	
 	@ManyToMany
     @JoinTable(
@@ -36,13 +35,13 @@ public abstract class Usuario {
 		super();
 	}
 
-	public Usuario(int id, String nome, String email, String senha, String tipoUsuario) {
+	public Usuario(int id, String nome, String email, String senha, List<Curso> cursosFavoritos) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.tipoUsuario = tipoUsuario;
+		this.cursosFavoritos = cursosFavoritos;
 	}
 
 	public int getId() {
@@ -77,12 +76,12 @@ public abstract class Usuario {
 		this.senha = senha;
 	}
 
-	public String getTipoUsuario() {
-		return tipoUsuario;
+	public List<Curso> getCursosFavoritos() {
+		return cursosFavoritos;
 	}
 
-	public void setTipoUsuario(String tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
+	public void setCursosFavoritos(List<Curso> cursosFavoritos) {
+		this.cursosFavoritos = cursosFavoritos;
 	}
 
 }
