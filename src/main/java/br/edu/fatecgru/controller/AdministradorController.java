@@ -26,4 +26,9 @@ public class AdministradorController {
         return "cadastro";
     }
 	
+	@GetMapping("/cadastroadm")
+    public String cadastroAdmPage() {
+        return "cadastroadm";
+    }
+	
 }

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/css/homeconsumidor.css">
+    <title>Catálogo</title>
+    <link rel="stylesheet" href="/css/catalogo.css">
 </head>
 <body>
 
@@ -17,9 +17,9 @@
         </div>
         <nav>
             <ul class="nav-links">
-                <li><a th:href="@{/consumidor/home}" class="active">Home</a></li>
+                <li><a th:href="@{/consumidor/home}">Home</a></li>
                 <li><a th:href="@{/consumidor/educacional}">Educacional</a></li>
-                <li><a th:href="@{/consumidor/catalogo}">Catálogo de Serviços</a></li>
+                <li><a th:href="@{/consumidor/catalogo}" class="active">Catálogo de Serviços</a></li>
                 <li><a th:href="@{/consumidor/equipe}">Sobre Nós</a></li>
             </ul>
         </nav>
@@ -32,11 +32,25 @@
 
     <!-- Main Content -->
     <main class="container">
-        <!-- Seção de Serviços de Interesse -->
+				<div class="search-box">
+				  <input type="text" placeholder="Pesquisar Serviço" />
+				  <button class="search-btn">
+				    <a>
+							<img src="/imagem/lupa.png" alt="Logo">						
+						</a>
+				  </button>
+				  <button class="filter-btn">
+						<a>
+					    <img src="/imagem/filtro.png" alt="Logo">							
+						</a>
+				  </button>
+				</div>
+
+        <!-- Catálogo de serviços -->
         <div class="section">
             <div class="section-header">
-                <h2>Serviços que podem ser de seu interesse</h2>
-                <a th:href="@{/consumidor/catalogo}" class="link">Ver Catálogo</a>
+                <h2>Serviços</h2>
+                <a th:href="@{/consumidor/catalogo}" class="link">Ver Todos</a>
             </div>
             <div class="card-grid">
                 <div class="card">
@@ -46,41 +60,6 @@
 												  <input type="checkbox" />
 												  <svg
 												    class="heart"
-												    viewBox="0 0 24 24"
-												    fill="none"
-												    stroke="#333"
-												    stroke-width="2"
-												    stroke-linecap="round"
-												    stroke-linejoin="round"
-												  >
-												    <path
-												      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 
-												      5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 
-												      1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-												    />
-												  </svg>
-												</label>
-
-                    </div>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
-                    <a href="#" class="card-link">Ver Mais...</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Seção de Serviços Favoritos -->
-        <div class="section">
-            <div class="section-header">
-                <h2>Serviços Favoritos</h2>
-            </div>
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Limpar Calha</h3>
-												<label class="heart-checkbox">
-												  <input type="checkbox" />
-												  <svg
-												    class="Heart"
 												    viewBox="0 0 24 24"
 												    fill="none"
 												    stroke="#333"
