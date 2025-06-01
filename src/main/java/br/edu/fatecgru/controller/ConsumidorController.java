@@ -22,7 +22,7 @@ public class ConsumidorController {
 
 	@GetMapping("/educacional")
     public String educacional() {
-        return "educacional";
+        return "educacionalconsu";
     }
 	
 	@GetMapping("/catalogo")
@@ -32,12 +32,22 @@ public class ConsumidorController {
 	
 	@GetMapping("/equipe")
     public String equipe() {
-        return "equipe";
+        return "equipeconsu";
 	}
 	
 	@GetMapping("/cursos")
     public String cursos() {
-        return "cursos";
+        return "cursoconsu";
     }
 	
+	@GetMapping("/servicos")
+    public String servicos() {
+        return "servico";
+    }
+	
+
+	@GetMapping("/prefil")
+    public String meusServicos() {
+        return "meuperfil";
+	}
 }

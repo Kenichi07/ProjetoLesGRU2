@@ -17,16 +17,26 @@ public class PrestadorController {
 	
 	@GetMapping("/home")
     public String home() {
-        return "homeconsumidor";
+        return "homeprestador";
     }
 
 	@GetMapping("/educacional")
     public String educacional() {
-        return "educacional";
+        return "educacionalpresta";
     }
 	
 	@GetMapping("/equipe")
     public String equipe() {
-        return "equipe";
+        return "equipepresta";
+	}
+	
+	@GetMapping("/cursos")
+    public String cursos() {
+        return "cursopresta";
+    }
+	
+	@GetMapping("/servicos")
+    public String meusServicos() {
+        return "meusServicos";
 	}
 }

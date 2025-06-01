@@ -4,38 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Educacional</title>
-    <link rel="stylesheet" href="/css/homeconsumidor.css">
+    <link rel="stylesheet" href="/css/educacional.css">
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="logo">
 					<a th:href="@{/administrador/index}">
 						<img src="/imagem/logo.png" alt="Logo">
 					</a>
         </div>
-        <nav>
+				<nav>
           <ul class="nav-links">
-            <li><a th:href="@{/consumidor/home}">Home</a></li>
-            <li><a th:href="@{/consumidor/educacional}" class="active">Educacional</a></li>
-            <li><a th:href="@{/consumidor/catalogo}">Catálogo de Serviços</a></li>
-            <li><a th:href="@{/consumidor/equipe}">Sobre Nós</a></li>
+              <li><a th:href="@{/prestador/home}">Home</a></li>
+              <li><a th:href="@{/prestador/educacional}" class="active">Educacional</a></li>
+              <li><a th:href="@{/prestador/equipe}">Sobre Nós</a></li>
           </ul>
-        </nav>
+      	</nav>
         <div class="profile-btn">
-					<a th:href="@{/consumidor/perfil}">
+					<a th:href="@{/prestador/perfil}">
 						<img src="/imagem/Group.png" alt="Profile">
 					</a>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="container">
-        <!-- Seção de Cursos de Interesse -->
         <div class="section">
           <div class="section-header">
               <h2>Cursos</h2>
-              <a th:href="@{/consumidor/cursos}" class="link">Ver Todos</a>
+              <a th:href="@{/prestador/cursos}" class="link">Ver Todos</a>
           </div>
           <div class="card-grid">
             <div class="card">
@@ -68,7 +64,6 @@
         	</div>
         </div>
 
-        <!-- Seção de Cursos Favoritos -->
         <div class="section">
           <div class="section-header">
               <h2>Cursos Favoritos</h2>

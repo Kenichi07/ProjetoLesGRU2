@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Serviços</title>
+    <link rel="stylesheet" href="/css/servico.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+					<a th:href="@{/administrador/index}">
+						<img src="/imagem/logo.png" alt="Logo">
+					</a>
+        </div>
+        <nav>
+          <ul class="nav-links">
+            <li><a th:href="@{/prestador/home}">Home</a></li>
+            <li><a th:href="@{/prestador/educacional}">Educacional</a></li>
+            <li><a th:href="@{/prestador/equipe}">Sobre Nós</a></li>
+          </ul>
+        </nav>
+        <div class="profile-btn">
+					<a th:href="@{/prestador/perfil}">
+						<img src="/imagem/Group.png" alt="Profile">
+					</a>
+        </div>
+    </header>
+
+    <main class="container">
+			<div class="section">
+         <div class="section-header">
+             <h2>Meus Serviços</h2>
+         </div>
+         <div class="card-grid">
+           <div class="card">
+               <div class="card-header">
+                   <h3>Limpar Calha</h3>
+									<label class="heart-checkbox">
+									  <input type="checkbox" />
+									  <svg
+									    class="heart"
+									    viewBox="0 0 24 24"
+									    fill="none"
+									    stroke="#333"
+									    stroke-width="2"
+									    stroke-linecap="round"
+									    stroke-linejoin="round"
+									  >
+									    <path
+									      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 
+									      5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 
+									      1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+									    />
+									  </svg>
+									</label>
+               </div>
+               <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
+               <a href="#" class="card-link">Ver Mais...</a>
+           </div>
+         </div>
+       </div>
+    </main>
+</body>
+</html>

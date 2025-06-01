@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="/css/catalogo.css">
 </head>
 <body>
-
-    <!-- Header -->
     <header class="header">
         <div class="logo">
 					<a th:href="@{/administrador/index}">
@@ -29,8 +27,7 @@
 					</a>
         </div>
     </header>
-
-    <!-- Main Content -->
+		
     <main class="container">
 				<div class="search-box">
 				  <input type="text" placeholder="Pesquisar Serviço" />
@@ -46,11 +43,10 @@
 				  </button>
 				</div>
 
-        <!-- Catálogo de serviços -->
         <div class="section">
             <div class="section-header">
                 <h2>Serviços</h2>
-                <a th:href="@{/consumidor/catalogo}" class="link">Ver Todos</a>
+                <a th:href="@{/consumidor/servicos}" class="link">Ver Todos</a>
             </div>
             <div class="card-grid">
                 <div class="card">
