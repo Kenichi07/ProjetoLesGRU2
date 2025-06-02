@@ -11,6 +11,6 @@ public class PrestadorService {
 	@Autowired
 	private PrestadorServicoRepository prestadorRepository;
 	
-	@Autowired
-    private ServicoRepository servicoRepo;
+	 @Autowired
+	 private UsuarioService usuarioService;
 }

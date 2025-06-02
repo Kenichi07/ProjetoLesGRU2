@@ -1,6 +1,7 @@
 package br.edu.fatecgru.model.entity;
 
 import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
@@ -17,8 +18,8 @@ public class PrestadorServico extends Usuario{
 		// TODO Auto-generated constructor stub
 	}
 
-	public PrestadorServico(int id, String nome, String email, String senha, List<Curso> cursosFavoritos) {
-		super(id, nome, email, senha, cursosFavoritos);
+	public PrestadorServico(int id, String nome, String email, String senha) {
+		super(id, nome, email, senha);
 		// TODO Auto-generated constructor stub
 	}
 

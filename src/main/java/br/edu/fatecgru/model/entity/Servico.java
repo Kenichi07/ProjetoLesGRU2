@@ -1,6 +1,7 @@
 package br.edu.fatecgru.model.entity;
 
 import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class Servico {
     private Categoria categoria;
     
     @ManyToMany(mappedBy = "servicosFavoritos")
-    private List<ConsumidorServico> consumidoresQueFavoritaram;
+    private List<Usuario> usuariosQueFavoritaram;
        
     @ManyToMany
     @JoinTable(
@@ -44,7 +45,7 @@ public class Servico {
 	}
 
 	public Servico(int id, String nome, String descricao, Float valor, PrestadorServico prestadorservico,
-			Categoria categoria, List<ConsumidorServico> consumidoresQueFavoritaram, List<Cidade> servicoCidade) {
+			Categoria categoria, List<Usuario> usuariosQueFavoritaram, List<Cidade> servicoCidade) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -52,7 +53,7 @@ public class Servico {
 		this.valor = valor;
 		this.prestadorservico = prestadorservico;
 		this.categoria = categoria;
-		this.consumidoresQueFavoritaram = consumidoresQueFavoritaram;
+		this.usuariosQueFavoritaram = usuariosQueFavoritaram;
 		this.servicoCidade = servicoCidade;
 	}
 
@@ -104,12 +105,12 @@ public class Servico {
 		this.categoria = categoria;
 	}
 
-	public List<ConsumidorServico> getConsumidoresQueFavoritaram() {
-		return consumidoresQueFavoritaram;
+	public List<Usuario> getUsuariosQueFavoritaram() {
+		return usuariosQueFavoritaram;
 	}
 
-	public void setConsumidoresQueFavoritaram(List<ConsumidorServico> consumidoresQueFavoritaram) {
-		this.consumidoresQueFavoritaram = consumidoresQueFavoritaram;
+	public void setUsuariosQueFavoritaram(List<Usuario> usuariosQueFavoritaram) {
+		this.usuariosQueFavoritaram = usuariosQueFavoritaram;
 	}
 
 	public List<Cidade> getServicoCidade() {

@@ -14,4 +14,6 @@ public class ConsumidorController {
 	@Autowired
 	private ConsumidorService consumidorService;
 	
+	@Autowired
+	private UsuarioController usuarioController;
 }

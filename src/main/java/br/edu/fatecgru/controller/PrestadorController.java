@@ -14,4 +14,6 @@ public class PrestadorController {
 	@Autowired
 	private PrestadorService prestadorService;
 	
+	@Autowired
+	private UsuarioController usuarioController;
 }
