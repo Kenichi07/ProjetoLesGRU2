@@ -1,0 +1,179 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #f9f9ff;
+    color: #111;
+		height: 100vh;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    background-color: white;
+}
+
+.logo img {
+    width: 71px;
+    height: 69px;
+		justify-content: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #111;
+    font-weight: 500;
+		font-size: 18px;
+}
+
+.nav-links li a.active {
+    color: #0062ff;
+    font-weight: 600;
+}
+
+.profile-btn img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+		margin-right: 10px;
+}
+
+/* Container */
+.container {
+    padding: 80px;
+		margin: 0px 100px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-header h2 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 90px;
+}
+
+.card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+		height: 250px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-header h3 {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.heart-checkbox {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;	
+	
+}
+
+.heart-checkbox input {
+  display: none;
+}
+
+.heart {
+  width: 25px;
+  height: 25px;
+  stroke: #333;
+  fill: white;
+  transition: all 0.3s ease;
+}
+
+.Heart {
+  width: 25px;
+  height: 25px;
+  stroke: red;
+  fill: red;
+  transition: all 0.3s ease;
+}
+
+.heart-checkbox input:checked + .heart {
+  fill: red;
+  stroke: red;
+}
+
+.heart-checkbox input:checked + .Heart {
+  fill: white;
+  stroke: #333;
+}
+
+.card p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #444;
+}
+
+.card-link {
+    text-decoration: none;
+    color: #003eff;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+}
+
+.card-link:hover {
+    text-decoration: underline;
+}
+
+.btn-add {
+  background: linear-gradient(180deg, #2A4EFF 0%, #174EE0 100%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: background 0.3s ease;
+}
+
+.btn-add:hover {
+  background: linear-gradient(180deg, #1d3bc9 0%, #123bb3 100%);
+}
+

@@ -38,13 +38,17 @@ public class Servico {
 	
 	private List<Cidade> servicoCidade;
     
+    @ManyToOne
+    private Estado estado;
+    
     public Servico() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+    
 	public Servico(int id, String nome, String descricao, Float valor, PrestadorServico prestadorservico,
-			Categoria categoria, List<ConsumidorServico> consumidoresQueFavoritaram, List<Cidade> servicoCidade) {
+			Categoria categoria, List<ConsumidorServico> consumidoresQueFavoritaram, List<Cidade> servicoCidade,
+			Estado estado) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -54,6 +58,7 @@ public class Servico {
 		this.categoria = categoria;
 		this.consumidoresQueFavoritaram = consumidoresQueFavoritaram;
 		this.servicoCidade = servicoCidade;
+		this.estado = estado;
 	}
 
 	public int getId() {
@@ -120,4 +125,12 @@ public class Servico {
 		this.servicoCidade = servicoCidade;
 	}
 
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+	
 }

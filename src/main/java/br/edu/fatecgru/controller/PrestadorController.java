@@ -2,9 +2,11 @@ package br.edu.fatecgru.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.service.PrestadorService;
 
 //@RestController
@@ -35,8 +37,17 @@ public class PrestadorController {
         return "cursopresta";
     }
 	
-	@GetMapping("/servicos")
+	@GetMapping("/list")
     public String meusServicos() {
         return "meusServicos";
 	}
+	
+	@GetMapping("/new")
+	public String newBrinquedo(Model model) {
+		model
+			.addAttribute("servico", new Servico())
+			.addAttribute("novo", true);
+		return "formpresta";
+	}
+	
 }
