@@ -20,12 +20,17 @@ public class AdministradorController {
 	
 	@GetMapping("/login")
     public String loginPage() {
-        return "homeconsumidor";
+        return "login";
     }
 	
 	@GetMapping("/cadastro")
     public String cadastroPage() {
         return "cadastro";
+    }
+	
+	@GetMapping("/cadastroadm")
+    public String cadastroAdmPage() {
+        return "cadastroadm";
     }
 	
 }

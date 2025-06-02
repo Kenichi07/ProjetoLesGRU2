@@ -60,7 +60,7 @@ body {
 }
 
 .section {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 .section-header {
@@ -75,20 +75,9 @@ body {
     font-weight: 700;
 }
 
-.section-header .link {
-    text-decoration: none;
-    color: #003eff;
-    font-weight: 800;
-    font-size: 18px;
-}
-
-.link:hover {
-		text-decoration: underline;
-}
-
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 90px;
 }
 
@@ -167,3 +156,24 @@ body {
 .card-link:hover {
     text-decoration: underline;
 }
+
+.btn-add {
+  background: linear-gradient(180deg, #2A4EFF 0%, #174EE0 100%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: background 0.3s ease;
+}
+
+.btn-add:hover {
+  background: linear-gradient(180deg, #1d3bc9 0%, #123bb3 100%);
+}
+

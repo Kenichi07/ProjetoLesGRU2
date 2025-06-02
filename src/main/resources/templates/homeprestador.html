@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/homeprestador.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+					<a th:href="@{/administrador/index}">
+						<img src="/imagem/logo.png" alt="Logo">
+					</a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a th:href="@{/prestador/home}" class="active">Home</a></li>
+                <li><a th:href="@{/prestador/educacional}">Educacional</a></li>
+                <li><a th:href="@{/prestador/equipe}">Sobre Nós</a></li>
+            </ul>
+        </nav>
+        <div class="profile-btn">
+					<a th:href="@{/prestador/perfil}">
+						<img src="/imagem/Group.png" alt="Profile">
+					</a>
+        </div>
+    </header>
+
+    <main class="container">
+      <div class="section">
+        <div class="section-header">
+            <h2>Meus Serviços</h2>
+            <a th:href="@{/prestador/list}" class="link">Ver Tudo</a>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+              <div class="card-header">
+                  <h3>Limpar Calha</h3>
+              </div>
+              <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
+              <a href="#" class="card-link">Ver Mais...</a>
+          </div>
+        </div>
+      </div>
+    </main>
+</body>
+</html>
