@@ -2,6 +2,7 @@ package br.edu.fatecgru.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.repository.PrestadorServicoRepository;
 import br.edu.fatecgru.model.entity.repository.ServicoRepository;
 
@@ -13,4 +14,8 @@ public class PrestadorService {
 	
 	@Autowired
     private ServicoRepository servicoRepo;
+	
+	public PrestadorServico getByCode(int id) {
+		return prestadorRepository.findById(id).get();
+	}
 }

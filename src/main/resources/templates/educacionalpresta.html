@@ -20,11 +20,13 @@
               <li><a th:href="@{/prestador/equipe}">Sobre Nós</a></li>
           </ul>
       	</nav>
-        <div class="profile-btn">
-					<a th:href="@{/prestador/perfil}">
-						<img src="/imagem/Group.png" alt="Profile">
-					</a>
-        </div>
+				<div class="dropdown">	  
+					<img src="/imagem/Group.png" alt="Profile" class="dropbtn" onclick="toggleDropdown()">
+				  <div id="myDropdown" class="dropdown-content">
+				    <a href="/perfil">Perfil</a>
+				    <a href="/logout">Sair</a>
+				  </div>
+				</div>
     </header>
 
     <main class="container">
@@ -98,5 +100,6 @@
           </div>
         </div>
     </main>
+		<script src="/js/script.js"></script>
 </body>
 </html>

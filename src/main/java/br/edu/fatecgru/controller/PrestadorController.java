@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.service.PrestadorService;
 
@@ -42,12 +45,30 @@ public class PrestadorController {
         return "meusServicos";
 	}
 	
+	@GetMapping("/servico")
+    public String servico() {
+        return "servicoindividual";
+	}
+	
 	@GetMapping("/new")
-	public String newBrinquedo(Model model) {
+	public String newServico(Model model) {
 		model
 			.addAttribute("servico", new Servico())
 			.addAttribute("novo", true);
 		return "formpresta";
 	}
 	
+	@GetMapping("/{id}/edit")
+	public String editServico(Model model, @PathVariable Integer id) {
+		PrestadorServico servico = prestadorService.getByCode(id);
+		model
+			.addAttribute("brinquedo", servico)
+			.addAttribute("novo", false);
+		return "formpresta";
+	}
+	
+	@GetMapping("/prefil")
+    public String perfil() {
+        return "meuperfil";
+	}
 }

@@ -47,7 +47,7 @@ public class ConsumidorController {
 	
 
 	@GetMapping("/prefil")
-    public String meusServicos() {
+    public String perfil() {
         return "meuperfil";
 	}
 }
