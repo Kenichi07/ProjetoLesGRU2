@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.service.AdministradorService;
 
@@ -16,6 +15,9 @@ public class AdministradorController {
 	@Autowired
 	private AdministradorService administradorService;
 
+	@Autowired
+	private UsuarioController usuarioController;
+	
 	@GetMapping("/login")
     public String loginPage() {
         return "login";

@@ -2,6 +2,8 @@ package br.edu.fatecgru.model.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,22 +25,19 @@ public class Curso {
     private Categoria categoria;
     
     @ManyToMany(mappedBy = "cursosFavoritos")
+    @JsonBackReference
     private List<Usuario> usuariosQueFavoritaram;
 
 	public Curso() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Curso(int id, String nome, String descricao, String linkCurso, Categoria categoria,
-			List<Usuario> usuariosQueFavoritaram) {
-		super();
+	public Curso(int id, String nome, String descricao, String linkCurso, Categoria categoria) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.linkCurso = linkCurso;
 		this.categoria = categoria;
-		this.usuariosQueFavoritaram = usuariosQueFavoritaram;
 	}
 
 	public int getId() {

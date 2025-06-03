@@ -11,10 +11,7 @@ public class AdministradorService {
 
 	@Autowired
 	private AdministradorRepository administradorRepository;
-	
-	@Autowired
-    private CursoRepository cursoRepo;
 
     @Autowired
-    private UsuarioRepository usuarioRepo;
+    private UsuarioService usuarioService;
 }

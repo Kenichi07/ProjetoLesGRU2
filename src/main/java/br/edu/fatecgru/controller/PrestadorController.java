@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.service.PrestadorService;
@@ -20,6 +19,9 @@ public class PrestadorController {
 	@Autowired
 	private PrestadorService prestadorService;
 	
+	@Autowired
+	private UsuarioController usuarioController;
+
 	@GetMapping("/home")
     public String home() {
         return "homeprestador";
@@ -71,4 +73,5 @@ public class PrestadorController {
     public String perfil() {
         return "meuperfil";
 	}
+	
 }

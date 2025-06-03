@@ -15,7 +15,11 @@ public class PrestadorService {
 	@Autowired
     private ServicoRepository servicoRepo;
 	
+	@Autowired
+	 private UsuarioService usuarioService;
+	
 	public PrestadorServico getByCode(int id) {
 		return prestadorRepository.findById(id).get();
 	}
+	
 }

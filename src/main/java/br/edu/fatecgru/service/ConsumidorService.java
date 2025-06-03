@@ -11,6 +11,6 @@ public class ConsumidorService {
 	@Autowired
 	private ConsumidorServicoRepository consumidorRepository;
 	
-	@Autowired
-    private ServicoRepository servicoRepo;
+	 @Autowired
+	    private UsuarioService usuarioService;
 }
