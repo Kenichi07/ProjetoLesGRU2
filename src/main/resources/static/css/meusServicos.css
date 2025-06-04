@@ -157,6 +157,46 @@ body {
     text-decoration: underline;
 }
 
+/* Ao passar o mouse (opcional) */
+.card:hover {
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Container dos botões */
+.card-actions {
+  display: none;
+  gap: 10px;
+  margin-top: 10px;
+	justify-content: center;
+}
+
+/* Botões */
+.edit-btn, .delete-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.edit-btn {
+  background-color: #007bff;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+}
+
+/* Card selecionado */
+.card.selecionado {
+  border: 2px solid #007bff;
+}
+
+.card.selecionado .card-actions {
+  display: flex;
+}
+
+
 .btn-add {
   background: linear-gradient(180deg, #2A4EFF 0%, #174EE0 100%);
   color: white;

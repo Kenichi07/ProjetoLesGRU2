@@ -64,9 +64,15 @@ public class PrestadorController {
 	public String editServico(Model model, @PathVariable Integer id) {
 		PrestadorServico servico = prestadorService.getByCode(id);
 		model
-			.addAttribute("brinquedo", servico)
+			.addAttribute("servico", servico)
 			.addAttribute("novo", false);
 		return "formpresta";
+	}
+	
+	@GetMapping("/{id}/delete")
+	public String delete(@PathVariable Integer id) {
+		prestadorService.delete(id);
+		return "redirect:/prestador/list";
 	}
 	
 	@GetMapping("/prefil")

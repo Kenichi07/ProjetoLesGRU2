@@ -22,4 +22,8 @@ public class PrestadorService {
 		return prestadorRepository.findById(id).get();
 	}
 	
+	public void delete(Integer id) {
+		prestadorRepository.deleteById(id);
+	}
+	
 }

@@ -33,4 +33,24 @@ public class AdministradorController {
         return "cadastroadm";
     }
 	
+	@GetMapping("/home")
+    public String home() {
+        return "homeadministrador";
+    }
+
+	@GetMapping("/educacional")
+    public String educacional() {
+        return "educacionaladm";
+    }
+	
+	@GetMapping("/equipe")
+    public String equipe() {
+        return "equipeadm";
+	}
+	
+	@GetMapping("/cursos")
+    public String cursos() {
+        return "cursoadm";
+    }
+	
 }

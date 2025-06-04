@@ -14,3 +14,16 @@ window.onclick = function(event) {
     }
   }
 }
+
+function selecionarCard(card) {
+  // Se o card já estiver selecionado, desmarca
+  if (card.classList.contains('selecionado')) {
+    card.classList.remove('selecionado');
+  } else {
+    // Remove a seleção de outros cards
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('selecionado'));
+
+    // Adiciona a seleção no card clicado
+    card.classList.add('selecionado');
+  }
+}
