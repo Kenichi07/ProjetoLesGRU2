@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.UsuarioDTO;
+import br.edu.fatecgru.model.entity.Curso;
 import br.edu.fatecgru.service.AdministradorService;
+import org.springframework.ui.Model;
 
 @RestController
 //@Controller
@@ -70,9 +72,10 @@ public class AdministradorController {
         return "equipeadm";
 	}
 	
-	@GetMapping("/cursos")
-    public String cursos() {
-        return "cursoadm";
-    }
-	
+	  @GetMapping("/new") public String newServico(Model model) { 
+	  		model
+	  			.addAttribute("curso", new Curso())
+	  			.addAttribute("novo", true); 
+	  		return "formadm"; 
+	  }		
 }

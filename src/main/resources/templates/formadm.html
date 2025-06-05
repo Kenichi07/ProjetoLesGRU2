@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="/css/formpresta.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+					<a th:href="@{/administrador/index}">
+						<img src="/imagem/logo.png" alt="Logo">
+					</a>
+        </div>
+        <nav>
+          <ul class="nav-links">
+            <li><a th:href="@{/administrador/home}">Home</a></li>
+            <li><a th:href="@{/administrador/educacional}">Educacional</a></li>
+            <li><a th:href="@{/administrador/equipe}">Sobre Nós</a></li>
+          </ul>
+        </nav>
+				<div class="dropdown">	  
+					<img src="/imagem/Group.png" alt="Profile" class="dropbtn" onclick="toggleDropdown()">
+				  <div id="myDropdown" class="dropdown-content">
+				    <a href="/perfil">Perfil</a>
+				    <a href="/logout">Sair</a>
+				  </div>
+				</div>
+    </header>
+
+    <main class="container">
+			<h1><label th:text="${novo} ?'Novo ' : 'Editar '"></label> Curso</h1>
+        <form class="form" th:action="@{/administrador/save}" th:object="${curso}" method="post">
+					<input type="hidden" th:field="*{id}"/>
+					
+					<label for="nome">Nome do Curso:</label>
+				  <input type="text" id="servico" placeholder="Insira o nome do curso" th:field="*{nome}" required>
+				
+          <label for="descricao">Descrição:</label>
+          <input type="email" id="descricao" placeholder="Insira a descrição" th:field="*{descricao}" required>
+
+          <label for="valor">Link:</label>
+          <input type="text" id="valor" placeholder="Insira o link" th:field="*{linkCurso}" required>
+					
+					<div>
+						<button type="submit" class="btn">Salvar</button>
+						<a th:href="@{/administrador/educacional}" class="btn">Voltar</a>
+					</div>
+        </form>
+    </main>
+		<script src="/js/script.js"></script>
+</body>
+</html>

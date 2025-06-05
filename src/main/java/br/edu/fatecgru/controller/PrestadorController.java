@@ -51,6 +51,11 @@ public class PrestadorController {
         return "cursopresta";
     }
 	
+	@GetMapping("/curso")
+    public String curso() {
+        return "cursoindividualpresta";
+    }
+	
 	@GetMapping("/list")
     public String meusServicos() {
         return "meusServicos";
