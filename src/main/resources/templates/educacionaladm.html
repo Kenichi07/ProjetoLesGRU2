@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educacional</title>
-    <link rel="stylesheet" href="/css/educacional.css">
+    <title>Cursos</title>
+    <link rel="stylesheet" href="/css/curso.css">
 </head>
 <body>
     <header class="header">
@@ -30,23 +30,30 @@
     </header>
 
     <main class="container">
-        <div class="section">
-          <div class="section-header">
-              <h2>Cursos</h2>
-              <a th:href="@{/administrador/cursos}" class="link">Ver Todos</a>
-          </div>
-          <div class="card-grid">
-            <div class="card">
-              <div class="card-header">
-                <h3>Curso XPTO</h3>
-		          </div>
-		          <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
-		          <p>Fundação Bradesco</p>
-		          <a href="#" class="card-link">Ver Mais...</a>
-		        </div>
-        	</div>
+      <div class="section">
+        <div class="section-header">
+            <h2>Cursos</h2>
         </div>
+        <div class="card-grid">
+          <div class="card" onclick="selecionarCard(this)">
+            <div class="card-header">
+              <h3>Curso XPTO</h3>
+	          </div>
+	          <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
+	          <p>Link: </p>
+						<div class="card-actions">
+					     <a class="edit-btn" th:href="@{/prestador/{id}/edit}">Editar</a>
+					     <a class="delete-btn" th:href="@{/prestador/{id}/delete}">Excluir</a>
+					  </div>
+	        </div>
+      	</div>
+      </div>
+			<a class="btn-add" th:href="@{/administrador/new}">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 16 16">
+		     <path d="M8 1a.5.5 0 0 1 .5.5V7.5H14a.5.5 0 0 1 0 1H8.5V14a.5.5 0 0 1-1 0V8.5H2a.5.5 0 0 1 0-1h5.5V1.5A.5.5 0 0 1 8 1z"/>
+		   	</svg>
+			 </a>
     </main>
 		<script src="/js/script.js"></script>
-</body>
+	</body>
 </html>

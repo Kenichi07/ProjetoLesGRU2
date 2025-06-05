@@ -45,12 +45,22 @@ public class ConsumidorController {
 	
 	@GetMapping("/servicos")
     public String servicos() {
-        return "servico";
+        return "servicos";
+    }
+	
+	@GetMapping("/servico")
+    public String servico() {
+        return "servicoindividual";
+    }
+	
+	@GetMapping("/curso")
+    public String curso() {
+        return "cursoindividualconsu";
     }
 	
 
 	@GetMapping("/prefil")
     public String perfil() {
-        return "meuperfil";
+        return "perfilconsu";
 	}
 }

@@ -23,8 +23,8 @@
 				<div class="dropdown">	  
 					<img src="/imagem/Group.png" alt="Profile" class="dropbtn" onclick="toggleDropdown()">
 				  <div id="myDropdown" class="dropdown-content">
-				    <a href="/perfil">Perfil</a>
-				    <a href="/logout">Sair</a>
+				    <a th:href="@{/prestador/perfil}">Perfil</a>
+				    <a th:href="@{/prestador/sair}">Sair</a>
 				  </div>
 				</div>
     </header>
@@ -41,7 +41,6 @@
                   <h3>Limpar Calha</h3>
               </div>
               <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
-              <a href="#" class="card-link">Ver Mais...</a>
           </div>
         </div>
       </div>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serviço</title>
-    <link rel="stylesheet" href="/css/servicoindividual.css">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="/css/formpresta.css">
 </head>
 <body>
     <header class="header">
@@ -17,7 +17,6 @@
           <ul class="nav-links">
             <li><a th:href="@{/consumidor/home}">Home</a></li>
             <li><a th:href="@{/consumidor/educacional}">Educacional</a></li>
-						<li><a th:href="@{/consumidor/catalogo}" class="active">Catálogo de Serviços</a></li>
             <li><a th:href="@{/consumidor/equipe}">Sobre Nós</a></li>
           </ul>
         </nav>
@@ -31,14 +30,23 @@
     </header>
 
     <main class="container">
-			<div class="section">
-       <div class="section-header">
-          <h2>Serviço: Limpar Calha</h2>
-       </div>
-         <p>Descrição: Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
-				 <p>Whatsapp: </p>
-				 <p>Preço: </p>
-       </div>
+			<h1>Perfil</h1>
+        <form class="form" th:action="@{/consumidor/save}" th:object="${consumidor}" method="post">
+					<input type="hidden" th:field="*{id}"/>
+					
+					<label for="nome">Nome:</label>
+				  <input type="text" id="servico" placeholder="Insira o nome" th:field="*{nome}" required>
+				
+          <label for="descricao">Email:</label>
+          <input type="email" id="descricao" placeholder="Insira o email" th:field="*{email}" required>
+
+          <label for="valor">Senha:</label>
+          <input type="text" id="valor" placeholder="Insira a senha" th:field="*{senha}" required>
+					
+					<div>
+						<button type="submit" class="btn">Salvar</button>
+					</div>
+        </form>
     </main>
 		<script src="/js/script.js"></script>
 </body>

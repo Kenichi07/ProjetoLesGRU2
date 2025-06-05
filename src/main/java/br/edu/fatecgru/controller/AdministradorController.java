@@ -2,9 +2,11 @@ package br.edu.fatecgru.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.edu.fatecgru.model.entity.Curso;
 import br.edu.fatecgru.service.AdministradorService;
 
 //@RestController
@@ -48,9 +50,12 @@ public class AdministradorController {
         return "equipeadm";
 	}
 	
-	@GetMapping("/cursos")
-    public String cursos() {
-        return "cursoadm";
-    }
+	@GetMapping("/new")
+	public String newServico(Model model) {
+		model
+			.addAttribute("curso", new Curso())
+			.addAttribute("novo", true);
+		return "formadm";
+	}
 	
 }
