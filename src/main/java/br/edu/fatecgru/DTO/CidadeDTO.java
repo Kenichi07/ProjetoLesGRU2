@@ -1,11 +1,17 @@
 package br.edu.fatecgru.DTO;
 
+import br.edu.fatecgru.model.entity.Cidade;
+
 public class CidadeDTO {
 	private String nome;
     private String estado;
     private String siglaEstado;
 
-    
+    public CidadeDTO(Cidade c) {
+		nome = c.getNome();
+		estado = c.getEstado().getNome();
+		siglaEstado = c.getEstado().getSigla();
+	}
     public CidadeDTO(String nome, String estado, String siglaEstado) {
         this.nome = nome;
         this.estado = estado;

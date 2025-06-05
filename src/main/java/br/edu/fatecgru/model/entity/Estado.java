@@ -19,9 +19,7 @@ public class Estado {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Estado(int id, String nome, String sigla) {
-		super();
-		this.id = id;
+	public Estado(String nome, String sigla) {
 		this.nome = nome;
 		this.sigla = sigla;
 	}

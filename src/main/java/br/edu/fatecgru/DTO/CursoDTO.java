@@ -1,5 +1,7 @@
 package br.edu.fatecgru.DTO;
 
+import br.edu.fatecgru.model.entity.Curso;
+
 public class CursoDTO {
 	private int id;
     private String nome;
@@ -8,8 +10,14 @@ public class CursoDTO {
     private String nomeCategoria;
 
     
-    public CursoDTO() {
-	}
+    public CursoDTO(Curso c) {
+        id = c.getId();
+        nome = c.getNome();
+        descricao = c.getDescricao();
+        linkCurso = c.getLinkCurso();
+        nomeCategoria = c.getCategoria().getNome();
+    }
+
 
 	public CursoDTO(int id, String nome, String descricao, String linkCurso, String nomeCategoria) {
         this.id = id;

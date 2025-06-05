@@ -23,14 +23,10 @@ public class Cidade {
 	@ManyToMany(mappedBy = "servicoCidade")
 	private List<Servico> servicoCidade;
 	
-	public Cidade() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Cidade() {	
 	}
 
-	public Cidade(int id, String nome, Estado estado, List<Servico> servicoCidade) {
-		super();
-		this.id = id;
+	public Cidade(String nome, Estado estado, List<Servico> servicoCidade) {
 		this.nome = nome;
 		this.estado = estado;
 		this.servicoCidade = servicoCidade;

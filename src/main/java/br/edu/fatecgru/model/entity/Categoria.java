@@ -18,13 +18,9 @@ public class Categoria {
     private List<Servico> servicos;
 	
     public Categoria() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Categoria(int id, String nome, List<Servico> servicos) {
-		super();
-		this.id = id;
+	public Categoria( String nome, List<Servico> servicos) {
 		this.nome = nome;
 		this.servicos = servicos;
 	}

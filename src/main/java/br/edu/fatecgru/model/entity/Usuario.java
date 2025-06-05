@@ -42,63 +42,32 @@ public abstract class Usuario {
     private List<Servico> servicosFavoritos;
 	
 	public Usuario() {
-		super();
 	}
 
-	public Usuario(int id, String nome, String email, String senha) {
-		super();
-		this.id = id;
+	public Usuario(String nome, String email, String senha) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 	}
+	
+	
+	//getter n setters
+	public int getId() {return id;}
+	public void setId(int id) {this.id = id;}
+	
+	public String getNome() {return nome;}
+	public void setNome(String nome) {this.nome = nome;}
 
-	public int getId() {
-		return id;
-	}
+	public String getEmail() {return email;}
+	public void setEmail(String email) {this.email = email;}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	public String getSenha() {return senha;}
+	public void setSenha(String senha) {this.senha = senha;}
 
-	public String getNome() {
-		return nome;
-	}
+	public List<Curso> getCursosFavoritos() {return cursosFavoritos;}
+	public void setCursosFavoritos(List<Curso> cursosFavoritos) {this.cursosFavoritos = cursosFavoritos;}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public List<Curso> getCursosFavoritos() {
-		return cursosFavoritos;
-	}
-
-	public void setCursosFavoritos(List<Curso> cursosFavoritos) {
-		this.cursosFavoritos = cursosFavoritos;
-	}
-
-	public List<Servico> getServicosFavoritos() {
-		return servicosFavoritos;
-	}
-
-	public void setServicosFavoritos(List<Servico> servicosFavoritos) {
-		this.servicosFavoritos = servicosFavoritos;
-	}
+	public List<Servico> getServicosFavoritos() {return servicosFavoritos;}
+	public void setServicosFavoritos(List<Servico> servicosFavoritos) {this.servicosFavoritos = servicosFavoritos;}
 	
 }

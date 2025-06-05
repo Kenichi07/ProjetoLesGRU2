@@ -1,9 +1,13 @@
 package br.edu.fatecgru.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import br.edu.fatecgru.DTO.AdministradorCadastroDTO;
+import br.edu.fatecgru.DTO.UsuarioDTO;
 import br.edu.fatecgru.model.entity.repository.AdministradorRepository;
-import br.edu.fatecgru.model.entity.repository.CursoRepository;
 import br.edu.fatecgru.model.entity.repository.UsuarioRepository;
 
 @Service
@@ -12,6 +16,17 @@ public class AdministradorService {
 	@Autowired
 	private AdministradorRepository administradorRepository;
 
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	
     @Autowired
     private UsuarioService usuarioService;
+    
+    public void salvar(AdministradorCadastroDTO dto) {
+        administradorRepository.save(dto.toEntity());
+    }
+    
+    public List<UsuarioDTO> listarTodosUsuarios(){
+		return usuarioRepository.findAll().stream().map(u -> new UsuarioDTO(u)).toList();
+	}
 }

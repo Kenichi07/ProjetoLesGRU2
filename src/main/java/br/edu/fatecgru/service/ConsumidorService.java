@@ -2,8 +2,10 @@ package br.edu.fatecgru.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import br.edu.fatecgru.DTO.ConsumidorServicoCadastroDTO;
+import br.edu.fatecgru.model.entity.ConsumidorServico;
 import br.edu.fatecgru.model.entity.repository.ConsumidorServicoRepository;
-import br.edu.fatecgru.model.entity.repository.ServicoRepository;
 
 @Service
 public class ConsumidorService {
@@ -13,4 +15,8 @@ public class ConsumidorService {
 	
 	 @Autowired
 	    private UsuarioService usuarioService;
+	 
+	 public void salvar(ConsumidorServicoCadastroDTO dto) {
+	        consumidorRepository.save(dto.toEntity());
+	 }
 }

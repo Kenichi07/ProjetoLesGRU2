@@ -15,62 +15,23 @@ public class ServicoService {
 	@Autowired
     private ServicoRepository servicoRepository;
     
+	
+	/*public List<ServicoDTO> bucarTodosServicos(){
+		return servicoRepository.findAll().stream().map(s -> new ServicoDTO(s))
+		
+	}*/
+	
     public List<ServicoDTO> buscarServicosFavoritosPorUsuario(int usuarioId) {
-        return servicoRepository.findServicosFavoritadosPorUsuario(usuarioId).stream()
-        		.map(s -> new ServicoDTO(
-        				s.getId(),
-        				s.getNome(),
-        				s.getDescricao(),
-        				s.getValor(),
-        				s.getCategoria().getNome(),
-        				s.getServicoCidade().stream()
-                        	.map(c -> new CidadeDTO(
-                                c.getNome(),
-                                c.getEstado().getNome(),
-                                c.getEstado().getSigla()
-                        	))
-                        	.collect(Collectors.toList())
-        				))
-        				.collect(Collectors.toList());
-    }
+        return servicoRepository.findServicosFavoritadosPorUsuario(usuarioId)
+        		.stream().map(s -> new ServicoDTO(s)).toList();}
     
     public List<ServicoDTO> buscarServicoPorNomeCidade(String nomeCidade) {
-        return servicoRepository.findByNomeCidade(nomeCidade).stream()
-            .map(s -> new ServicoDTO(
-    				s.getId(),
-    				s.getNome(),
-    				s.getDescricao(),
-    				s.getValor(),
-    				s.getCategoria().getNome(),
-    				s.getServicoCidade().stream()
-                    	.map(c -> new CidadeDTO(
-                            c.getNome(),
-                            c.getEstado().getNome(),
-                            c.getEstado().getSigla()
-                    	))
-                    	.collect(Collectors.toList())
-    				))
-    				.collect(Collectors.toList());
-    }
+        return servicoRepository.findByNomeCidade(nomeCidade)
+        		.stream().map(s -> new ServicoDTO(s)).toList();}
     
     public List<ServicoDTO> buscarServicoPorNomeEstado(String nomeEstado) {
-        return servicoRepository.findByNomeEstado(nomeEstado).stream()
-            .map(s -> new ServicoDTO(
-    				s.getId(),
-    				s.getNome(),
-    				s.getDescricao(),
-    				s.getValor(),
-    				s.getCategoria().getNome(),
-    				s.getServicoCidade().stream()
-                    	.map(c -> new CidadeDTO(
-                            c.getNome(),
-                            c.getEstado().getNome(),
-                            c.getEstado().getSigla()
-                    	))
-                    	.collect(Collectors.toList())
-    				))
-    				.collect(Collectors.toList());
-    }
+        return servicoRepository.findByNomeEstado(nomeEstado)
+        		.stream().map(s -> new ServicoDTO(s)).toList();}
 
     
 }

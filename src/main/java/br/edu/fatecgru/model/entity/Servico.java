@@ -43,15 +43,11 @@ public class Servico {
     private Estado estado;
     
     public Servico() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
     
-	public Servico(int id, String nome, String descricao, Float valor, PrestadorServico prestadorservico,
+	public Servico(String nome, String descricao, Float valor, PrestadorServico prestadorservico,
 			Categoria categoria, List<Usuario> usuariosQueFavoritaram, List<Cidade> servicoCidade,
 			Estado estado) {
-		super();
-		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.valor = valor;

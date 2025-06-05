@@ -32,8 +32,7 @@ public class Curso {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Curso(int id, String nome, String descricao, String linkCurso, Categoria categoria) {
-		this.id = id;
+	public Curso(String nome, String descricao, String linkCurso, Categoria categoria) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.linkCurso = linkCurso;

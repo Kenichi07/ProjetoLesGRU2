@@ -4,18 +4,6 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class ConsumidorServico extends Usuario{
-
-	
-
-	public ConsumidorServico() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public ConsumidorServico(int id, String nome, String email, String senha) {
-		super(id, nome, email, senha);
-		// TODO Auto-generated constructor stub
-	}
-
-
+	public ConsumidorServico() {}
+	public ConsumidorServico(String nome, String email, String senha) {super(nome, email, senha);}
 }
