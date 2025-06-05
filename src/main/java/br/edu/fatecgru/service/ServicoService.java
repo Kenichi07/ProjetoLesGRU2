@@ -1,12 +1,10 @@
 package br.edu.fatecgru.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.fatecgru.DTO.CidadeDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.model.entity.repository.ServicoRepository;
 
@@ -15,6 +13,9 @@ public class ServicoService {
 	@Autowired
     private ServicoRepository servicoRepository;
     
+	@Autowired
+    private PrestadorService prestadorService;
+
 	
 	/*public List<ServicoDTO> bucarTodosServicos(){
 		return servicoRepository.findAll().stream().map(s -> new ServicoDTO(s))

@@ -42,18 +42,26 @@ public class Servico {
     @ManyToOne
     private Estado estado;
     
-    public Servico() {
+    public Servico(){}
+    
+    public Servico(Servico s) {
+    	nome = s.getNome();
+    	descricao = s.getDescricao();
+    	valor = s.getValor();
+    	prestadorservico = s.getPrestadorservico();
+    	categoria = s.getCategoria();
+    	servicoCidade = s.getServicoCidade();
+    	estado = s.getEstado();
 	}
     
 	public Servico(String nome, String descricao, Float valor, PrestadorServico prestadorservico,
-			Categoria categoria, List<Usuario> usuariosQueFavoritaram, List<Cidade> servicoCidade,
+			Categoria categoria, List<Cidade> servicoCidade,
 			Estado estado) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.valor = valor;
 		this.prestadorservico = prestadorservico;
 		this.categoria = categoria;
-		this.usuariosQueFavoritaram = usuariosQueFavoritaram;
 		this.servicoCidade = servicoCidade;
 		this.estado = estado;
 	}

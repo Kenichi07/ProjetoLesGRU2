@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
+import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.service.PrestadorService;
+import br.edu.fatecgru.service.ServicoService;
 
 @RestController
 //@Controller
@@ -23,6 +25,9 @@ public class PrestadorController {
 	private PrestadorService prestadorService;
 	
 	@Autowired
+	private ServicoService servicoService;
+	
+	@Autowired
 	private UsuarioController usuarioController;
 
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
@@ -30,6 +35,12 @@ public class PrestadorController {
 	public void cadastrarPrestadorServico(@RequestBody PrestadorServicoCadastroDTO dto) {
 		prestadorService.salvar(dto);
 	}
+	
+	//CADASTRO DE SERVICO, OBS: MAIS INFO NO ServicoCadastroDTO
+	@PostMapping("/{idPrestador}/servicos")
+    public void cadastrarServico(@PathVariable int idPrestador,@RequestBody ServicoCadastroDTO dto) { 
+		prestadorService.cadastrarServico(dto, idPrestador);
+    }
 	
 	@GetMapping("/home")
     public String home() {

@@ -14,7 +14,8 @@ public class ServicoDTO {
     private String nomeCategoria;
     private List<CidadeDTO> cidades;
     
-
+    public ServicoDTO() {}
+    
     public ServicoDTO(Servico s) {
     	id = s.getId();
     	nomeServico = s.getNome();
