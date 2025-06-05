@@ -1,6 +1,7 @@
 package br.edu.fatecgru.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +17,8 @@ import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.service.PrestadorService;
 import br.edu.fatecgru.service.ServicoService;
 
-@RestController
-//@Controller
+//@RestController
+@Controller
 @RequestMapping("/prestador")
 public class PrestadorController {
 
