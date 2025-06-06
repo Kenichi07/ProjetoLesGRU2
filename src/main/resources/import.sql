@@ -47,9 +47,9 @@ insert into consumidor_servico (id) VALUES (5);
 -- ========================
 -- Tabela prestador_servico
 -- ========================
-insert into prestador_servico (id, whatsapp) VALUES (3, "11999998888");
-insert into prestador_servico (id, whatsapp) VALUES (4, "11988887777");
-insert into prestador_servico (id, whatsapp) VALUES (6, "21977776666");
+insert into prestador_servico (id, whats_app) VALUES (3, "11999998888");
+insert into prestador_servico (id, whats_app) VALUES (4, "11988887777");
+insert into prestador_servico (id, whats_app) VALUES (6, "21977776666");
 
 -- ========================
 -- Tabela curso

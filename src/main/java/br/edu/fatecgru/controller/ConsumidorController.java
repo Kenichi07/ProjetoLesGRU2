@@ -1,6 +1,7 @@
 package br.edu.fatecgru.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.fatecgru.DTO.ConsumidorServicoCadastroDTO;
 import br.edu.fatecgru.service.ConsumidorService;
 
-@RestController
-//@Controller
+//@RestController
+@Controller
 @RequestMapping("/consumidor")
 public class ConsumidorController {
 
