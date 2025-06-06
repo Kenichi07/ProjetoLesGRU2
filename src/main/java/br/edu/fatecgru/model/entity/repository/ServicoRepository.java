@@ -21,4 +21,5 @@ public interface ServicoRepository extends JpaRepository<Servico, Integer> {
 	@Query("SELECT s FROM Servico s JOIN s.servicoCidade c JOIN c.estado e WHERE LOWER(e.nome) LIKE LOWER(CONCAT('%', :nomeEstado, '%'))")
 	List<Servico> findByNomeEstado(@Param("nomeEstado") String nomeEstado);
 	
+	List<Servico> findByPrestadorservicoId(int idPrestador);
 }

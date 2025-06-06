@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import br.edu.fatecgru.DTO.CursoDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,6 +40,10 @@ public class Curso {
 		this.categoria = categoria;
 	}
 
+	public CursoDTO toDTO() {
+		return new CursoDTO(this);
+	}
+	
 	public int getId() {
 		return id;
 	}

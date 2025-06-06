@@ -6,21 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.fatecgru.DTO.ServicoDTO;
+import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.model.entity.repository.ServicoRepository;
 
 @Service
 public class ServicoService {
 	@Autowired
     private ServicoRepository servicoRepository;
-    
-	@Autowired
-    private PrestadorService prestadorService;
-
-	
+    	
 	/*public List<ServicoDTO> bucarTodosServicos(){
 		return servicoRepository.findAll().stream().map(s -> new ServicoDTO(s))
 		
 	}*/
+	
+	public void salvarServico(Servico s) {servicoRepository.save(s);}
+	
+	public List<ServicoDTO> listarTodosServicos(){
+		return servicoRepository.findAll().stream().map(s -> new ServicoDTO(s)).toList();
+	}
+	
+	public List<ServicoDTO> buscarPorPrestador(int idPrestador){
+		return servicoRepository.findByPrestadorservicoId(idPrestador)
+				.stream().map(s -> new ServicoDTO(s)).toList();		
+	}
 	
     public List<ServicoDTO> buscarServicosFavoritosPorUsuario(int usuarioId) {
         return servicoRepository.findServicosFavoritadosPorUsuario(usuarioId)

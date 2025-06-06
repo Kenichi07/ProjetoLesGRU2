@@ -2,12 +2,14 @@ package br.edu.fatecgru.model.entity;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 @Entity
 public class PrestadorServico extends Usuario{
-
+	
+	@Column(name = "whatsapp")
 	private String whatsApp;
 	
 	@OneToMany(mappedBy = "prestadorservico")

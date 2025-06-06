@@ -1,5 +1,7 @@
 package br.edu.fatecgru.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
+import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.service.PrestadorService;
-import br.edu.fatecgru.service.ServicoService;
 
 @RestController
 //@Controller
@@ -24,12 +26,6 @@ public class PrestadorController {
 	@Autowired
 	private PrestadorService prestadorService;
 	
-	@Autowired
-	private ServicoService servicoService;
-	
-	@Autowired
-	private UsuarioController usuarioController;
-
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
 	public void cadastrarPrestadorServico(@RequestBody PrestadorServicoCadastroDTO dto) {
@@ -41,6 +37,12 @@ public class PrestadorController {
     public void cadastrarServico(@PathVariable int idPrestador,@RequestBody ServicoCadastroDTO dto) { 
 		prestadorService.cadastrarServico(dto, idPrestador);
     }
+	
+	@GetMapping("/{idPrestador}/servicos")
+	public List<ServicoDTO> buscarServicosDoPrestador(@PathVariable int idPrestador) {
+        return prestadorService.buscarServicosCriados(idPrestador);
+    }
+    
 	
 	@GetMapping("/home")
     public String home() {
