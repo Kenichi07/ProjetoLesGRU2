@@ -20,10 +20,12 @@ public class ServicoController {
 	
 	@GetMapping("/listar_todos")
 	public List<ServicoDTO> listarTodosServicos() {
-	    return servicoService.listarTodosServicos();
+	    return servicoService.buscarTodosServico();
 	    
 	}
 	
+	//Reformular
+	/*
 	@GetMapping("/buscar/cidade")
 	public List<ServicoDTO> buscarPorNomeCidade(@RequestParam String nomeCidade) {
 		return  servicoService.buscarServicoPorNomeCidade(nomeCidade);
@@ -34,6 +36,6 @@ public class ServicoController {
 	public List<ServicoDTO> buscarPorNomeEstado(@RequestParam String nomeEstado) {
 		return servicoService.buscarServicoPorNomeEstado(nomeEstado);
 	    
-	}
+	}*/
 
 }

@@ -7,5 +7,6 @@ import br.edu.fatecgru.model.entity.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-    
+	 
+	 public boolean existsByEmailAndSenha(String email, String senha);
 }

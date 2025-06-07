@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
@@ -30,7 +29,7 @@ public class PrestadorController {
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
 	public void cadastrarPrestadorServico(@RequestBody PrestadorServicoCadastroDTO dto) {
-		prestadorService.salvar(dto);
+		prestadorService.cadastrarPrestadorServico(dto);
 	}
 	
 	//CADASTRO DE SERVICO, OBS: MAIS INFO NO ServicoCadastroDTO

@@ -27,21 +27,22 @@ public class UsuarioController {
 	private CursoService cursoService;
 	
 	@Autowired
-	private ServicoService servicoService;
+	private ServicoService servicoService;	
 	
-	
-	@GetMapping("/{usuarioId}/cursos_favoritos")
-    public List<CursoDTO> listarCursosFavoritos(@PathVariable int usuarioId) {
-        return cursoService.buscarCursosFavoritosPorUsuario(usuarioId);
-    }
-	
-	@GetMapping("/{usuarioId}/servicos_favoritos")
-    public List<ServicoDTO> listarServicoFavoritos(@PathVariable int usuarioId) {
-        return servicoService.buscarServicosFavoritosPorUsuario(usuarioId);
-    }
-	
-	/*@DeleteMapping("/{usuarioId}")
+	@DeleteMapping("/{usuarioId}")
     public void deletarUsuario(@PathVariable int usuarioId) {
         usuarioService.deletarUsuario(usuarioId);
-    }*/
+    }
+	
+	//Precisam ser reformulados
+		/*
+		@GetMapping("/{usuarioId}/cursos_favoritos")
+	    public List<CursoDTO> listarCursosFavoritos(@PathVariable int usuarioId) {
+	        return cursoService.buscarCursosFavoritosPorUsuario(usuarioId);
+	    }
+		
+		@GetMapping("/{usuarioId}/servicos_favoritos")
+	    public List<ServicoDTO> listarServicoFavoritos(@PathVariable int usuarioId) {
+	        return servicoService.buscarServicosFavoritosPorUsuario(usuarioId);
+	    }*/
 }

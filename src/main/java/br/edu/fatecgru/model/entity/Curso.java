@@ -1,95 +1,67 @@
 package br.edu.fatecgru.model.entity;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.Objects;
 
 import br.edu.fatecgru.DTO.CursoDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Curso {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	//Atributos
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String nome;
     private String descricao;
     private String linkCurso;
-
     @ManyToOne
     private Categoria categoria;
+
+    // Construtores
+    public Curso() {}
+    public Curso(String nome, String descricao, String linkCurso, Categoria categoria) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.linkCurso = linkCurso;
+        this.categoria = categoria;
+    }
+
+    // Método utilitário
+    public CursoDTO toDTO() {
+        return new CursoDTO(this);
+    }
+
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
+
+    public String getLinkCurso() { return linkCurso; }
+    public void setLinkCurso(String linkCurso) { this.linkCurso = linkCurso; }
+
+    public Categoria getCategoria() { return categoria; }
+    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
     
-    @ManyToMany(mappedBy = "cursosFavoritos")
-    @JsonBackReference
-    private List<Usuario> usuariosQueFavoritaram;
-
-	public Curso() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Curso(String nome, String descricao, String linkCurso, Categoria categoria) {
-		this.nome = nome;
-		this.descricao = descricao;
-		this.linkCurso = linkCurso;
-		this.categoria = categoria;
-	}
-
-	public CursoDTO toDTO() {
-		return new CursoDTO(this);
-	}
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getLinkCurso() {
-		return linkCurso;
-	}
-
-	public void setLinkCurso(String linkCurso) {
-		this.linkCurso = linkCurso;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public List<Usuario> getUsuariosQueFavoritaram() {
-		return usuariosQueFavoritaram;
-	}
-
-	public void setUsuariosQueFavoritaram(List<Usuario> usuariosQueFavoritaram) {
-		this.usuariosQueFavoritaram = usuariosQueFavoritaram;
-	}
-    
+    //Equals e HashCode
+	@Override
+	public int hashCode() {return Objects.hash(categoria, descricao, id, linkCurso, nome);}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)return true;
+		if (obj == null)return false;
+		if (getClass() != obj.getClass())return false;
+		Curso other = (Curso) obj;
+		return Objects.equals(categoria, other.categoria) && Objects.equals(descricao, other.descricao)
+				&& id == other.id && Objects.equals(linkCurso, other.linkCurso) && Objects.equals(nome, other.nome);
+	}   
 }

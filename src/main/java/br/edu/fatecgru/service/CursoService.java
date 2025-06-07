@@ -18,6 +18,9 @@ public class CursoService {
 	@Autowired
 	private CategoriaService categoriaService;
 	
+
+	//Precisam ser refeitos
+	/*
 	public List<CursoDTO> listarTodosCursos(int usuarioId) {
         return cursoRepository.findAll().stream().map(c -> new CursoDTO(c)).toList();
     }
@@ -25,9 +28,7 @@ public class CursoService {
 	public List<CursoDTO> buscarCursosFavoritosPorUsuario(int usuarioId) {
         return cursoRepository.findCursosFavoritosByUsuarioId(usuarioId).stream()
                      .map(c -> new CursoDTO(c)).toList();
-    }
-	
-	//SEM CONTROLLER	
+  
 	public CursoDTO buscarPorId(int idCurso){
 		return cursoRepository.findById(idCurso).get().toDTO();
 	}
@@ -39,5 +40,5 @@ public class CursoService {
         c.setLinkCurso(dto.getLinkCurso());
         c.setCategoria(categoriaService.buscarCategoriaPorId(dto.getIdCategoria()));
 		cursoRepository.save(c);
-    }
+    }*/
 }

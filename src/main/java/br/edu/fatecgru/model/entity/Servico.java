@@ -1,141 +1,78 @@
 package br.edu.fatecgru.model.entity;
 
-import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Servico {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	//Atributos
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String nome;
     private String descricao;
     private Float valor;
-	
     @ManyToOne
     private PrestadorServico prestadorservico;
-    
     @ManyToOne
     private Categoria categoria;
-    
-    @ManyToMany(mappedBy = "servicosFavoritos")
-    private List<Usuario> usuariosQueFavoritaram;
-       
-    @ManyToMany
-    @JoinTable(
-        name = "SERVICOS_CIDADES",
-        joinColumns = @JoinColumn(name = "SECI_SER_Id"),
-        inverseJoinColumns = @JoinColumn(name = "SECI_CID_Id")
-    )
-	
-	private List<Cidade> servicoCidade;
-    
-    @ManyToOne
-    private Estado estado;
-    
-    public Servico(){}
-    
+   
+    // Construtores
+    public Servico() {}
+    public Servico(String nome, String descricao, Float valor, PrestadorServico prestadorservico,
+                   Categoria categoria) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.prestadorservico = prestadorservico;
+        this.categoria = categoria;
+    }
+
     public Servico(Servico s) {
-    	nome = s.getNome();
-    	descricao = s.getDescricao();
-    	valor = s.getValor();
-    	prestadorservico = s.getPrestadorservico();
-    	categoria = s.getCategoria();
-    	servicoCidade = s.getServicoCidade();
-    	estado = s.getEstado();
-	}
-    
-	public Servico(String nome, String descricao, Float valor, PrestadorServico prestadorservico,
-			Categoria categoria, List<Cidade> servicoCidade,
-			Estado estado) {
-		this.nome = nome;
-		this.descricao = descricao;
-		this.valor = valor;
-		this.prestadorservico = prestadorservico;
-		this.categoria = categoria;
-		this.servicoCidade = servicoCidade;
-		this.estado = estado;
-	}
+        this.nome = s.getNome();
+        this.descricao = s.getDescricao();
+        this.valor = s.getValor();
+        this.prestadorservico = s.getPrestadorservico();
+        this.categoria = s.getCategoria();
+        }
 
-	public int getId() {
-		return id;
-	}
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public Float getValor() { return valor; }
+    public void setValor(Float valor) { this.valor = valor; }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public PrestadorServico getPrestadorservico() { return prestadorservico; }
+    public void setPrestadorservico(PrestadorServico prestadorservico) { this.prestadorservico = prestadorservico; }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public Categoria getCategoria() { return categoria; }
+    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 
-	public Float getValor() {
-		return valor;
-	}
+	//Equals e HashCode
+	@Override
+	public int hashCode() {return Objects.hash(categoria, descricao, id, nome, prestadorservico, valor);}
 
-	public void setValor(Float valor) {
-		this.valor = valor;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)return true;
+		if (obj == null)return false;
+		if (getClass() != obj.getClass())return false;
+		Servico other = (Servico) obj;
+		return Objects.equals(categoria, other.categoria) && Objects.equals(descricao, other.descricao)
+				&& id == other.id && Objects.equals(nome, other.nome)&& Objects.equals(prestadorservico, other.prestadorservico) 
+				&& Objects.equals(valor, other.valor);
 	}
-
-	public PrestadorServico getPrestadorservico() {
-		return prestadorservico;
-	}
-
-	public void setPrestadorservico(PrestadorServico prestadorservico) {
-		this.prestadorservico = prestadorservico;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public List<Usuario> getUsuariosQueFavoritaram() {
-		return usuariosQueFavoritaram;
-	}
-
-	public void setUsuariosQueFavoritaram(List<Usuario> usuariosQueFavoritaram) {
-		this.usuariosQueFavoritaram = usuariosQueFavoritaram;
-	}
-
-	public List<Cidade> getServicoCidade() {
-		return servicoCidade;
-	}
-
-	public void setServicoCidade(List<Cidade> servicoCidade) {
-		this.servicoCidade = servicoCidade;
-	}
-
-	public Estado getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-	
 }
