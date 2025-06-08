@@ -48,12 +48,17 @@ public class UsuarioService {
 	//FIM DOS METODOS DE AUTENTICAR
 	
 	public void cadastrarUsuario(UsuarioCadastroDTO dto) {
-		if (dto.getPapel().equals("PRESTADOR DE SERVICO")) {
-			prestadorService.cadastrarPrestadorServico(dto.toPrestadorServicoCadastroDTO());
-        } else if (dto.getPapel().equals("CONSUMIDOR DE SERVICO")) {
-        	consumidorService.salvar(dto.toConsumidorServicoCadastroDTO());
-        } else {throw new IllegalArgumentException("Papel inválido: " + dto.getPapel());}
+	    String papel = dto.getPapel();
+
+	    if ("PRESTADOR".equals(papel)) {
+	        prestadorService.cadastrarPrestadorServico(dto.toPrestadorServicoCadastroDTO());
+	    } else if ("CONSUMIDOR".equals(papel)) {
+	        consumidorService.salvar(dto.toConsumidorServicoCadastroDTO());
+	    } else {
+	        throw new IllegalArgumentException("Papel inválido ou não informado: " + papel + dto.getNome() + dto.getEmail() + dto.getWhatsApp() + dto.getSenha());
+	    }
 	}
+
 
 	
 	public List<Usuario> listAll(){

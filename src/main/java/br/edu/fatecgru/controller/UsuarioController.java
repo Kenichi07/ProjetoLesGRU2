@@ -33,7 +33,7 @@ public class UsuarioController {
     }*/
 	
 	@PostMapping("/cadastro")
-	public void cadastrarUsuario(UsuarioCadastroDTO dto) {
+	public void cadastrarUsuario(@RequestBody UsuarioCadastroDTO dto) {
 	   usuarioService.cadastrarUsuario(dto);
 	}
 	

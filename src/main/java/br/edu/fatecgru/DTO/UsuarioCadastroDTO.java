@@ -8,7 +8,7 @@ public class UsuarioCadastroDTO {
     private String whatsApp;
     private String papel;
     
-    public UsuarioCadastroDTO() {}
+    //public UsuarioCadastroDTO() {}
 	
     public ConsumidorServicoCadastroDTO toConsumidorServicoCadastroDTO() {
     	return new ConsumidorServicoCadastroDTO(nome,email,senha);	
