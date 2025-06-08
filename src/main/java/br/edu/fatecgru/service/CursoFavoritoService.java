@@ -51,6 +51,7 @@ public class CursoFavoritoService {
         }
     }
     
+    /*
     //Metodo para listar os Cursos favoritos
     public List<CursoDTO> listarCursosFavoritosDoUsuario(int usuarioId) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
@@ -63,4 +64,5 @@ public class CursoFavoritoService {
 
         return List.of();
     }
+    */
 }

@@ -33,6 +33,7 @@ public class ServicoService {
 	}
 	///FIM DOS METODOS DE CADASTRO/// OBS:NÃO USAR DE FORMA INDEPENDENTE, PODE GERAR INCONSISTENCIA NO BANCO DE DADOS 
 	
+	
 	public List<ServicoDTO> buscarTodosServico(){
 		return servicoRepository.findAll().stream()
 		        .map(s -> {
@@ -40,10 +41,24 @@ public class ServicoService {
 		        }).toList();
 	}
 	
+	
+	/*
 	public List<Servico> buscarPorPrestadorId(int prestadorId) {
 	    return servicoRepository.findByPrestadorservicoId(prestadorId);
 	}
 	
+
+	public List<Cidade> buscarCidadesPorServicoId(int servicoId) {
+	    return servicoCidadeRepository.findByIdServicoId(servicoId).stream()
+	        .map(servicoCidade -> servicoCidade.getId().getCidade())
+	        .toList();
+	}
+	
+	public List<ServicoDTO> bucarTodosServicos(){
+		return servicoRepository.findAll().stream().map(s -> new ServicoDTO(s))
+		
+	}
+
 	
 	
 	/*	

@@ -1,5 +1,7 @@
 package br.edu.fatecgru.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +28,13 @@ public class UsuarioService {
 	//Metodo que confirma se existe o email e senha na tabela Usuario
 	public boolean autenticarUsuario(LoginDTO dto) {
         return usuarioRepository.existsByEmailAndSenha(dto.getEmail(), dto.getSenha());
-                
     }
 	
+	public List<Usuario> listAll(){
+		return usuarioRepository.findAll();
+	}
 	
+	/*
 	public void deletarUsuario(int id) {
 	    Usuario usuario = usuarioRepository.findById(id).get();	   
 	    for (CursoFavorito cf : cursoFavoritoRepository.findByIdUsuario(usuario)) {
@@ -40,6 +45,6 @@ public class UsuarioService {
 	    }
 	    usuarioRepository.delete(usuario);
 	}
-
+*/
 	
 }

@@ -27,12 +27,16 @@ public class UsuarioController {
 	private CursoService cursoService;
 	
 	@Autowired
-	private ServicoService servicoService;	
+	private ServicoService servicoService;
 	
+	
+	
+	/*
 	@DeleteMapping("/{usuarioId}")
     public void deletarUsuario(@PathVariable int usuarioId) {
         usuarioService.deletarUsuario(usuarioId);
     }
+    */
 	
 	//Precisam ser reformulados
 		/*

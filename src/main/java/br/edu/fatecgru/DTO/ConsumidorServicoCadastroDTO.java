@@ -10,7 +10,7 @@ public class ConsumidorServicoCadastroDTO {
     
     public ConsumidorServicoCadastroDTO() {}
     
-    public ConsumidorServicoCadastroDTO(ConsumidorServico cs) {
+	public ConsumidorServicoCadastroDTO(ConsumidorServico cs) {
     	nome = cs.getNome();
     	email = cs.getEmail();
     	senha = cs.getSenha();    	

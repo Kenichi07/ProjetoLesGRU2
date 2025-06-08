@@ -17,12 +17,13 @@ import br.edu.fatecgru.service.ServicoService;
 public class ServicoController {
 	@Autowired
 	private ServicoService servicoService;
-	
+	/*
 	@GetMapping("/listar_todos")
 	public List<ServicoDTO> listarTodosServicos() {
 	    return servicoService.buscarTodosServico();
 	    
 	}
+	/*
 	
 	//Reformular
 	/*
