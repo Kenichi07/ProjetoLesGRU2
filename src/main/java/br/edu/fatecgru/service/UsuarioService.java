@@ -26,8 +26,12 @@ public class UsuarioService {
 
 	
 	//Metodo que confirma se existe o email e senha na tabela Usuario
-	public boolean autenticarUsuario(LoginDTO dto) {
-        return usuarioRepository.existsByEmailAndSenha(dto.getEmail(), dto.getSenha());
+	public Usuario autenticarUsuario(LoginDTO dto) {
+		Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
+		if (usuario != null && usuario.getSenha().equals(dto.getSenha())) {
+	        return usuario; // já vai retornar o tipo real (Administrador, etc)
+	    }
+		return null;
     }
 	
 	public List<Usuario> listAll(){

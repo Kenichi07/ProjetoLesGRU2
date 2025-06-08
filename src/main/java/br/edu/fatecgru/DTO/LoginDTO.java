@@ -4,8 +4,11 @@ public class LoginDTO {
 	private String email;
     private String senha;
     
-    
-    
+	public LoginDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public LoginDTO(String email, String senha) {
 		super();
 		this.email = email;
@@ -23,7 +26,5 @@ public class LoginDTO {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-    
    
 }

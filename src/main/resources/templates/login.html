@@ -17,12 +17,12 @@
 
     <main class="container">
         <h1>Login</h1>
-        <form class="form">
+        <form class="form" th:action="@{/administrador/logar}" th:object="${LoginDTO}" method="post">
             <label for="email">E-mail</label>
-            <input type="email" id="email" placeholder="Insira seu e-mail" required>
+            <input type="email" id="email" placeholder="Insira seu e-mail" th:field="*{email}" required>
 
             <label for="senha">Senha</label>
-            <input type="password" id="senha" placeholder="Insira uma senha" required>
+            <input type="password" id="senha" placeholder="Insira uma senha" th:field="*{senha}" required>
 
             <button type="submit">Entrar</button>
         </form>
