@@ -50,13 +50,11 @@ public class PrestadorService {
 
 	public List<ServicoDTO> buscarServicosCriados(int idPrestador) {
 	    Optional<PrestadorServico> prestadorOpt = prestadorRepository.findById(idPrestador);
-
 	    if (prestadorOpt.isEmpty()) {
 	        throw new RuntimeException("Prestador não encontrado.");
 	    }
 
 	    List<Servico> servicos = servicoService.buscarPorPrestadorId(idPrestador);
-
 	    return servicos.stream()
 	        .map(servico -> {
 	            List<Cidade> cidades = servicoService.buscarCidadesPorServicoId(servico.getId());

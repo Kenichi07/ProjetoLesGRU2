@@ -8,6 +8,8 @@ public class PrestadorServicoCadastroDTO {
     private String senha;
     private String whatsApp;
     
+    public PrestadorServicoCadastroDTO() {}
+    
     public PrestadorServicoCadastroDTO(PrestadorServico ps) {
 		nome = ps.getNome();
 		email = ps.getEmail();

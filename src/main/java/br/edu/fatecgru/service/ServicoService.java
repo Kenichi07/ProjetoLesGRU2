@@ -20,7 +20,18 @@ public class ServicoService {
 	@Autowired
 	private ServicoCidadeRepository servicoCidadeRepository;
 	
+	//METODOS PARA CADASTRO DE SERVICO. RESPONSAVEL: PrestadorService
 	public void salvarServico(Servico s) {servicoRepository.save(s);}
+	
+	public void salvarServicoCidade(ServicoCidade servicoCidade) {
+	    servicoCidadeRepository.save(servicoCidade);
+	}
+	public List<Cidade> buscarCidadesPorServicoId(int servicoId) {
+	    return servicoCidadeRepository.findByIdServicoId(servicoId).stream()
+	        .map(servicoCidade -> servicoCidade.getId().getCidade())
+	        .toList();
+	}
+	///FIM DOS METODOS DE CADASTRO/// OBS:NÃO USAR DE FORMA INDEPENDENTE, PODE GERAR INCONSISTENCIA NO BANCO DE DADOS 
 	
 	public List<ServicoDTO> buscarTodosServico(){
 		return servicoRepository.findAll().stream()
@@ -29,31 +40,13 @@ public class ServicoService {
 		        }).toList();
 	}
 	
-	
-	public void salvarServicoCidade(ServicoCidade servicoCidade) {
-	    servicoCidadeRepository.save(servicoCidade);
-	}
-	
 	public List<Servico> buscarPorPrestadorId(int prestadorId) {
 	    return servicoRepository.findByPrestadorservicoId(prestadorId);
 	}
 	
-	public List<Cidade> buscarCidadesPorServicoId(int servicoId) {
-	    return servicoCidadeRepository.findByIdServicoId(servicoId).stream()
-	        .map(servicoCidade -> servicoCidade.getId().getCidade())
-	        .toList();
-	}
-	
-	/*public List<ServicoDTO> bucarTodosServicos(){
-		return servicoRepository.findAll().stream().map(s -> new ServicoDTO(s))
-		
-	}
 	
 	
-	public List<ServicoDTO> listarTodosServicos(){
-		return servicoRepository.findAll().stream().map(s -> new ServicoDTO(s)).toList();
-	}
-	
+	/*	
 	public List<ServicoDTO> buscarPorPrestador(int idPrestador){
 		return servicoRepository.findByPrestadorservicoId(idPrestador)
 				.stream().map(s -> new ServicoDTO(s)).toList();		

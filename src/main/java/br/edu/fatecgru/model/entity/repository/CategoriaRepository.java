@@ -8,4 +8,5 @@ import br.edu.fatecgru.model.entity.Categoria;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer> { 
 	
+	public Categoria findByNome(String nomeCategoria);
 }

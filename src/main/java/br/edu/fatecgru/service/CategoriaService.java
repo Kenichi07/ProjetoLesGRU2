@@ -14,4 +14,8 @@ public class CategoriaService {
 	public Categoria buscarCategoriaPorId(int id) {
 		return categoriaRepository.findById(id).get();
 	}
+	
+	public Categoria buscarPorNome(String nome) {
+		return categoriaRepository.findByNome(nome);
+	}
 }
