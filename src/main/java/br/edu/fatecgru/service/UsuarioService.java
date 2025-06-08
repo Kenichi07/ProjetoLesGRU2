@@ -31,15 +31,21 @@ public class UsuarioService {
 	private ServicoFavoritoRepository servicoFavoritoRepository;
 
 	
-	//Metodo que confirma se existe o email e senha na tabela Usuario
-	public UsuarioDTO autenticarUsuario(LoginDTO dto) {
+	//METODO DE AUTENTICAR
+	public Usuario autenticarUsuario(LoginDTO dto) {
+		Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
+		if (usuario != null && usuario.getSenha().equals(dto.getSenha())) {
+			return usuario; // já vai retornar o tipo real (Administrador, etc)
+		}
+		return null;
+	}
+	/*public UsuarioDTO autenticarUsuario(LoginDTO dto) {
 	    if (usuarioRepository.existsByEmailAndSenha(dto.getEmail(), dto.getSenha())) {
 	        return new UsuarioDTO(usuarioRepository.findByEmail(dto.getEmail()));
 	    }
 	    return null;
-	}
-
-
+	}*/
+	//FIM DOS METODOS DE AUTENTICAR
 	
 	public void cadastrarUsuario(UsuarioCadastroDTO dto) {
 		if (dto.getPapel().equals("PRESTADOR DE SERVICO")) {
@@ -48,6 +54,7 @@ public class UsuarioService {
         	consumidorService.salvar(dto.toConsumidorServicoCadastroDTO());
         } else {throw new IllegalArgumentException("Papel inválido: " + dto.getPapel());}
 	}
+
 	
 	public List<Usuario> listAll(){
 		return usuarioRepository.findAll();
