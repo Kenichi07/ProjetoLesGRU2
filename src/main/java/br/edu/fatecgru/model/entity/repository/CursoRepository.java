@@ -15,7 +15,7 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 	//@Query("SELECT c FROM Curso c JOIN c.usuariosQueFavoritaram u WHERE u.id = :usuarioId")
     //List<Curso> findCursosFavoritosByUsuarioId(@Param("usuarioId") int usuarioId);
 	
-	@Query("SELECT c FROM Curso c JOIN c.usuariosQueFavoritaram u WHERE u.id = :usuarioId")
-	List<Curso> findCursosFavoritosByUsuarioId(@Param("usuarioId") int usuarioId);
+	//@Query("SELECT c FROM Curso c JOIN c.usuariosQueFavoritaram u WHERE u.id = :usuarioId")
+	//List<Curso> findCursosFavoritosByUsuarioId(@Param("usuarioId") int usuarioId);
 
 }

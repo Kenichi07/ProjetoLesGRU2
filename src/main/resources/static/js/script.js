@@ -27,3 +27,14 @@ function selecionarCard(card) {
     card.classList.add('selecionado');
   }
 }
+
+function atualizarVisibilidade() {
+  const profissional = document.getElementById('profissional').checked;
+  const whatsappGroup = document.getElementById('whatsapp-group');
+
+  if (profissional) {
+    whatsappGroup.style.display = 'block';
+  } else {
+    whatsappGroup.style.display = 'none';
+  }
+}

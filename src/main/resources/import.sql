@@ -104,46 +104,46 @@ insert into servico (id, nome, descricao, valor, prestadorservico_id, categoria_
 -- ========================
 -- Tabela cursos_favoritos
 -- ========================
-insert into cursos_favoritos (cufa_usu_id, cufa_cur_id) VALUES (2, 1);
-insert into cursos_favoritos (cufa_usu_id, cufa_cur_id) VALUES (2, 3);
-insert into cursos_favoritos (cufa_usu_id, cufa_cur_id) VALUES (5, 4);
-insert into cursos_favoritos (cufa_usu_id, cufa_cur_id) VALUES (5, 5);
+insert into curso_favorito (usuario_id, curso_id) VALUES (2, 1);
+insert into curso_favorito (usuario_id, curso_id) VALUES (2, 3);
+insert into curso_favorito (usuario_id, curso_id) VALUES (5, 4);
+insert into curso_favorito (usuario_id, curso_id) VALUES (5, 5);
 
 -- ========================
 -- Tabela servicos_cidades
 -- ========================
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (1, 1);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (1, 2);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (2, 3);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (3, 3);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (4, 4);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (5, 5);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (6, 1);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (6, 2);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (7, 2);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (7, 3);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (8, 3);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (8, 4);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (9, 4);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (9, 5);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (10, 1);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (10, 5);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (11, 1);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (11, 2);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (12, 2);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (12, 3);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (13, 3);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (13, 4);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (14, 4);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (14, 5);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (15, 1);
-INSERT INTO servicos_cidades (seci_ser_id, seci_cid_id) VALUES (15, 5);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (1, 1);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (1, 2);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (2, 3);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (3, 3);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (4, 4);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (5, 5);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (6, 1);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (6, 2);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (7, 2);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (7, 3);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (8, 3);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (8, 4);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (9, 4);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (9, 5);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (10, 1);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (10, 5);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (11, 1);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (11, 2);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (12, 2);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (12, 3);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (13, 3);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (13, 4);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (14, 4);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (14, 5);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (15, 1);
+INSERT INTO servico_cidade (servico_id, cidade_id) VALUES (15, 5);
 
 
 -- ========================
 -- Tabela servicos_favoritos
 -- ========================
-INSERT INTO servicos_favoritos (sefa_con_usu_id, sefa_ser_id) VALUES (2, 1);
-INSERT INTO servicos_favoritos (sefa_con_usu_id, sefa_ser_id) VALUES (2, 2);
-INSERT INTO servicos_favoritos (sefa_con_usu_id, sefa_ser_id) VALUES (5, 4);
-INSERT INTO servicos_favoritos (sefa_con_usu_id, sefa_ser_id) VALUES (5, 5);
+INSERT INTO servico_favorito (usuario_id, servico_id) VALUES (2, 1);
+INSERT INTO servico_favorito (usuario_id, servico_id) VALUES (2, 2);
+INSERT INTO servico_favorito (usuario_id, servico_id) VALUES (5, 4);
+INSERT INTO servico_favorito (usuario_id, servico_id) VALUES (5, 5);

@@ -55,6 +55,7 @@ public class ServicoFavoritoService {
         }
     }
 
+    /*
     //Metodos para o usuario listar seus serviços favoritos
     public List<ServicoDTO> listarFavoritosDoUsuario(int usuarioId) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
@@ -71,4 +72,5 @@ public class ServicoFavoritoService {
                 })
                 .toList();
     }
+    */
 }

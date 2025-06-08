@@ -47,7 +47,7 @@ public class PrestadorService {
 	    	servicoService.salvarServicoCidade(new ServicoCidade(servico, cidade));
 	    }
 	}
-
+/*
 	public List<ServicoDTO> buscarServicosCriados(int idPrestador) {
 	    Optional<PrestadorServico> prestadorOpt = prestadorRepository.findById(idPrestador);
 
@@ -64,6 +64,7 @@ public class PrestadorService {
 	        })
 	        .toList();
 	}
+	*/
 
 	public void cadastrarPrestadorServico(PrestadorServicoCadastroDTO dto) {
         prestadorRepository.save(dto.toEntity());

@@ -17,25 +17,30 @@
 
     <main class="container">
         <h1>Cadastre-se</h1>
-        <form class="form">
+        <form class="form" >
 						<label for="nome">Nome completo</label>
-					  <input type="text" id="nome" placeholder="Insira seu nome completo" required>
+					  <input type="text" id="nome" placeholder="Insira seu nome completo"  required>
 					
             <label for="email">E-mail</label>
-            <input type="email" id="email" placeholder="Insira seu e-mail" required>
+            <input type="email" id="email" placeholder="Insira seu e-mail"  required>
 
             <label for="senha">Senha</label>
-            <input type="password" id="senha" placeholder="Insira uma senha" required>
+            <input type="password" id="senha" placeholder="Insira uma senha"  required>
+						
+						<div class="form-group" id="whatsapp-group" style="display: none;">
+						  <label for="whatsapp">WhatsApp</label>
+						  <input type="text" id="whatsapp" name="whatsapp" placeholder="Insira um número whatsapp" class="form-control">
+						</div>
 						
 						<div class="radio-group">
 						    <label class="radio-button">
-						        <input type="radio" name="tipoUsuario" value="contratante" checked>
+						        <input type="radio" name="tipoUsuario" value="contratante" id="contratante" checked onclick="atualizarVisibilidade()">
 						        <span class="custom-radio"></span>
 						        Contratante
 						    </label>
 
 						    <label class="radio-button">
-						        <input type="radio" name="tipoUsuario" value="profissional">
+						        <input type="radio" name="tipoUsuario" value="profissional" id="profissional" onclick="atualizarVisibilidade()">
 						        <span class="custom-radio"></span>
 						        Profissional
 						    </label>
@@ -45,5 +50,6 @@
         </form>
         <p class="cadastro">Já possui uma conta? <a th:href="@{/administrador/login}">Faça o login</a></p>
     </main>
+		<script src="/js/script.js"></script>
 </body>
 </html>

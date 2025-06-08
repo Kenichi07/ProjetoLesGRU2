@@ -42,7 +42,10 @@ public class AdministradorController {
     }
 	
 	@GetMapping("/cadastro")
-    public String cadastroPage() {
+    public String cadastroPage(Model model) {
+		model
+			.addAttribute("usuarioDTO", new UsuarioDTO())
+			.addAttribute("novo", true);
         return "cadastro";
     }
 	
@@ -73,7 +76,8 @@ public class AdministradorController {
         return "equipeadm";
 	}
 	
-	  @GetMapping("/new") public String newServico(Model model) { 
+	  @GetMapping("/new") 
+	  public String newServico(Model model) { 
 	  		model
 	  			.addAttribute("curso", new Curso())
 	  			.addAttribute("novo", true); 

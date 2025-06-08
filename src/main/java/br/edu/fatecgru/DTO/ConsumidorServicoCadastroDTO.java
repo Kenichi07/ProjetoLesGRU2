@@ -7,7 +7,10 @@ public class ConsumidorServicoCadastroDTO {
     private String email;
     private String senha;
     
-    public ConsumidorServicoCadastroDTO(ConsumidorServico cs) {
+    public ConsumidorServicoCadastroDTO() {
+		super();
+    }
+	public ConsumidorServicoCadastroDTO(ConsumidorServico cs) {
     	nome = cs.getNome();
     	email = cs.getEmail();
     	senha = cs.getSenha();    	

@@ -11,6 +11,8 @@ public class UsuarioDTO {
 	private String email;
 	private String papel;
 	
+	public UsuarioDTO() {}
+	
 	public UsuarioDTO(Usuario u) {
 		id = u.getId();
 		nome = u.getNome();
@@ -46,6 +48,5 @@ public class UsuarioDTO {
 
 	public String getPapel() {return papel;}
 	public void setPapel(String papel) {this.papel = papel;}
-	
 	
 }

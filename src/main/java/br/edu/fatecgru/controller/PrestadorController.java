@@ -37,11 +37,11 @@ public class PrestadorController {
     public void cadastrarServico(@PathVariable int idPrestador,@RequestBody ServicoCadastroDTO dto) { 
 		prestadorService.cadastrarServico(dto, idPrestador);
     }
-	
+	/*
 	@GetMapping("/{idPrestador}/servicos")
 	public List<ServicoDTO> buscarServicosDoPrestador(@PathVariable int idPrestador) {
         return prestadorService.buscarServicosCriados(idPrestador);
-    }
+    }*/
     
 	
 	@GetMapping("/home")

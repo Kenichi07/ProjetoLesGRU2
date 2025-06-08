@@ -22,18 +22,19 @@ public class ServicoService {
 	
 	public void salvarServico(Servico s) {servicoRepository.save(s);}
 	
+	/*
 	public List<ServicoDTO> buscarTodosServico(){
 		return servicoRepository.findAll().stream()
 		        .map(s -> {
 		        	return new ServicoDTO(s, buscarCidadesPorServicoId(s.getId()));
 		        }).toList();
 	}
-	
+	*/
 	
 	public void salvarServicoCidade(ServicoCidade servicoCidade) {
 	    servicoCidadeRepository.save(servicoCidade);
 	}
-	
+	/*
 	public List<Servico> buscarPorPrestadorId(int prestadorId) {
 	    return servicoRepository.findByPrestadorservicoId(prestadorId);
 	}
@@ -44,7 +45,7 @@ public class ServicoService {
 	        .toList();
 	}
 	
-	/*public List<ServicoDTO> bucarTodosServicos(){
+	public List<ServicoDTO> bucarTodosServicos(){
 		return servicoRepository.findAll().stream().map(s -> new ServicoDTO(s))
 		
 	}

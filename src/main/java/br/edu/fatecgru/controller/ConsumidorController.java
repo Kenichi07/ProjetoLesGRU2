@@ -2,6 +2,7 @@ package br.edu.fatecgru.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.ConsumidorServicoCadastroDTO;
+import br.edu.fatecgru.model.entity.ConsumidorServico;
 import br.edu.fatecgru.service.ConsumidorService;
 
 //@RestController
@@ -22,12 +24,11 @@ public class ConsumidorController {
 	@Autowired
 	private UsuarioController usuarioController;
 	
-	
-	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
-	public void cadastrarConsumidorServico(@RequestBody ConsumidorServicoCadastroDTO dto) {
-		consumidorService.salvar(dto);
+	public String cadastrarConsumidorServico(ConsumidorServicoCadastroDTO dto) {
+	    consumidorService.salvar(dto);
+		return "redirect:/consumidor/home";
 	}
 	
 	@GetMapping("/home")
@@ -69,10 +70,11 @@ public class ConsumidorController {
     public String curso() {
         return "cursoindividualconsu";
     }
-	
 
-	@GetMapping("/prefil")
-    public String perfil() {
+	@GetMapping("/perfil")
+    public String perfil(Model model) {
+		model
+		.addAttribute("consumidor", new ConsumidorServico());
         return "perfilconsu";
 	}
 }

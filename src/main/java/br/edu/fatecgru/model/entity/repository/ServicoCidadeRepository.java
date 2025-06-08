@@ -14,9 +14,9 @@ import br.edu.fatecgru.model.entity.ServicoCidadePK;
 @Repository
 public interface ServicoCidadeRepository extends JpaRepository<ServicoCidade, ServicoCidadePK>{
 	
-	@Query("SELECT sc.id.cidade FROM ServicoCidade sc WHERE sc.id.servico.id = :servicoId")
-    List<Cidade> findCidadesByServicoId(@Param("servicoId") int servicoId);
+	//@Query("SELECT sc.id.cidade FROM ServicoCidade sc WHERE sc.id.servico.id = :servicoId")
+    //List<Cidade> findCidadesByServicoId(@Param("servicoId") int servicoId);
 	
-	List<ServicoCidade> findByIdServicoId(int servicoId);
+	//List<ServicoCidade> findByIdServicoId(int servicoId);
 
 }
