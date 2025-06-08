@@ -6,8 +6,7 @@ public class ConsumidorServicoCadastroDTO {
 	private String nome;
     private String email;
     private String senha;
-    private String whatsapp;
-    
+        
     public ConsumidorServicoCadastroDTO() {}
     
 	public ConsumidorServicoCadastroDTO(ConsumidorServico cs) {
@@ -17,12 +16,10 @@ public class ConsumidorServicoCadastroDTO {
     }
     
     
-	public ConsumidorServicoCadastroDTO(String nome, String email, String senha, String whatsapp) {
-		super();
+	public ConsumidorServicoCadastroDTO(String nome, String email, String senha) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.whatsapp = whatsapp;
 	}
 	
 	public ConsumidorServico toEntity() {
@@ -38,9 +35,4 @@ public class ConsumidorServicoCadastroDTO {
 	
 	public String getSenha() {return senha;}
 	public void setSenha(String senha) {this.senha = senha;}
-
-	public String getWhatsapp() {return whatsapp;}
-	public void setWhatsapp(String whatsapp) {this.whatsapp = whatsapp;} 
-	
-	
 }

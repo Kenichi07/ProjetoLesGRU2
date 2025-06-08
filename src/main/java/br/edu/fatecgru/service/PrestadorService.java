@@ -30,9 +30,6 @@ public class PrestadorService {
 	@Autowired
     private CidadeService cidadeService;
 	
-	@Autowired
-	private UsuarioService usuarioService;
-	
 	public void cadastrarServico(ServicoCadastroDTO dto, int idPrestador) {
 	    Servico servico = new Servico();
 	    servico.setNome(dto.getNome());

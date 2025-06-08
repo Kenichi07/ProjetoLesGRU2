@@ -1,17 +1,14 @@
 package br.edu.fatecgru.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.fatecgru.DTO.CursoDTO;
-import br.edu.fatecgru.DTO.ServicoDTO;
+import br.edu.fatecgru.DTO.LoginDTO;
+import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
 import br.edu.fatecgru.service.CursoService;
 import br.edu.fatecgru.service.ServicoService;
 import br.edu.fatecgru.service.UsuarioService;
@@ -29,6 +26,16 @@ public class UsuarioController {
 	@Autowired
 	private ServicoService servicoService;
 	
+	/*@PostMapping("/autenticar")
+    public UsuarioDTO autenticarUsuario(@RequestBody LoginDTO dto) {
+        boolean autenticado = usuarioService.autenticarUsuario(dto);
+        return ResponseEntity.ok(autenticado);
+    }*/
+	
+	@PostMapping("/cadastro")
+	public void cadastrarUsuario(UsuarioCadastroDTO dto) {
+	   usuarioService.cadastrarUsuario(dto);
+	}
 	
 	
 	/*

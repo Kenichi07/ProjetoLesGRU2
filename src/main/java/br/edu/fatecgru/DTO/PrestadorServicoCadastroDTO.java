@@ -19,7 +19,6 @@ public class PrestadorServicoCadastroDTO {
     
 
 	public PrestadorServicoCadastroDTO(String nome, String email, String senha, String whatsapp) {
-		super();
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;

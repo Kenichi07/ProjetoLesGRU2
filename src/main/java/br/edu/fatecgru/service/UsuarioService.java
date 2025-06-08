@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.fatecgru.DTO.LoginDTO;
-import br.edu.fatecgru.model.entity.CursoFavorito;
-import br.edu.fatecgru.model.entity.ServicoFavorito;
+import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
+import br.edu.fatecgru.DTO.UsuarioDTO;
 import br.edu.fatecgru.model.entity.Usuario;
 import br.edu.fatecgru.model.entity.repository.CursoFavoritoRepository;
 import br.edu.fatecgru.model.entity.repository.ServicoFavoritoRepository;
@@ -19,6 +19,12 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 
 	@Autowired
+	private PrestadorService prestadorService;
+	
+	@Autowired
+	private ConsumidorService consumidorService;
+	
+	@Autowired
 	private CursoFavoritoRepository cursoFavoritoRepository;
 
 	@Autowired
@@ -26,9 +32,22 @@ public class UsuarioService {
 
 	
 	//Metodo que confirma se existe o email e senha na tabela Usuario
-	public boolean autenticarUsuario(LoginDTO dto) {
-        return usuarioRepository.existsByEmailAndSenha(dto.getEmail(), dto.getSenha());
-    }
+	public UsuarioDTO autenticarUsuario(LoginDTO dto) {
+	    if (usuarioRepository.existsByEmailAndSenha(dto.getEmail(), dto.getSenha())) {
+	        return new UsuarioDTO(usuarioRepository.findByEmail(dto.getEmail()));
+	    }
+	    return null;
+	}
+
+
+	
+	public void cadastrarUsuario(UsuarioCadastroDTO dto) {
+		if (dto.getPapel().equals("PRESTADOR DE SERVICO")) {
+			prestadorService.cadastrarPrestadorServico(dto.toPrestadorServicoCadastroDTO());
+        } else if (dto.getPapel().equals("CONSUMIDOR DE SERVICO")) {
+        	consumidorService.salvar(dto.toConsumidorServicoCadastroDTO());
+        } else {throw new IllegalArgumentException("Papel inválido: " + dto.getPapel());}
+	}
 	
 	public List<Usuario> listAll(){
 		return usuarioRepository.findAll();
