@@ -34,13 +34,19 @@
 						
 						<div class="radio-group">
 						    <label class="radio-button">
-						        <input type="radio" name="tipoUsuario" value="contratante" id="contratante" checked onclick="atualizarVisibilidade()">
+						        <input type="radio" name="tipoUsuario" value="CONSUMIDOR" th:field="*{papel}" id="contratante" checked onclick="atualizarVisibilidade()">
 						        <span class="custom-radio"></span>
 						        Contratante
 						    </label>
+								
+								<label class="radio-button">
+						        <input type="radio" name="tipoUsuario" value="ADMINISTRADOR" th:field="*{papel}" id="contratante" onclick="atualizarVisibilidade()">
+						        <span class="custom-radio"></span>
+						        Administrador
+						    </label>
 
 						    <label class="radio-button">
-						        <input type="radio" name="tipoUsuario" value="profissional" id="profissional" onclick="atualizarVisibilidade()">
+						        <input type="radio" name="tipoUsuario" value="PRESTADOR" th:field="*{papel}" id="profissional" onclick="atualizarVisibilidade()">
 						        <span class="custom-radio"></span>
 						        Profissional
 						    </label>
