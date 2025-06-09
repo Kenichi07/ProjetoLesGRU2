@@ -3,7 +3,10 @@ package br.edu.fatecgru.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import br.edu.fatecgru.DTO.LoginDTO;
 import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
@@ -16,12 +19,17 @@ import br.edu.fatecgru.model.entity.Usuario;
 import br.edu.fatecgru.model.entity.repository.CursoFavoritoRepository;
 import br.edu.fatecgru.model.entity.repository.ServicoFavoritoRepository;
 import br.edu.fatecgru.model.entity.repository.UsuarioRepository;
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
+	@Lazy
+	@Autowired
+	private AdministradorService administradorService;
+	
 	@Autowired
 	private PrestadorService prestadorService;
 	
@@ -53,42 +61,27 @@ public class UsuarioService {
 	
 	public Usuario cadastrarUsuario(UsuarioCadastroDTO dto) {
 	    if (dto.getPapel().equalsIgnoreCase("ADMINISTRADOR")) {
-	        Administrador admin = new Administrador();
-	        admin.setNome(dto.getNome());
-	        admin.setEmail(dto.getEmail());
-	        admin.setSenha(dto.getSenha());
-	        usuarioRepository.save(admin);
+	    	administradorService.salvar(dto.toAdministradorCadastroDTO());
 	        Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
 	        if (usuario != null && usuario.getSenha().equals(dto.getSenha())) {
 				return usuario; // já vai retornar o tipo real (Administrador, etc)
 			}
 	    } else if (dto.getPapel().equalsIgnoreCase("CONSUMIDOR")) {
-	        ConsumidorServico consumidor = new ConsumidorServico();
-	        consumidor.setNome(dto.getNome());
-	        consumidor.setEmail(dto.getEmail());
-	        consumidor.setSenha(dto.getSenha());
-	        usuarioRepository.save(consumidor);
+	    	consumidorService.salvar(dto.toConsumidorServicoCadastroDTO());
 	        Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
 	        if (usuario != null && usuario.getSenha().equals(dto.getSenha())) {
-				return usuario; // já vai retornar o tipo real (Administrador, etc)
+				return usuario; // já vai retornar o tipo real (Consumidor, etc)
 			}
 	    } else if (dto.getPapel().equalsIgnoreCase("PRESTADOR")) {
-	        PrestadorServico prestador = new PrestadorServico();
-	        prestador.setNome(dto.getNome());
-	        prestador.setEmail(dto.getEmail());
-	        prestador.setSenha(dto.getSenha());
-	        prestador.setWhatsApp(dto.getWhatsApp());
-	        usuarioRepository.save(prestador);
+	    	prestadorService.salvar(dto.toPrestadorServicoCadastroDTO());
 	        Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
 	        if (usuario != null && usuario.getSenha().equals(dto.getSenha())) {
-				return usuario; // já vai retornar o tipo real (Administrador, etc)
+				return usuario; // já vai retornar o tipo real (Prestador, etc)
 	        }
 	    }
 	    return null;
 	    
 	}
-
-
 	
 	public List<Usuario> listAll(){
 		return usuarioRepository.findAll();

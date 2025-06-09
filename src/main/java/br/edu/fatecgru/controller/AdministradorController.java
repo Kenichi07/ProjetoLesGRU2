@@ -3,6 +3,7 @@ package br.edu.fatecgru.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -37,6 +38,7 @@ public class AdministradorController {
 	@Autowired
 	private UsuarioController usuarioController;
 	
+	@Lazy
 	@Autowired
 	private UsuarioService usuarioService;
 	
@@ -45,24 +47,6 @@ public class AdministradorController {
 	public List<UsuarioDTO> listarTodosUsuarios() {
 	    return administradorService.listarTodosUsuarios();
 	}
-	
-	//Esse trem é aqui mesmo nessa controller?
-	@PostMapping("/logar")
-	public String logar(@ModelAttribute LoginDTO dto, HttpSession session) {
-		Usuario usuario = usuarioService.autenticarUsuario(dto);
-
-		if (usuario != null) {
-			session.setAttribute("usuarioLogado", usuario); // guarda na sessão
-	        if (usuario instanceof Administrador) {
-	            return "redirect:/administrador/home";
-	        } else if (usuario instanceof PrestadorServico) {
-	            return "redirect:/prestador/home";
-	        } else if (usuario instanceof ConsumidorServico) {
-	            return "redirect:/consumidor/home";
-	        }
-	    }
-		return null;
-    }
 	
 	@DeleteMapping("/{id}")
 	public void deletarUsuario(@PathVariable int id) {
@@ -81,11 +65,41 @@ public class AdministradorController {
         return "cadastro";
     }
 	
+	//Esse trem é aqui mesmo nessa controller?
+	@PostMapping("/logar")
+	public String logar(@ModelAttribute LoginDTO dto, HttpSession session) {
+		Usuario usuario = usuarioService.autenticarUsuario(dto);
+
+		if (usuario != null) {
+			session.setAttribute("usuarioLogado", usuario); // guarda na sessão
+	        if (usuario instanceof Administrador) {
+	            return "redirect:/administrador/home";
+	        } else if (usuario instanceof PrestadorServico) {
+	            return "redirect:/prestador/home";
+	        } else if (usuario instanceof ConsumidorServico) {
+	            return "redirect:/consumidor/home";
+	        }
+	    }
+		return null;
+    }	
+	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO (só não esquece de att os imports)
 	
 	@PostMapping("/cadastro")
-	public void cadastrarAdministrador(@ModelAttribute UsuarioCadastroDTO dto, HttpSession session) {
-	    usuarioService.cadastrarUsuario(dto);
+	public String cadastrarAdministrador(@ModelAttribute UsuarioCadastroDTO dto, HttpSession session) {
+	    Usuario usuario = usuarioService.cadastrarUsuario(dto);
+	    
+	    if (usuario != null) {
+			session.setAttribute("usuarioLogado", usuario); // guarda na sessão
+	        if (usuario instanceof Administrador) {
+	            return "redirect:/administrador/home";
+	        } else if (usuario instanceof PrestadorServico) {
+	            return "redirect:/prestador/home";
+	        } else if (usuario instanceof ConsumidorServico) {
+	            return "redirect:/consumidor/home";
+	        }
+	    }
+		return null;
 	}
 	
 	@GetMapping("/cadastroadm")

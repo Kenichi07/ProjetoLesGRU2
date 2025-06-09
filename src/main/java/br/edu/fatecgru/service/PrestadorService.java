@@ -63,7 +63,7 @@ public class PrestadorService {
 	}
 	
 
-	public void cadastrarPrestadorServico(PrestadorServicoCadastroDTO dto) {
+	public void salvar(PrestadorServicoCadastroDTO dto) {
         prestadorRepository.save(dto.toEntity());
     }
 	

@@ -3,6 +3,7 @@ package br.edu.fatecgru.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
+import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.service.PrestadorService;
+import jakarta.servlet.http.HttpSession;
 
-@RestController
-//@Controller
+//@RestController
+@Controller
 @RequestMapping("/prestador")
 public class PrestadorController {
 
@@ -29,7 +32,7 @@ public class PrestadorController {
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
 	public void cadastrarPrestadorServico(@RequestBody PrestadorServicoCadastroDTO dto) {
-		prestadorService.cadastrarPrestadorServico(dto);
+		//prestadorService.cadastrarPrestadorServico(dto);
 	}
 	
 	//CADASTRO DE SERVICO
@@ -47,7 +50,9 @@ public class PrestadorController {
 	
 	
 	@GetMapping("/home")
-    public String home() {
+    public String home(HttpSession session, Model model) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("prestador", prestador);
         return "homeprestador";
     }
 

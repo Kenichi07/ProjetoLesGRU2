@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.ConsumidorServicoCadastroDTO;
 import br.edu.fatecgru.model.entity.ConsumidorServico;
+import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.service.ConsumidorService;
+import jakarta.servlet.http.HttpSession;
 
 //@RestController
 @Controller
@@ -32,7 +34,9 @@ public class ConsumidorController {
 	}
 	
 	@GetMapping("/home")
-    public String home() {
+    public String home(HttpSession session, Model model) {
+		ConsumidorServico consu = (ConsumidorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("consu", consu);
         return "homeconsumidor";
     }
 
