@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.edu.fatecgru.DTO.LoginDTO;
 import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
-import br.edu.fatecgru.DTO.UsuarioDTO;
+import br.edu.fatecgru.model.entity.CursoFavorito;
+import br.edu.fatecgru.model.entity.ServicoFavorito;
 import br.edu.fatecgru.model.entity.Usuario;
 import br.edu.fatecgru.model.entity.repository.CursoFavoritoRepository;
 import br.edu.fatecgru.model.entity.repository.ServicoFavoritoRepository;
@@ -64,6 +65,27 @@ public class UsuarioService {
 	public List<Usuario> listAll(){
 		return usuarioRepository.findAll();
 	}
+	
+	public void deletarUsuario(int id) {
+	    Usuario usuario = usuarioRepository.findById(id)
+	        .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+	    // Remover favoritos de cursos
+	    List<CursoFavorito> cursosFavoritos = cursoFavoritoRepository.findByIdUsuario(usuario);
+	    for (CursoFavorito cf : cursosFavoritos) {
+	        cursoFavoritoRepository.delete(cf);
+	    }
+
+	    // Remover favoritos de serviços
+	    List<ServicoFavorito> servicosFavoritos = servicoFavoritoRepository.findByIdUsuario(usuario);
+	    for (ServicoFavorito sf : servicosFavoritos) {
+	        servicoFavoritoRepository.delete(sf);
+	    }
+
+	    // Excluir usuário
+	    usuarioRepository.delete(usuario);
+	}
+
 	
 	/*
 	public void deletarUsuario(int id) {
