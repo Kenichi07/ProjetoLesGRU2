@@ -10,6 +10,10 @@ public class UsuarioCadastroDTO {
     
     //public UsuarioCadastroDTO() {}
 	
+    public AdministradorCadastroDTO toAdministradorCadastroDTO() {
+    	return new AdministradorCadastroDTO(nome,email,senha);	
+    }
+    
     public ConsumidorServicoCadastroDTO toConsumidorServicoCadastroDTO() {
     	return new ConsumidorServicoCadastroDTO(nome,email,senha);	
     }

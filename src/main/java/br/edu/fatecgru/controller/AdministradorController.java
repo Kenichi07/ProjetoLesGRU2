@@ -26,7 +26,7 @@ import br.edu.fatecgru.service.AdministradorService;
 import br.edu.fatecgru.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 
-//@RestController
+//RestController
 @Controller
 @RequestMapping("/administrador")
 public class AdministradorController {
