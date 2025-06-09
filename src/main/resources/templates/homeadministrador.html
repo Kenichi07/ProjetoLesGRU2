@@ -36,13 +36,14 @@
         </div>
         <div class="card-grid">
           <div class="card" onclick="selecionarCard(this)">
-              <div class="card-header">
+						<input type="hidden" th:field="*{id}"/>  
+						<div class="card-header">
                   <h3>Limpar Calha</h3>
               </div>
               <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
 							<div class="card-actions">
-					     	<a class="edit-btn" th:href="@{/prestador/{id}/edit}">Editar</a>
-					     	<a class="delete-btn" th:href="@{/prestador/{id}/delete}">Excluir</a>
+					     	<a class="edit-btn" th:href="@{/administrador/{id}/edit}">Editar</a>
+					     	<a class="delete-btn" th:href="@{/administrador/{id}/delete}">Excluir</a>
 					   	</div>
           </div>
         </div>

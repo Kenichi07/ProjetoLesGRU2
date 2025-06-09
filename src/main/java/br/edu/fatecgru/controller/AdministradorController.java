@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.edu.fatecgru.DTO.LoginDTO;
+import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
+import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
 import br.edu.fatecgru.DTO.UsuarioDTO;
 import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.ConsumidorServico;
@@ -24,8 +26,8 @@ import br.edu.fatecgru.service.AdministradorService;
 import br.edu.fatecgru.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 
-@RestController
-//@Controller
+//@RestController
+@Controller
 @RequestMapping("/administrador")
 public class AdministradorController {
 
@@ -61,7 +63,6 @@ public class AdministradorController {
 		return null;
     }
 	
-	
 	@DeleteMapping("/{id}")
 	public void deletarUsuario(@PathVariable int id) {
 		usuarioService.deletarUsuario(id);
@@ -75,15 +76,16 @@ public class AdministradorController {
 	
 	@GetMapping("/cadastro")
     public String cadastroPage(Model model) {
+		model.addAttribute("usuarioCadastroDTO", new UsuarioCadastroDTO());
         return "cadastro";
     }
 	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO (só não esquece de att os imports)
-	/*
+	
 	@PostMapping("/cadastro")
-	public void cadastrarAdministrador(@RequestBody AdministradorCadastroDTO dto) {
-	    administradorService.salvar(dto);
-	}*/
+	public void cadastrarAdministrador(@ModelAttribute UsuarioCadastroDTO dto, HttpSession session) {
+	    usuarioService.cadastrarUsuario(dto);
+	}
 	
 	@GetMapping("/cadastroadm")
     public String cadastroAdmPage() {
