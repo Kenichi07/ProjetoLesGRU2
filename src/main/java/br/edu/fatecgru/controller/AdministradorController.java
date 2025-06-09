@@ -3,19 +3,13 @@ package br.edu.fatecgru.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jms.JmsProperties.Template.Session;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import br.edu.fatecgru.DTO.LoginDTO;
 import br.edu.fatecgru.DTO.UsuarioDTO;
 import br.edu.fatecgru.model.entity.Administrador;
@@ -109,11 +103,23 @@ public class AdministradorController {
         return "equipeadm";
 	}
 	
-	  @GetMapping("/new") 
-	  public String newServico(Model model) { 
-	  		model
-	  			.addAttribute("curso", new Curso())
-	  			.addAttribute("novo", true); 
-	  		return "formadm"; 
-	  }		
+	@GetMapping("/new") 
+	public String newServico(Model model) { 
+  		model
+  			.addAttribute("curso", new Curso())
+  			.addAttribute("novo", true); 
+  		return "formadm"; 
+	}		
+	  
+	@GetMapping("/perfil")
+    public String perfil(HttpSession session, Model model) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+
+	    if (usuario == null) {
+	        return "redirect:/login"; // redireciona se não estiver logado
+	    }
+
+	    model.addAttribute("usuario", usuario); // envia os dados para a view
+        return "perfiladm";
+	}
 }
