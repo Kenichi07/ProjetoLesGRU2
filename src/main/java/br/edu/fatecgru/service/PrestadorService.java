@@ -30,6 +30,7 @@ public class PrestadorService {
 	@Autowired
     private CidadeService cidadeService;
 	
+	//METODO DE CADASTRO DE SERVIÇO
 	public void cadastrarServico(ServicoCadastroDTO dto, int idPrestador) {
 	    Servico servico = new Servico();
 	    servico.setNome(dto.getNome());
@@ -44,7 +45,8 @@ public class PrestadorService {
 	    	servicoService.salvarServicoCidade(new ServicoCidade(servico, cidade));
 	    }
 	}
-/*
+
+	//METODO PARA LISTAR SERVICO CRIADOS PELO PRESTADOR
 	public List<ServicoDTO> buscarServicosCriados(int idPrestador) {
 	    Optional<PrestadorServico> prestadorOpt = prestadorRepository.findById(idPrestador);
 	    if (prestadorOpt.isEmpty()) {
@@ -59,7 +61,7 @@ public class PrestadorService {
 	        })
 	        .toList();
 	}
-	*/
+	
 
 	public void cadastrarPrestadorServico(PrestadorServicoCadastroDTO dto) {
         prestadorRepository.save(dto.toEntity());

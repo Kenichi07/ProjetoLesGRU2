@@ -46,6 +46,7 @@ public class AdministradorController {
 	    return administradorService.listarTodosUsuarios();
 	}
 	
+	//Esse trem é aqui mesmo nessa controller?
 	@PostMapping("/logar")
 	public String logar(@ModelAttribute LoginDTO dto, HttpSession session) {
 		Usuario usuario = usuarioService.autenticarUsuario(dto);

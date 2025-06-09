@@ -113,19 +113,4 @@ public class UsuarioService {
 	    // Excluir usuário
 	    usuarioRepository.delete(usuario);
 	}
-
-	
-	/*
-	public void deletarUsuario(int id) {
-	    Usuario usuario = usuarioRepository.findById(id).get();	   
-	    for (CursoFavorito cf : cursoFavoritoRepository.findByIdUsuario(usuario)) {
-	        cursoFavoritoRepository.delete(cf);
-	    }
-	    for (ServicoFavorito sf : servicoFavoritoRepository.findByIdUsuario(usuario)) {
-	        servicoFavoritoRepository.delete(sf);
-	    }
-	    usuarioRepository.delete(usuario);
-	}
-*/
-	
 }

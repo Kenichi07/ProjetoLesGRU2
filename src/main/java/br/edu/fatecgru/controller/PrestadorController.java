@@ -3,13 +3,13 @@ package br.edu.fatecgru.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
@@ -18,8 +18,8 @@ import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.service.PrestadorService;
 
-//@RestController
-@Controller
+@RestController
+//@Controller
 @RequestMapping("/prestador")
 public class PrestadorController {
 
@@ -32,17 +32,19 @@ public class PrestadorController {
 		prestadorService.cadastrarPrestadorServico(dto);
 	}
 	
-	//CADASTRO DE SERVICO, OBS: MAIS INFO NO ServicoCadastroDTO
+	//CADASTRO DE SERVICO
 	@PostMapping("/{idPrestador}/servicos")
     public void cadastrarServico(@PathVariable int idPrestador,@RequestBody ServicoCadastroDTO dto) { 
 		prestadorService.cadastrarServico(dto, idPrestador);
     }
-	/*
+	
+	//LISTA OS SERVIÇOS DO PRESTADOR 
 	@GetMapping("/{idPrestador}/servicos")
 	public List<ServicoDTO> buscarServicosDoPrestador(@PathVariable int idPrestador) {
         return prestadorService.buscarServicosCriados(idPrestador);
-    }*/
+    }
     
+	
 	
 	@GetMapping("/home")
     public String home() {

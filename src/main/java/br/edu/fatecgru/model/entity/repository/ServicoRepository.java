@@ -11,19 +11,14 @@ import br.edu.fatecgru.model.entity.Servico;
 
 @Repository
 public interface ServicoRepository extends JpaRepository<Servico, Integer> {
-	
-
 	List<Servico> findByPrestadorservicoId(int idPrestador);
 	
-	//@Query("SELECT s FROM Servico s JOIN s.usuariosQueFavoritaram u WHERE u.id = :usuarioId")
-    //List<Servico> findServicosFavoritadosPorUsuario(@Param("usuarioId") int usuarioId);
-	
-	//@Query("SELECT s FROM Servico s JOIN s.servicoCidade c WHERE LOWER(c.nome) LIKE LOWER(CONCAT('%', :nomeCidade, '%'))")
-	//List<Servico> findByNomeCidade(@Param("nomeCidade") String nomeCidade);
+	@Query("SELECT sc.id.servico FROM ServicoCidade sc WHERE sc.id.cidade.id = :idCidade")
+    List<Servico> findServicoByIdCidade(@Param("idCidade") int idCidade);
 
-	//@Query("SELECT s FROM Servico s JOIN s.servicoCidade c JOIN c.estado e WHERE LOWER(e.nome) LIKE LOWER(CONCAT('%', :nomeEstado, '%'))")
-	//List<Servico> findByNomeEstado(@Param("nomeEstado") String nomeEstado);
-	
-	//List<Servico> findByPrestadorservicoId(int idPrestador);
+    @Query("SELECT sc.id.servico FROM ServicoCidade sc WHERE sc.id.cidade.estado.id = :idEstado")
+    List<Servico> findServicoByIdEstado(@Param("idEstado") int idEstado);
+
+   
 
 }

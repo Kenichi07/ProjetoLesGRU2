@@ -33,7 +33,7 @@ public class ServicoService {
 	}
 	///FIM DOS METODOS DE CADASTRO/// OBS:NÃO USAR DE FORMA INDEPENDENTE, PODE GERAR INCONSISTENCIA NO BANCO DE DADOS 
 	
-	
+	//METODO PARA BUSCAR TODOS SERVICOS
 	public List<ServicoDTO> buscarTodosServico(){
 		return servicoRepository.findAll().stream()
 		        .map(s -> {
@@ -41,43 +41,31 @@ public class ServicoService {
 		        }).toList();
 	}
 	
-	
-	/*
-	public List<Servico> buscarPorPrestadorId(int prestadorId) {
-	    return servicoRepository.findByPrestadorservicoId(prestadorId);
+	//METODO AUX PARA BUSCAR TODOS SERVICOS CRIADOS PELO USUARIO
+	public List<Servico> buscarPorPrestadorId(int idPrestador){
+		return servicoRepository.findByPrestadorservicoId(idPrestador);			
 	}
 	
-
-	public List<Cidade> buscarCidadesPorServicoId(int servicoId) {
-	    return servicoCidadeRepository.findByIdServicoId(servicoId).stream()
-	        .map(servicoCidade -> servicoCidade.getId().getCidade())
-	        .toList();
-	}
-	
-	public List<ServicoDTO> bucarTodosServicos(){
-		return servicoRepository.findAll().stream().map(s -> new ServicoDTO(s))
-		
-	}
-
-	
-	
-	/*	
-	public List<ServicoDTO> buscarPorPrestador(int idPrestador){
-		return servicoRepository.findByPrestadorservicoId(idPrestador)
-				.stream().map(s -> new ServicoDTO(s)).toList();		
-	}
-	
-    public List<ServicoDTO> buscarServicosFavoritosPorUsuario(int usuarioId) {
-        return servicoRepository.findServicosFavoritadosPorUsuario(usuarioId)
-        		.stream().map(s -> new ServicoDTO(s)).toList();}
+	//METODO PARA LISTAR POR ID CIDADE
+    public List<ServicoDTO> buscarServicoPorCidade(int idCidade) {
+        return servicoRepository.findServicoByIdCidade(idCidade)
+        		.stream().map(s -> {
+		        	return new ServicoDTO(s, buscarCidadesPorServicoId(s.getId()));
+		        }).toList();
+    }
     
-    public List<ServicoDTO> buscarServicoPorNomeCidade(String nomeCidade) {
-        return servicoRepository.findByNomeCidade(nomeCidade)
-        		.stream().map(s -> new ServicoDTO(s)).toList();}
+    //METODO PARA LISTAR POR ID ESTADO
+    public List<ServicoDTO> buscarServicoPorEstado(int idEstado) {
+        return servicoRepository.findServicoByIdEstado(idEstado)
+        		.stream().map(s -> {
+		        	return new ServicoDTO(s, buscarCidadesPorServicoId(s.getId()));
+		        }).toList();
+    }
+	
+//	public List<ServicoDTO> buscarServicosFavoritosPorUsuario(int usuarioId) {
+//        return servicoRepository.findServicosFavoritadosPorUsuario(usuarioId)
+//        		.stream().map(s -> new ServicoDTO(s)).toList();
+//    }
     
-    public List<ServicoDTO> buscarServicoPorNomeEstado(String nomeEstado) {
-        return servicoRepository.findByNomeEstado(nomeEstado)
-        		.stream().map(s -> new ServicoDTO(s)).toList();}
-
-    */
+	
 }
