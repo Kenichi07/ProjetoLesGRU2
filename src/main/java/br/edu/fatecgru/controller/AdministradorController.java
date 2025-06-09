@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +24,8 @@ import br.edu.fatecgru.service.AdministradorService;
 import br.edu.fatecgru.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 
-//@RestController
-@Controller
+@RestController
+//@Controller
 @RequestMapping("/administrador")
 public class AdministradorController {
 
@@ -35,11 +38,6 @@ public class AdministradorController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	/*
-	 * Consulta de todos usuarios
-	 * OBS: Os objetos não tem atributo senha, mas tem um atributo papel = "ADMINISTADOR", "PRESTADOR DE SERVIÇO", "CONSUMIDOR DE SERVICO" ou "DESCONHECIDO"
-	 * Mais detalhes em UsuarioDTO 
-	 */
 	
 	@GetMapping("/usuarios")
 	public List<UsuarioDTO> listarTodosUsuarios() {
@@ -62,6 +60,12 @@ public class AdministradorController {
 	    }
 		return null;
     }
+	
+	
+	@DeleteMapping("/{id}")
+	public void deletarUsuario(@PathVariable int id) {
+		usuarioService.deletarUsuario(id);
+	}
 	
 	@GetMapping("/login")
     public String loginPage(Model model) {

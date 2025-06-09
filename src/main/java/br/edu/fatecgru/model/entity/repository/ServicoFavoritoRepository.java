@@ -14,5 +14,5 @@ public interface ServicoFavoritoRepository extends JpaRepository <ServicoFavorit
 
 	//public List<ServicoFavorito> findByIdUsuarioId(int usuarioId);
 	
-	//public List<ServicoFavorito> findByIdUsuario(Usuario usuario);
+	public List<ServicoFavorito> findByIdUsuario(Usuario usuario);
 }
