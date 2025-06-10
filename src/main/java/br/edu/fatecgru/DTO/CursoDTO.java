@@ -25,7 +25,7 @@ public class CursoDTO {
 	        this.nomeCategoria = nomeCategoria;
 	    }
 		
-		public CursoCadastroDTO toCursoCadastroDTO() {
+		public CursoCadastroDTO toCursoCadastroDTO1() {
 			return new CursoCadastroDTO(id, nome, descricao, linkCurso, nomeCategoria);		
 		}
 

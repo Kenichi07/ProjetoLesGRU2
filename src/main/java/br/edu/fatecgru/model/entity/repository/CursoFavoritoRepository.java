@@ -16,5 +16,4 @@ public interface CursoFavoritoRepository extends JpaRepository<CursoFavorito, Cu
 	
 	public List<CursoFavorito> findByIdUsuario(Usuario usuario);
 	
-	
 }

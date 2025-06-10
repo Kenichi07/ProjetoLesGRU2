@@ -40,6 +40,7 @@
                 <div class="card" th:each="servico : ${servicos}">
                     <div class="card-header">
                         <h3 th:text="${servico.NomeServico}"></h3>
+												<a th:href="@{/consumidor/{id}/favoritarServico}">
 												<label class="heart-checkbox">
 												  <input type="checkbox" />
 												  <svg
@@ -58,7 +59,7 @@
 												    />
 												  </svg>
 												</label>
-
+												</a>
                     </div>
 										<p th:text="${servico.Descricao}"></p>
 										<p th:text="${#numbers.formatCurrency(servico.Valor)}"></p>
@@ -75,6 +76,7 @@
                 <div class="card"th:each="servico : ${servicoF}">
                     <div class="card-header">
                         <h3 th:text="${servico.NomeServico}"></h3>
+												<a th:href="@{/consumidor/{id}/desfavoritar}">
 												<label class="heart-checkbox">
 												  <input type="checkbox" />
 												  <svg
@@ -93,6 +95,7 @@
 												    />
 												  </svg>
 												</label>
+												</a>
                     </div>
 										<p th:text="${servico.Descricao}"></p>
 										<p th:text="${#numbers.formatCurrency(servico.Valor)}"></p>
