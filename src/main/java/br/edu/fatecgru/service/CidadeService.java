@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.fatecgru.model.entity.Cidade;
+import br.edu.fatecgru.model.entity.Estado;
 import br.edu.fatecgru.model.entity.repository.CidadeRepository;
 
 @Service
@@ -15,6 +16,10 @@ public class CidadeService {
 	
 	public Cidade buscarCidadePorId(int id) {
 		return cidadeRepository.findById(id).get();
+	}
+	
+	public Cidade buscarCidadePorNome(String nome) {
+		return cidadeRepository.findByNome(nome);
 	}
 	
 	public List<Cidade> buscarTodasCidadesPorId(List<Integer> idsCidades){

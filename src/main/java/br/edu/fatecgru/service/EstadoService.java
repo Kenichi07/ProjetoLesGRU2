@@ -14,4 +14,8 @@ public class EstadoService {
 	public Estado buscarEstadoPorId(int id) {
 		return estadoRepository.findById(id).get();
 	}
+	
+	public Estado buscarEstadoPorNome(String nome) {
+		return estadoRepository.findByNome(nome).get();
+	}
 }

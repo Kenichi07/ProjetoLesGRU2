@@ -9,10 +9,8 @@ import org.springframework.stereotype.Service;
 import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
-import br.edu.fatecgru.model.entity.Cidade;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
-import br.edu.fatecgru.model.entity.ServicoCidade;
 import br.edu.fatecgru.model.entity.repository.PrestadorServicoRepository;
 
 @Service
@@ -31,19 +29,8 @@ public class PrestadorService {
     private CidadeService cidadeService;
 	
 	//METODO DE CADASTRO DE SERVIÇO
-	public void cadastrarServico(ServicoCadastroDTO dto, int idPrestador) {
-	    Servico servico = new Servico();
-	    servico.setNome(dto.getNome());
-	    servico.setDescricao(dto.getDescricao());
-	    servico.setValor(dto.getValor());
-	    servico.setCategoria(categoriaService.buscarCategoriaPorId(dto.getIdCategoria()));
-	    servico.setPrestadorservico(prestadorRepository.findById(idPrestador).get());
-	    servicoService.salvarServico(servico); 
-	    
-	    List<Cidade> cidades = cidadeService.buscarTodasCidadesPorId(dto.getIdsCidades());
-	    for (Cidade cidade : cidades) {
-	    	servicoService.salvarServicoCidade(new ServicoCidade(servico, cidade));
-	    }
+	public void cadastrarServico(ServicoCadastroDTO dto) {
+		servicoService.salvarServico(dto);
 	}
 
 	//METODO PARA LISTAR SERVICO CRIADOS PELO PRESTADOR
@@ -55,10 +42,7 @@ public class PrestadorService {
 
 	    List<Servico> servicos = servicoService.buscarPorPrestadorId(idPrestador);
 	    return servicos.stream()
-	        .map(servico -> {
-	            List<Cidade> cidades = servicoService.buscarCidadesPorServicoId(servico.getId());
-	            return new ServicoDTO(servico, cidades);
-	        })
+	        .map(servico -> new ServicoDTO(servico))
 	        .toList();
 	}
 	

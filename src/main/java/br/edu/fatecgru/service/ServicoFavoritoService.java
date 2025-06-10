@@ -1,18 +1,14 @@
 package br.edu.fatecgru.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.fatecgru.DTO.ServicoDTO;
-import br.edu.fatecgru.model.entity.Cidade;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.model.entity.ServicoFavorito;
 import br.edu.fatecgru.model.entity.ServicoFavoritoPK;
 import br.edu.fatecgru.model.entity.Usuario;
-import br.edu.fatecgru.model.entity.repository.ServicoCidadeRepository;
 import br.edu.fatecgru.model.entity.repository.ServicoFavoritoRepository;
 import br.edu.fatecgru.model.entity.repository.ServicoRepository;
 import br.edu.fatecgru.model.entity.repository.UsuarioRepository;
@@ -29,8 +25,6 @@ public class ServicoFavoritoService {
     @Autowired
     private ServicoRepository servicoRepository;
 
-    @Autowired
-    private ServicoCidadeRepository servicoCidadeRepository;
     //Metodo para Usuario favoritar serviço
     public void favoritar(int usuarioId, int servicoId) {	
     	

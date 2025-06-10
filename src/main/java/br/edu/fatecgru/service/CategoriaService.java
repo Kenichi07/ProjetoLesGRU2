@@ -16,6 +16,6 @@ public class CategoriaService {
 	}
 	
 	public Categoria buscarPorNome(String nome) {
-		return categoriaRepository.findByNome(nome);
+		return categoriaRepository.findByNome(nome).get();
 	}
 }

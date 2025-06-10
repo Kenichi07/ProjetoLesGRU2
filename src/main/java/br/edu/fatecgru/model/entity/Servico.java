@@ -17,7 +17,9 @@ public class Servico {
     private int id;
     private String nome;
     private String descricao;
-    private Float valor;
+    private Float valor;   
+    @ManyToOne
+    private Cidade cidade;
     @ManyToOne
     private PrestadorServico prestadorservico;
     @ManyToOne
@@ -25,11 +27,12 @@ public class Servico {
    
     // Construtores
     public Servico() {}
-    public Servico(String nome, String descricao, Float valor, PrestadorServico prestadorservico,
+    public Servico(String nome, String descricao, Float valor,Cidade cidade, PrestadorServico prestadorservico,
                    Categoria categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.valor = valor;
+        this.cidade = cidade;
         this.prestadorservico = prestadorservico;
         this.categoria = categoria;
     }
@@ -38,6 +41,7 @@ public class Servico {
         this.nome = s.getNome();
         this.descricao = s.getDescricao();
         this.valor = s.getValor();
+        this.cidade = s.getCidade();
         this.prestadorservico = s.getPrestadorservico();
         this.categoria = s.getCategoria();
         }
@@ -54,8 +58,11 @@ public class Servico {
 
     public Float getValor() { return valor; }
     public void setValor(Float valor) { this.valor = valor; }
-
-    public PrestadorServico getPrestadorservico() { return prestadorservico; }
+    
+    public Cidade getCidade() {return cidade;}
+	public void setCidade(Cidade cidade) {this.cidade = cidade;}
+	
+	public PrestadorServico getPrestadorservico() { return prestadorservico; }
     public void setPrestadorservico(PrestadorServico prestadorservico) { this.prestadorservico = prestadorservico; }
 
     public Categoria getCategoria() { return categoria; }

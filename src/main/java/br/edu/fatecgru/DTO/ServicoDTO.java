@@ -14,12 +14,13 @@ import br.edu.fatecgru.model.entity.Servico;
 	    private String nomePrestadorServico;
 	    private String numeroWhatsAppPrestadorServico;
 	    private String nomeCategoria;
-	    private String cidades;
-	
+	    private String cidade;
+	    private String estado;
+	    
 	    //Contrutores
 	    public ServicoDTO() {}
 	
-	    public ServicoDTO(Servico s, List<Cidade> cidadesList) {
+	    public ServicoDTO(Servico s) {
 	        this.id = s.getId();
 	        this.nomeServico = s.getNome();
 	        this.descricao = s.getDescricao();
@@ -27,22 +28,8 @@ import br.edu.fatecgru.model.entity.Servico;
 	        this.nomePrestadorServico = s.getPrestadorservico().getNome();
 	        this.numeroWhatsAppPrestadorServico = s.getPrestadorservico().getWhatsApp();
 	        this.nomeCategoria = s.getCategoria().getNome();
-	        this.cidades = formatarCidades(cidadesList);
-	    }
-	
-	    // Metodos utilitarios
-	    private String formatarCidades(List<Cidade> cidades) {
-	        StringBuilder sb = new StringBuilder();
-	        for (Cidade cidade : cidades) {
-	            sb.append(cidade.getNome())
-	              .append("/")
-	              .append(cidade.getEstado().getSigla())
-	              .append(", ");
-	        }
-	        if (sb.length() > 2) {
-	            sb.setLength(sb.length() - 2);
-	        }
-	        return sb.toString();
+	        this.cidade = s.getCidade().getNome();
+	        this.estado = s.getCidade().getEstado().getNome();
 	    }
 	
 	    // Getters e Setters
@@ -67,7 +54,9 @@ import br.edu.fatecgru.model.entity.Servico;
 	    public String getNomeCategoria() { return nomeCategoria; }
 	    public void setNomeCategoria(String nomeCategoria) { this.nomeCategoria = nomeCategoria; }
 	
-	    public String getCidades() { return cidades; }
-	    public void setCidades(String cidades) { this.cidades = cidades; }
-	   
+	    public String getCidade() { return cidade; }
+	    public void setCidade(String cidades) { this.cidade = cidades; }
+
+		public String getEstado() {return estado;}
+		public void setEstado(String estado) {this.estado = estado;}   
 	}

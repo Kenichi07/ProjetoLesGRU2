@@ -37,8 +37,8 @@ public class PrestadorController {
 	
 	//CADASTRO DE SERVICO
 	@PostMapping("/{idPrestador}/servicos")
-    public void cadastrarServico(@PathVariable int idPrestador,@RequestBody ServicoCadastroDTO dto) { 
-		prestadorService.cadastrarServico(dto, idPrestador);
+    public void cadastrarServico(@RequestBody ServicoCadastroDTO dto) { 
+		prestadorService.cadastrarServico(dto);
     }
 	
 	//LISTA OS SERVIÇOS DO PRESTADOR 
