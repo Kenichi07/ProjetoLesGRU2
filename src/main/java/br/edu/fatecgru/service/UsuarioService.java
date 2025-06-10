@@ -139,13 +139,13 @@ public class UsuarioService {
 	    if (usuarioExistente instanceof PrestadorServico) {
 	        PrestadorServico prestador = (PrestadorServico) usuarioExistente;
 	        prestador.setWhatsApp(dto.getWhatsApp());
-	        prestadorService.salvar(prestador); // ou prestadorRepository.save(prestador)
+	        prestadorService.salvar(prestador); 
 	    } else if (usuarioExistente instanceof ConsumidorServico) {
 	        ConsumidorServico consumidor = (ConsumidorServico) usuarioExistente;
-	        consumidorService.salvar(consumidor); // ou consumidorRepository.save(consumidor)
+	        consumidorService.salvar(consumidor); 
 	    } else if (usuarioExistente instanceof Administrador) {
 	        Administrador administrador = (Administrador) usuarioExistente;
-	        administradorService.salvar(administrador); // ou administradorRepository.save(administrador)
+	        administradorService.salvar(administrador); 
 	    } else {
 	        throw new RuntimeException("Tipo de usuário não suportado");
 	    }
