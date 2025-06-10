@@ -15,7 +15,7 @@
         </div>
         <nav>
             <ul class="nav-links">
-                <li><a th:href="@{/administrador/home}" class="active">Home</a></li>
+                <li><a th:href="@{/administrador/usuarios}" class="active">Home</a></li>
                 <li><a th:href="@{/administrador/educacional}">Educacional</a></li>
                 <li><a th:href="@{/administrador/equipe}">Sobre Nós</a></li>
             </ul>
@@ -35,14 +35,15 @@
             <h2>Usuários</h2>
         </div>
         <div class="card-grid">
-          <div class="card" onclick="selecionarCard(this)">
+          <div class="card" th:each="usuario : ${usuarios}" onclick="selecionarCard(this)">
 						<div class="card-header">
-                  <h3>Limpar Calha</h3>
+                  <h3 th:text="${usuario.nome}"></h3>
               </div>
-              <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
+              <p th:text="${usuario.email}"></p>
+							<p th:text="${usuario.papel}"></p>
 							<div class="card-actions">
-					     	<a class="edit-btn" th:href="@{/administrador/{id}/edit}">Editar</a>
-					     	<a class="delete-btn" th:href="@{/administrador/{id}/delete}">Excluir</a>
+					     	<a class="edit-btn" th:href="@{/administrador/{id}/edit(id=${usuario.id})}">Editar</a>
+					     	<a class="delete-btn" th:href="@{/administrador/{id}/delete(id=${usuario.id})}">Excluir</a>
 					   	</div>
           </div>
         </div>

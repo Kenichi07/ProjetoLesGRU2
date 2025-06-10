@@ -21,7 +21,6 @@ public class ServicoCadastroDTO {
 			this.nomeCidade = nomeCidade;
 			this.nomeEstado = nomeEstado;
 		}
-
 		public String getNome() {return nome;}
 		public void setNome(String nome) {this.nome = nome;}
 
@@ -41,10 +40,5 @@ public class ServicoCadastroDTO {
 		public void setNomeCidade(String nomeCidade) {this.nomeCidade = nomeCidade;}
 
 		public String getNomeEstado() {return nomeEstado;}
-		public void setNomeEstado(String nomeEstado) {this.nomeEstado = nomeEstado;}
-
-		
-	    
-		
-	    
+		public void setNomeEstado(String nomeEstado) {this.nomeEstado = nomeEstado;}	    
 }

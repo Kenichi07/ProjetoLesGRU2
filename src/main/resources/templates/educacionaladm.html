@@ -15,7 +15,7 @@
         </div>
         <nav>
           <ul class="nav-links">
-            <li><a th:href="@{/administrador/home}">Home</a></li>
+            <li><a th:href="@{/administrador/usuarios}">Home</a></li>
             <li><a th:href="@{/administrador/educacional}" class="active">Educacional</a></li>
             <li><a th:href="@{/administrador/equipe}">Sobre Nós</a></li>
           </ul>
@@ -35,15 +35,16 @@
             <h2>Cursos</h2>
         </div>
         <div class="card-grid">
-          <div class="card" onclick="selecionarCard(this)">
+          <div class="card" th:each="curso : ${cursos}" onclick="selecionarCard(this)">
             <div class="card-header">
-              <h3>Curso XPTO</h3>
+              <h3 th:text="${curso.nome}"></h3>
 	          </div>
-	          <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
-	          <p>Link: </p>
+						<p th:text="${curso.nomeCategoria}"></p>
+	          <p th:text="${curso.descricao}"></p>
+	          <p>Link: <label th:text="${curso.linkCurso}"></label></p>
 						<div class="card-actions">
-					     <a class="edit-btn" th:href="@{/prestador/{id}/edit}">Editar</a>
-					     <a class="delete-btn" th:href="@{/prestador/{id}/delete}">Excluir</a>
+					     <a class="edit-btn" th:href="@{/prestador/{id}/edit(id=${curso.id})}">Editar</a>
+					     <a class="delete-btn" th:href="@{/prestador/{id}/delete(id=${curso.id})}">Excluir</a>
 					  </div>
 	        </div>
       	</div>

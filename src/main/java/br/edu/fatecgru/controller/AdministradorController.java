@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.edu.fatecgru.DTO.CursoCadastroDTO;
+import br.edu.fatecgru.DTO.CursoDTO;
 import br.edu.fatecgru.DTO.LoginDTO;
 import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
@@ -24,6 +27,7 @@ import br.edu.fatecgru.model.entity.Curso;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Usuario;
 import br.edu.fatecgru.service.AdministradorService;
+import br.edu.fatecgru.service.CursoService;
 import br.edu.fatecgru.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 
@@ -42,15 +46,23 @@ public class AdministradorController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	@Autowired
+	private CursoService cursoService;
+	
 	
 	@GetMapping("/usuarios")
-	public List<UsuarioDTO> listarTodosUsuarios() {
-	    return administradorService.listarTodosUsuarios();
+	public String listarTodosUsuarios(HttpSession session, Model model) {
+		List<UsuarioDTO> usuarios = administradorService.listarTodosUsuarios();
+		Administrador admin = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", admin);
+		model.addAttribute("usuarios", usuarios);
+		return "homeadministrador";
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deletarUsuario(@PathVariable int id) {
+	@GetMapping("/{id}/delete")
+	public String deletarUsuario(@PathVariable int id) {
 		usuarioService.deletarUsuario(id);
+		return "redirect:/administrador/usuarios";
 	}
 	
 	@GetMapping("/login")
@@ -73,7 +85,7 @@ public class AdministradorController {
 		if (usuario != null) {
 			session.setAttribute("usuarioLogado", usuario); // guarda na sessão
 	        if (usuario instanceof Administrador) {
-	            return "redirect:/administrador/home";
+	            return "redirect:/administrador/usuarios";
 	        } else if (usuario instanceof PrestadorServico) {
 	            return "redirect:/prestador/home";
 	        } else if (usuario instanceof ConsumidorServico) {
@@ -107,15 +119,20 @@ public class AdministradorController {
         return "cadastroadm";
     }
 	
+	/*
 	@GetMapping("/home")
     public String home(HttpSession session, Model model) {
 		Administrador admin = (Administrador) session.getAttribute("usuarioLogado");
 	    model.addAttribute("admin", admin);
         return "homeadministrador";
-    }
+    }*/
 
 	@GetMapping("/educacional")
-    public String educacional() {
+    public String educacional(HttpSession session, Model model) {
+		List<CursoDTO> curso = cursoService.listarTodosCursos();
+		Administrador admin = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", admin);
+		model.addAttribute("cursos", curso);
         return "educacionaladm";
     }
 	
@@ -127,7 +144,7 @@ public class AdministradorController {
 	@GetMapping("/new") 
 	public String newServico(Model model) { 
   		model
-  			.addAttribute("curso", new Curso())
+  			.addAttribute("cursoDTO", new CursoCadastroDTO())
   			.addAttribute("novo", true); 
   		return "formadm"; 
 	}		

@@ -26,6 +26,10 @@ public class Categoria {
 		this.servicos = servicos;
 	}
 
+	public Categoria(String nome) {
+		super();
+		this.nome = nome;
+	}
 	//Getters e Setters
 	public int getId() {return id;}
 	public void setId(int id) {this.id = id;}
