@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.fatecgru.DTO.CursoCadastroDTO;
 import br.edu.fatecgru.DTO.CursoDTO;
@@ -53,7 +54,8 @@ public class CursoService {
 	    cursoRepository.save(curso);
 	}
 	
-	//METODO PARA UPDATE CURSO
+	//METODO PARA ATUALIZAR CURSO
+	@Transactional
 	public void atualizarCurso(CursoDTO dto) {
 	   Curso cursoExistente = cursoRepository.findById(dto.getId())
 	        .orElseThrow(() -> new RuntimeException("Curso não encontrado com ID: " + dto.getId()));

@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.fatecgru.DTO.LoginDTO;
 import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
+import br.edu.fatecgru.model.entity.Administrador;
+import br.edu.fatecgru.model.entity.ConsumidorServico;
 import br.edu.fatecgru.model.entity.CursoFavorito;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
@@ -108,7 +111,7 @@ public class UsuarioService {
 	            }
 	        }
 	    }
-
+ 
 	    List<CursoFavorito> cursosFavoritos = cursoFavoritoRepository.findByIdUsuario(usuario);
 	    for (CursoFavorito cf : cursosFavoritos) {
 	        cursoFavoritoRepository.delete(cf);
@@ -121,5 +124,32 @@ public class UsuarioService {
 
 	    usuarioRepository.delete(usuario);
 	}
+	//FIM DELETAR USUARIO
+	
+	//METODO PARA ATUALIZAR USUARIO
+	@Transactional
+	public Usuario atualizarUsuario(UsuarioCadastroDTO dto) {
+	    Usuario usuarioExistente = usuarioRepository.findById(dto.getId())
+	        .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
+	    usuarioExistente.setNome(dto.getNome());
+	    usuarioExistente.setEmail(dto.getEmail());
+	    usuarioExistente.setSenha(dto.getSenha());
+
+	    if (usuarioExistente instanceof PrestadorServico) {
+	        PrestadorServico prestador = (PrestadorServico) usuarioExistente;
+	        prestador.setWhatsApp(dto.getWhatsApp());
+	        prestadorService.salvar(prestador); // ou prestadorRepository.save(prestador)
+	    } else if (usuarioExistente instanceof ConsumidorServico) {
+	        ConsumidorServico consumidor = (ConsumidorServico) usuarioExistente;
+	        consumidorService.salvar(consumidor); // ou consumidorRepository.save(consumidor)
+	    } else if (usuarioExistente instanceof Administrador) {
+	        Administrador administrador = (Administrador) usuarioExistente;
+	        administradorService.salvar(administrador); // ou administradorRepository.save(administrador)
+	    } else {
+	        throw new RuntimeException("Tipo de usuário não suportado");
+	    }
+
+	    return usuarioExistente;
+	}
 }
