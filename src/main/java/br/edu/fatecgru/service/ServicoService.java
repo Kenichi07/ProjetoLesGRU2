@@ -142,11 +142,8 @@ public class ServicoService {
         return servicoRepository.findServicoByIdEstado(idEstado)
         		.stream().map(s -> new ServicoDTO(s)).toList();
     }
-	
-//	public List<ServicoDTO> buscarServicosFavoritosPorUsuario(int usuarioId) {
-//        return servicoRepository.findServicosFavoritadosPorUsuario(usuarioId)
-//        		.stream().map(s -> new ServicoDTO(s)).toList();
-//    }
-    
-	
+	   
+	public void deletarServico(int servicoId) {
+		servicoRepository.deleteById(servicoId);
+	}
 }

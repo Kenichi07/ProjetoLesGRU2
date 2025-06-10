@@ -24,6 +24,10 @@ public class CursoDTO {
 	        this.linkCurso = linkCurso;
 	        this.nomeCategoria = nomeCategoria;
 	    }
+		
+		public CursoCadastroDTO toCursoCadastroDTO() {
+			return new CursoCadastroDTO(id, nome, descricao, linkCurso, nomeCategoria);		
+		}
 
 		// Getters e Setters
 		public int getId() {return id;}

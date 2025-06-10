@@ -79,15 +79,7 @@ public class CursoService {
 		return cursoRepository.findById(idCurso).get().toDTO();
 	}
 	
-	//Precisam ser refeitos
-	/*
-	
-	
-	public List<CursoDTO> buscarCursosFavoritosPorUsuario(int usuarioId) {
-        return cursoRepository.findCursosFavoritosByUsuarioId(usuarioId).stream()
-                     .map(c -> new CursoDTO(c)).toList();
-  
-	
-	
-*/
+	public void deletarCurso(int cursoId) {
+		cursoRepository.deleteById(cursoId);
+	}
 }
