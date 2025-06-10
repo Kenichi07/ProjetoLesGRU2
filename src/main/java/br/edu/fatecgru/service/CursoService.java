@@ -9,6 +9,7 @@ import br.edu.fatecgru.DTO.CursoCadastroDTO;
 import br.edu.fatecgru.DTO.CursoDTO;
 import br.edu.fatecgru.model.entity.Categoria;
 import br.edu.fatecgru.model.entity.Curso;
+import br.edu.fatecgru.model.entity.repository.CategoriaRepository;
 import br.edu.fatecgru.model.entity.repository.CursoRepository;
 
 @Service
@@ -17,7 +18,7 @@ public class CursoService {
 	private CursoRepository cursoRepository;
 	
 	@Autowired
-	private CategoriaService categoriaService;
+	private CategoriaRepository categoriaRepository;
 		
 	
 	public List<CursoDTO> listarTodosCursos() {
@@ -26,24 +27,48 @@ public class CursoService {
 	
 	//METODO PARA CADASTRO
 	public void salvarCurso(CursoCadastroDTO dto) {
-		cursoRepository.save(new Curso(
-				dto.getNome(),
-				dto.getDescricao(),
-                dto.getLinkCurso(),
-                categoriaService.buscarCategoriaPorId(dto.getIdCategoria())
-                ));
-    }
-	
-	//METODOS PARA UPDATE
-	public void salvarCurso(CursoDTO dto) {
-		cursoRepository.save(new Curso(
-				dto.getNome(),
-				dto.getDescricao(),
-                dto.getLinkCurso(),
-                categoriaService.buscarPorNome(dto.getNomeCategoria())
-                ));
-    }
+	    
+		Categoria categoria = categoriaRepository.findByNome(dto.getNomeCategoria())
+                .orElseGet(() -> {
+                    Categoria novaCategoria = new Categoria();
+                    novaCategoria.setNome(dto.getNomeCategoria());
+                    return categoriaRepository.save(novaCategoria);
+                });
 
+	    Curso curso = new Curso(
+	        dto.getNome(),
+	        dto.getDescricao(),
+	        dto.getLinkCurso(),
+	        categoria
+	    );
+
+	    cursoRepository.save(curso);
+	}
+	
+	//METODO PARA UPDATE CURSO
+	public void atualizarCurso(CursoDTO dto) {
+	   Curso cursoExistente = cursoRepository.findById(dto.getId())
+	        .orElseThrow(() -> new RuntimeException("Curso não encontrado com ID: " + dto.getId()));
+
+	  Categoria categoria = categoriaRepository.findByNome(dto.getNomeCategoria())
+	        .orElseGet(() -> {
+	            Categoria novaCategoria = new Categoria();
+	            novaCategoria.setNome(dto.getNomeCategoria());
+	            return categoriaRepository.save(novaCategoria);
+	        });
+
+	    cursoExistente.setNome(dto.getNome());
+	    cursoExistente.setDescricao(dto.getDescricao());
+	    cursoExistente.setLinkCurso(dto.getLinkCurso());
+	    cursoExistente.setCategoria(categoria);
+
+	    cursoRepository.save(cursoExistente);
+	}
+
+	public CursoDTO buscarPorId(int idCurso){
+		return cursoRepository.findById(idCurso).get().toDTO();
+	}
+	
 	//Precisam ser refeitos
 	/*
 	
@@ -52,9 +77,7 @@ public class CursoService {
         return cursoRepository.findCursosFavoritosByUsuarioId(usuarioId).stream()
                      .map(c -> new CursoDTO(c)).toList();
   
-	public CursoDTO buscarPorId(int idCurso){
-		return cursoRepository.findById(idCurso).get().toDTO();
-	}
+	
 	
 */
 }

@@ -4,16 +4,16 @@ public class CursoCadastroDTO {
     private String nome;
     private String descricao;
     private String linkCurso;
-    private int idCategoria;
+    private String nomeCategoria;
     
 	public CursoCadastroDTO() {	
 	}
 
-	public CursoCadastroDTO(String nome, String descricao, String linkCurso, int idCategoria) {
+	public CursoCadastroDTO(String nome, String descricao, String linkCurso, String nomeCategoria) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.linkCurso = linkCurso;
-		this.idCategoria = idCategoria;
+		this.nomeCategoria = nomeCategoria;
 	}
 	
 	public String getNome() {return nome;}
@@ -25,8 +25,8 @@ public class CursoCadastroDTO {
 	public String getLinkCurso() {return linkCurso;}
 	public void setLinkCurso(String linkCurso) {this.linkCurso = linkCurso;}
 
-	public int getIdCategoria() {return idCategoria;}
-	public void setIdCategoria(int idCategoria) {this.idCategoria = idCategoria;}
+	public String getNomeCategoria() {return nomeCategoria;}
+	public void setNomeCategoria(String nomeCategoria) {this.nomeCategoria = nomeCategoria;}
     
 	
     
