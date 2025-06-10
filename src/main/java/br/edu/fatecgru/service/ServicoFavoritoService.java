@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.model.entity.Servico;
@@ -28,34 +29,35 @@ public class ServicoFavoritoService {
     private ServicoRepository servicoRepository;
 
     //METODO PARA FAVORITAR SERVICO
-    public void favoritar(int usuarioId, int servicoId) {	
-    	
-    	Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
-        Optional<Servico> servicoOpt = servicoRepository.findById(servicoId);
+    @Transactional
+    public void favoritar(int usuarioId, int servicoId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + usuarioId));
+        
+        Servico servico = servicoRepository.findById(servicoId)
+                .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + servicoId));
 
-        if (usuarioOpt.isPresent() && servicoOpt.isPresent()) {
-            ServicoFavoritoPK pk = new ServicoFavoritoPK(usuarioOpt.get(), servicoOpt.get());
-            if (!servicoFavoritoRepository.existsById(pk)) {
-            	servicoFavoritoRepository.save(new ServicoFavorito(pk));
-            }
+        ServicoFavoritoPK pk = new ServicoFavoritoPK(usuario, servico);
+
+        if (!servicoFavoritoRepository.existsById(pk)) {
+            servicoFavoritoRepository.save(new ServicoFavorito(pk));
         }
     }
     
     //METODO PARA DESFAVORITAR SERVICO
-    public void desfavoritar(int usuarioId, int servicoId) {   	
-    	Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
-        Optional<Servico> servicoOpt = servicoRepository.findById(servicoId);
+    @Transactional
+    public void desfavoritar(int usuarioId, int servicoId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + usuarioId));
+        
+        Servico servico = servicoRepository.findById(servicoId)
+                .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + servicoId));
 
-        if (usuarioOpt.isPresent() && servicoOpt.isPresent()) {
-           servicoFavoritoRepository.deleteById(new ServicoFavoritoPK(usuarioOpt.get(), servicoOpt.get()));
+        ServicoFavoritoPK pk = new ServicoFavoritoPK(usuario, servico);
+
+        if (servicoFavoritoRepository.existsById(pk)) {
+            servicoFavoritoRepository.deleteById(pk);
         }
-    }
-    
-    //METODO PARA LISTAR CURSOS FAVORITOS DO USUARIO
-    public List<ServicoDTO> listarServicosFavoritosPorUsuario(int usuarioId) {
-        List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
-        return favoritos.stream()
-                        .map(f -> new ServicoDTO(f.getId().getServico())).toList();
     }
     
 }

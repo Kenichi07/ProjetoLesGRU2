@@ -1,10 +1,10 @@
 package br.edu.fatecgru.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.fatecgru.DTO.CursoDTO;
 import br.edu.fatecgru.model.entity.Curso;
@@ -28,25 +28,34 @@ public class CursoFavoritoService {
     private CursoRepository cursoRepository;
   
     //METODO PARA FAVORITAR CURSO
+    @Transactional
     public void favoritar(int usuarioId, int cursoId) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
-        Optional<Curso> cursoOpt = cursoRepository.findById(cursoId);
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + usuarioId));
+        
+        Curso curso = cursoRepository.findById(cursoId)
+                .orElseThrow(() -> new RuntimeException("Curso não encontrado com ID: " + cursoId));
+        
+        CursoFavoritoPK pk = new CursoFavoritoPK(usuario, curso);
 
-        if (usuarioOpt.isPresent() && cursoOpt.isPresent()) {
-            CursoFavoritoPK pk = new CursoFavoritoPK(usuarioOpt.get(), cursoOpt.get());
-            if (!cursoFavoritoRepository.existsById(pk)) {
-                cursoFavoritoRepository.save(new CursoFavorito(pk));
-            }
+        if (!cursoFavoritoRepository.existsById(pk)) {
+            cursoFavoritoRepository.save(new CursoFavorito(pk));
         }
     }
 
     // METODO PARA DESFAVORITAR CURSO
+    @Transactional
     public void desfavoritar(int usuarioId, int cursoId) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
-        Optional<Curso> cursoOpt = cursoRepository.findById(cursoId);
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + usuarioId));
+        
+        Curso curso = cursoRepository.findById(cursoId)
+                .orElseThrow(() -> new RuntimeException("Curso não encontrado com ID: " + cursoId));
+        
+        CursoFavoritoPK pk = new CursoFavoritoPK(usuario, curso);
 
-        if (usuarioOpt.isPresent() && cursoOpt.isPresent()) {
-            cursoFavoritoRepository.deleteById(new CursoFavoritoPK(usuarioOpt.get(), cursoOpt.get()));
+        if (cursoFavoritoRepository.existsById(pk)) {
+            cursoFavoritoRepository.deleteById(pk);
         }
     }
     
