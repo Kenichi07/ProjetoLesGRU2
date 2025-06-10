@@ -12,7 +12,7 @@ import br.edu.fatecgru.model.entity.Usuario;
 @Repository
 public interface ServicoFavoritoRepository extends JpaRepository <ServicoFavorito, ServicoFavoritoPK>{
 
-	//public List<ServicoFavorito> findByIdUsuarioId(int usuarioId);
+	public List<ServicoFavorito> findByIdUsuarioId(int usuarioId);
 	
 	public List<ServicoFavorito> findByIdUsuario(Usuario usuario);
 }

@@ -11,7 +11,8 @@ import br.edu.fatecgru.model.entity.Usuario;
 
 @Repository
 public interface CursoFavoritoRepository extends JpaRepository<CursoFavorito, CursoFavoritoPK>{
-	//List<CursoFavorito> findByIdUsuarioId(int usuarioId);
+	
+	List<CursoFavorito> findByIdUsuarioId(int usuarioId);
 	
 	public List<CursoFavorito> findByIdUsuario(Usuario usuario);
 	

@@ -26,9 +26,8 @@ public class CursoFavoritoService {
 
     @Autowired
     private CursoRepository cursoRepository;
-
-    
-    // Método para usuário favoritar um curso
+  
+    //METODO PARA FAVORITAR CURSO
     public void favoritar(int usuarioId, int cursoId) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
         Optional<Curso> cursoOpt = cursoRepository.findById(cursoId);
@@ -41,7 +40,7 @@ public class CursoFavoritoService {
         }
     }
 
-    // Método para usuário desfavoritar um curso
+    // METODO PARA DESFAVORITAR CURSO
     public void desfavoritar(int usuarioId, int cursoId) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
         Optional<Curso> cursoOpt = cursoRepository.findById(cursoId);
@@ -51,18 +50,10 @@ public class CursoFavoritoService {
         }
     }
     
-    /*
-    //Metodo para listar os Cursos favoritos
-    public List<CursoDTO> listarCursosFavoritosDoUsuario(int usuarioId) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
-
-        if (usuarioOpt.isPresent()) {
-            return cursoFavoritoRepository.findByIdUsuarioId(usuarioId).stream()
-                .map(fav -> new CursoDTO(fav.getId().getCurso()))
-                .toList();
-        }
-
-        return List.of();
+    public List<CursoDTO> listarCursosFavoritosPorUsuario(int usuarioId) {
+        List<CursoFavorito> favoritos = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
+        return favoritos.stream()
+                        .map(f -> new CursoDTO(f.getId().getCurso())).toList();
     }
-    */
+
 }

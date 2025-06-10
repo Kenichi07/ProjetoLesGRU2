@@ -1,10 +1,12 @@
 package br.edu.fatecgru.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.model.entity.ServicoFavorito;
 import br.edu.fatecgru.model.entity.ServicoFavoritoPK;
@@ -25,7 +27,7 @@ public class ServicoFavoritoService {
     @Autowired
     private ServicoRepository servicoRepository;
 
-    //Metodo para Usuario favoritar serviço
+    //METODO PARA FAVORITAR SERVICO
     public void favoritar(int usuarioId, int servicoId) {	
     	
     	Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
@@ -39,7 +41,7 @@ public class ServicoFavoritoService {
         }
     }
     
-    //Metodo para Usuario desfavoritar serviço
+    //METODO PARA DESFAVORITAR SERVICO
     public void desfavoritar(int usuarioId, int servicoId) {   	
     	Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
         Optional<Servico> servicoOpt = servicoRepository.findById(servicoId);
@@ -48,23 +50,11 @@ public class ServicoFavoritoService {
            servicoFavoritoRepository.deleteById(new ServicoFavoritoPK(usuarioOpt.get(), servicoOpt.get()));
         }
     }
-
-    /*
-    //Metodos para o usuario listar seus serviços favoritos
-    public List<ServicoDTO> listarFavoritosDoUsuario(int usuarioId) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(usuarioId);
-
-        if (usuarioOpt.isEmpty()) {
-            return List.of();
-        }
-
-        return servicoFavoritoRepository.findByIdUsuarioId(usuarioId).stream()
-                .map(favorito -> {
-                    Servico servico = favorito.getId().getServico();
-                    List<Cidade> cidades = servicoCidadeRepository.findCidadesByServicoId(servico.getId());
-                    return new ServicoDTO(servico, cidades);
-                })
-                .toList();
+    
+    //METODO PARA LISTAR CURSOS FAVORITOS DO USUARIO
+    public List<ServicoDTO> listarServicosFavoritosPorUsuario(int usuarioId) {
+        List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+        return favoritos.stream()
+                        .map(f -> new ServicoDTO(f.getId().getServico())).toList();
     }
-    */
 }

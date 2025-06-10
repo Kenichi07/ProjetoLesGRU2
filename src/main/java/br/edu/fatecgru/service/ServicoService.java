@@ -75,30 +75,31 @@ public class ServicoService {
 	
 	//METODOS PARA ATUALIZAR SERVICO
 	public void atualizarServico(ServicoDTO dto) {
-	    // Buscar o serviço existente
 	    Servico servicoExistente = servicoRepository.findById(dto.getId())
 	        .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + dto.getId()));
 
-	    // Buscar ou criar a categoria
-	    Categoria categoria = categoriaRepository.findByNome(dto.getNomeCategoria())
-	        .orElseGet(() -> {
-	            Categoria nova = new Categoria();
-	            nova.setNome(dto.getNomeCategoria());
-	            return categoriaRepository.save(nova);
-	        });
-
-	    // Buscar a cidade e o estado
-	    Estado estado = estadoRepository.findByNome(dto.getEstado())
-	        .orElseThrow(() -> new RuntimeException("Estado não encontrado: " + dto.getEstado()));
-
-	    Cidade cidade = cidadeRepository.findByNomeAndEstado(dto.getCidade(), estado)
-	        .orElseThrow(() -> new RuntimeException("Cidade não encontrada: " + dto.getCidade() + ", " + dto.getEstado()));
-
-	    // Buscar o prestador de serviço
 	    PrestadorServico prestador = prestadorServicoRepository.findByNome(dto.getNomePrestadorServico())
-	        .orElseThrow(() -> new RuntimeException("Prestador de serviço não encontrado: " + dto.getNomePrestadorServico()));
+		        .orElseThrow(() -> new RuntimeException("Prestador de serviço não encontrado: " + dto.getNomePrestadorServico()));
+	    
+	    Estado estado = estadoRepository.findByNome(dto.getEstado())
+	            .orElseThrow(() -> new RuntimeException("Estado não encontrado: " + dto.getEstado()));
 
-	    // Atualizar os dados do serviço
+        Cidade cidade = cidadeRepository.findByNomeAndEstado(dto.getCidade(), estado)
+                .orElseGet(() -> {
+                    Cidade novaCidade = new Cidade(dto.getCidade(), estado);
+                    return cidadeRepository.save(novaCidade);
+                });
+
+      
+        Categoria categoria = categoriaRepository.findByNome(dto.getNomeCategoria())
+                .orElseGet(() -> {
+                    Categoria novaCategoria = new Categoria();
+                    novaCategoria.setNome(dto.getNomeCategoria());
+                    return categoriaRepository.save(novaCategoria);
+                });
+    
+	     
+
 	    servicoExistente.setNome(dto.getNomeServico());
 	    servicoExistente.setDescricao(dto.getDescricao());
 	    servicoExistente.setValor(dto.getValor());
@@ -106,7 +107,6 @@ public class ServicoService {
 	    servicoExistente.setCidade(cidade);
 	    servicoExistente.setPrestadorservico(prestador);
 
-	    // Salvar
 	    servicoRepository.save(servicoExistente);
 	}
 
