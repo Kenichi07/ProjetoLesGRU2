@@ -76,6 +76,20 @@ public class AdministradorController {
 		return "formusuario";
 	}
 	
+	@GetMapping("/{id}/deleteCurso")
+	public String deletarCurso(@PathVariable int id) {
+		
+		return "redirect:/administrador/usuarios";
+	}
+	
+	@GetMapping("/{id}/editCurso")
+	public String editarCurso(HttpSession session, Model model, @PathVariable int id) {
+		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", adm);
+	    model.addAttribute("cursoDTO", cursoService.buscarPorId(id));
+		return "formadm";
+	}
+	
 	/*
 	@GetMapping("/{id}/edit")
 	public String editarCurso(Model model, @PathVariable int id) {
@@ -120,6 +134,14 @@ public class AdministradorController {
 		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
 	    model.addAttribute("admin", adm);
 		return "redirect:/administrador/usuarios";
+	}
+	
+	@PostMapping("saveCurso")
+	public String salvarCurso(@ModelAttribute CursoDTO dto, HttpSession session, Model model) {
+		cursoService.atualizarCurso(dto);
+		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", adm);
+		return "redirect:/administrador/educacional";
 	}
 	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO (só não esquece de att os imports)
