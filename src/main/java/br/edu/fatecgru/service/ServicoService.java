@@ -17,6 +17,7 @@ import br.edu.fatecgru.model.entity.repository.CategoriaRepository;
 import br.edu.fatecgru.model.entity.repository.CidadeRepository;
 import br.edu.fatecgru.model.entity.repository.EstadoRepository;
 import br.edu.fatecgru.model.entity.repository.PrestadorServicoRepository;
+import br.edu.fatecgru.model.entity.repository.ServicoFavoritoRepository;
 import br.edu.fatecgru.model.entity.repository.ServicoRepository;
 
 @Service
@@ -33,6 +34,9 @@ public class ServicoService {
     
 	@Autowired
 	private PrestadorServicoRepository prestadorServicoRepository;
+	
+	@Autowired
+	private ServicoFavoritoRepository servicoFavoritoRepository;
 	
 	//METODO PARA CADASTRO DE SERVICO. RESPONSAVEL: PrestadorService
 	public void salvarServico(ServicoCadastroDTO dto) {
@@ -143,7 +147,11 @@ public class ServicoService {
         		.stream().map(s -> new ServicoDTO(s)).toList();
     }
 	   
-	public void deletarServico(int servicoId) {
-		servicoRepository.deleteById(servicoId);
-	}
+    public void deletarServico(int servicoId) {
+        Servico servico = servicoRepository.findById(servicoId)
+            .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + servicoId));
+        servicoFavoritoRepository.deleteByIdServico(servico);
+        servicoRepository.delete(servico);
+    }
+
 }

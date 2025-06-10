@@ -8,10 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.fatecgru.DTO.CursoCadastroDTO;
 import br.edu.fatecgru.DTO.CursoDTO;
-import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.model.entity.Categoria;
 import br.edu.fatecgru.model.entity.Curso;
 import br.edu.fatecgru.model.entity.repository.CategoriaRepository;
+import br.edu.fatecgru.model.entity.repository.CursoFavoritoRepository;
 import br.edu.fatecgru.model.entity.repository.CursoRepository;
 
 @Service
@@ -21,7 +21,9 @@ public class CursoService {
 	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
-		
+	
+	@Autowired
+	private CursoFavoritoRepository cursoFavoritoRepository;
 	
 	public List<CursoDTO> listarTodosCursos() {
         return cursoRepository.findAll().stream().map(c -> new CursoDTO(c)).toList();
@@ -80,6 +82,10 @@ public class CursoService {
 	}
 	
 	public void deletarCurso(int cursoId) {
-		cursoRepository.deleteById(cursoId);
+	    Curso curso = cursoRepository.findById(cursoId)
+	        .orElseThrow(() -> new RuntimeException("Curso não encontrado com ID: " + cursoId)); 
+	    cursoFavoritoRepository.deleteByIdCurso(curso);
+	    cursoRepository.delete(curso);
 	}
+
 }

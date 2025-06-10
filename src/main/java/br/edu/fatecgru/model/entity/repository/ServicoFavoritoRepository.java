@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import br.edu.fatecgru.model.entity.Curso;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.model.entity.ServicoFavorito;
 import br.edu.fatecgru.model.entity.ServicoFavoritoPK;
@@ -18,4 +19,6 @@ public interface ServicoFavoritoRepository extends JpaRepository <ServicoFavorit
 	public List<ServicoFavorito> findByIdUsuario(Usuario usuario);
 	
 	public List<ServicoFavorito> findByIdServico(Servico servico);
+	
+	public void deleteByIdServico(Servico servico);
 }
