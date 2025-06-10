@@ -9,7 +9,6 @@ public class UsuarioDTO {
 	private int id;
 	private String nome;
 	private String email;
-	
 	private String papel;
 	
 	public UsuarioDTO() {}

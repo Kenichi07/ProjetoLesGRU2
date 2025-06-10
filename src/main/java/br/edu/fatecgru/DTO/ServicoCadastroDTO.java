@@ -1,7 +1,7 @@
 package br.edu.fatecgru.DTO;
 
 public class ServicoCadastroDTO {
-	
+	private int id; 
 	private String nome;
 	private String descricao;
 	private Float valor;
@@ -12,7 +12,7 @@ public class ServicoCadastroDTO {
 
 	public ServicoCadastroDTO() {}
 
-	public ServicoCadastroDTO(String nome, String descricao, Float valor, int prestadorServicoId, String nomeCategoria, String nomeCidade,
+	public ServicoCadastroDTO(int id, String nome, String descricao, Float valor, int prestadorServicoId, String nomeCategoria, String nomeCidade,
 			String nomeEstado) {
 		this.nome = nome;
 		this.descricao = descricao;
@@ -22,6 +22,10 @@ public class ServicoCadastroDTO {
 		this.nomeCidade = nomeCidade;
 		this.nomeEstado = nomeEstado;
 	}
+	
+	public int getId() {return id;}
+	public void setId(int id) {this.id = id;}
+
 	public String getNome() {return nome;}
 	public void setNome(String nome) {this.nome = nome;}
 
