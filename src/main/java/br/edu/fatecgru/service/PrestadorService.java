@@ -2,6 +2,7 @@ package br.edu.fatecgru.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.model.entity.repository.PrestadorServicoRepository;
+import br.edu.fatecgru.model.entity.repository.ServicoRepository;
 
 @Service
 public class PrestadorService {
@@ -21,6 +23,8 @@ public class PrestadorService {
 	
 	@Autowired
     private ServicoService servicoService;
+	
+	@Autowired ServicoRepository servicoRepository;
 	
 	@Autowired
     private CategoriaService categoriaService;
@@ -35,15 +39,10 @@ public class PrestadorService {
 
 	//METODO PARA LISTAR SERVICO CRIADOS PELO PRESTADOR
 	public List<ServicoDTO> buscarServicosCriados(int idPrestador) {
-	    Optional<PrestadorServico> prestadorOpt = prestadorRepository.findById(idPrestador);
-	    if (prestadorOpt.isEmpty()) {
-	        throw new RuntimeException("Prestador não encontrado.");
-	    }
-
-	    List<Servico> servicos = servicoService.buscarPorPrestadorId(idPrestador);
-	    return servicos.stream()
-	        .map(servico -> new ServicoDTO(servico))
-	        .toList();
+		return servicoRepository.findByPrestadorservicoId(idPrestador)
+                .stream()
+                .map(ServicoDTO::new)
+                .collect(Collectors.toList());
 	}
 	
 

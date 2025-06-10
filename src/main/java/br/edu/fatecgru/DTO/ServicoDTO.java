@@ -31,32 +31,32 @@ import br.edu.fatecgru.model.entity.Servico;
 	        this.cidade = s.getCidade().getNome();
 	        this.estado = s.getCidade().getEstado().getNome();
 	    }
-	
-	    // Getters e Setters
-	    public int getId() { return id; }
-	    public void setId(int id) { this.id = id; }
-	
-	    public String getNomeServico() { return nomeServico; }
-	    public void setNomeServico(String nomeServico) { this.nomeServico = nomeServico; }
-	
-	    public String getDescricao() { return descricao; }
-	    public void setDescricao(String descricao) { this.descricao = descricao; }
-	
-	    public Float getValor() { return valor; }
-	    public void setValor(Float valor) { this.valor = valor; }
-	
-	    public String getNomePrestadorServico() { return nomePrestadorServico; }
-	    public void setNomePrestadorServico(String nomePrestadorServico) { this.nomePrestadorServico = nomePrestadorServico; }
-	
-	    public String getNumeroWhatsAppPrestadorServico() { return numeroWhatsAppPrestadorServico; }
-	    public void setNumeroWhatsAppPrestadorServico(String numeroWhatsAppPrestadorServico) { this.numeroWhatsAppPrestadorServico = numeroWhatsAppPrestadorServico; }
-	
-	    public String getNomeCategoria() { return nomeCategoria; }
-	    public void setNomeCategoria(String nomeCategoria) { this.nomeCategoria = nomeCategoria; }
-	
-	    public String getCidade() { return cidade; }
-	    public void setCidade(String cidades) { this.cidade = cidades; }
+
+	 // Getters e Setters
+		public int getId() {return id;}
+		public void setId(int id) {this.id = id;}
+
+		public String getNomeServico() {return nomeServico;}
+		public void setNomeServico(String nomeServico) {this.nomeServico = nomeServico;}
+
+		public String getDescricao() {return descricao;}
+		public void setDescricao(String descricao) {this.descricao = descricao;}
+
+		public Float getValor() {return valor;}
+		public void setValor(Float valor) {this.valor = valor;}
+
+		public String getNomePrestadorServico() {return nomePrestadorServico;}
+		public void setNomePrestadorServico(String nomePrestadorServico) {this.nomePrestadorServico = nomePrestadorServico;}
+
+		public String getNumeroWhatsAppPrestadorServico() {return numeroWhatsAppPrestadorServico;}
+		public void setNumeroWhatsAppPrestadorServico(String numeroWhatsAppPrestadorServico) {this.numeroWhatsAppPrestadorServico = numeroWhatsAppPrestadorServico;}
+
+		public String getNomeCategoria() {return nomeCategoria;}
+		public void setNomeCategoria(String nomeCategoria) {this.nomeCategoria = nomeCategoria;}
+
+		public String getCidade() {return cidade;}
+		public void setCidade(String cidade) {this.cidade = cidade;}
 
 		public String getEstado() {return estado;}
-		public void setEstado(String estado) {this.estado = estado;}   
+		public void setEstado(String estado) {this.estado = estado;}
 	}

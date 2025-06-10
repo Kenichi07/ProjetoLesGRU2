@@ -10,7 +10,14 @@ import br.edu.fatecgru.model.entity.Curso;
 	    private String nomeCategoria;
 	
 	    
-	    public CursoDTO(Curso c) {
+
+		public CursoDTO() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+
+		public CursoDTO(Curso c) {
 	        id = c.getId();
 	        nome = c.getNome();
 	        descricao = c.getDescricao();
@@ -26,21 +33,57 @@ import br.edu.fatecgru.model.entity.Curso;
 	        this.linkCurso = linkCurso;
 	        this.nomeCategoria = nomeCategoria;
 	    }
+
+
+		public int getId() {
+			return id;
+		}
+
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+
+		public String getNome() {
+			return nome;
+		}
+
+
+		public void setNome(String nome) {
+			this.nome = nome;
+		}
+
+
+		public String getDescricao() {
+			return descricao;
+		}
+
+
+		public void setDescricao(String descricao) {
+			this.descricao = descricao;
+		}
+
+
+		public String getLinkCurso() {
+			return linkCurso;
+		}
+
+
+		public void setLinkCurso(String linkCurso) {
+			this.linkCurso = linkCurso;
+		}
+
+
+		public String getNomeCategoria() {
+			return nomeCategoria;
+		}
+
+
+		public void setNomeCategoria(String nomeCategoria) {
+			this.nomeCategoria = nomeCategoria;
+		}
 	
 	    // Getters e Setters
-	    public int getId() { return id; }
-	    public void setId(int id) { this.id = id; }
-	
-	    public String getNome() { return nome; }
-	    public void setNome(String nome) { this.nome = nome; }
-	
-	    public String getDescricao() { return descricao; }
-	    public void setDescricao(String descricao) { this.descricao = descricao; }
-	
-	    public String getLinkCurso() { return linkCurso; }
-	    public void setLinkCurso(String linkCurso) { this.linkCurso = linkCurso; }
-	    
-	    public String getNomeCategoria() {return nomeCategoria;}
-	    public void setNomeCategoria(String categoriaNome) {this.nomeCategoria = categoriaNome;}
 	}
 
