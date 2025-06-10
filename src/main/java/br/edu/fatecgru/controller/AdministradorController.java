@@ -87,6 +87,7 @@ public class AdministradorController {
 		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
 	    model.addAttribute("admin", adm);
 	    model.addAttribute("cursoDTO", cursoService.buscarPorId(id));
+	    model.addAttribute("novo", false);
 		return "formadm";
 	}
 	
@@ -138,9 +139,16 @@ public class AdministradorController {
 	
 	@PostMapping("saveCurso")
 	public String salvarCurso(@ModelAttribute CursoDTO dto, HttpSession session, Model model) {
-		cursoService.atualizarCurso(dto);
 		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
 	    model.addAttribute("admin", adm);
+	    
+	    if (dto.getId() == null) {
+	        // Cadastro novo
+	        cursoService.salvarCurso(dto.toCursoCadastroDTO());;
+	    } else {
+	        // Atualização
+	    	cursoService.atualizarCurso(dto);
+	    }
 		return "redirect:/administrador/educacional";
 	}
 	
