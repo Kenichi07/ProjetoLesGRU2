@@ -59,6 +59,7 @@ public class CursoFavoritoService {
         }
     }
     
+    //METODO PARA LISTAR OS CURSOS FAVORITADOS PELO USUARIO
     public List<CursoDTO> listarCursosFavoritosPorUsuario(int usuarioId) {
         List<CursoFavorito> favoritos = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
         return favoritos.stream()
