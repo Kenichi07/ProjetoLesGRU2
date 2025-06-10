@@ -70,35 +70,34 @@ insert into curso (id, nome, descricao, link_curso, categoria_id) VALUES (6, "Pr
 -- ========================
 -- Tabela servico
 -- ========================
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (1, "Desenvolvimento Web", "Criação de sites responsivos", 1500.00, 3, 3, 1);
+insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (1, "Desenvolvimento Web", "Criação de sites responsivos", 1500.00, 1, 3, 1);
 
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (2, "Serviço de Pintura", "Pintura residencial e comercial", 800.00, 4, 4, 2);
+insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (2, "Serviço de Pintura", "Pintura residencial e comercial", 800.00, 1, 4, 2);
 
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (3, "Manutenção Elétrica", "Serviços elétricos residenciais", 600.00, 4, 4, 2);
+insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (3, "Manutenção Elétrica", "Serviços elétricos residenciais", 600.00, 1, 4, 2);
 
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (4, "Design de Sobrancelhas", "Modelagem e design facial", 200.00, 5, 6, 4);
+insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (4, "Design de Sobrancelhas", "Modelagem e design facial", 200.00, 1, 6, 4);
 
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (5, "Treinamento Funcional", "Aulas presenciais de funcional", 500.00, 5, 6, 5);
+insert into servico (id, nome, descricao, valor, cidade_id,prestadorservico_id, categoria_id) VALUES (5, "Treinamento Funcional", "Aulas presenciais de funcional", 500.00, 1, 6, 5);
 
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (6, "Desenvolvimento Mobile", "Criação de aplicativos Android e iOS", 2000.00, 3, 3, 1);
+insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (6, "Desenvolvimento Mobile", "Criação de aplicativos Android e iOS", 2000.00, 2, 3, 1);
 
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (7, "Reforma de Banheiro", "Modernização e reforma completa de banheiros", 2500.00, 4, 4, 2);
-
+insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (7, "Reforma de Banheiro", "Modernização e reforma completa de banheiros", 2500.00, 3, 4, 2);
 insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (8, "Aulas de Inglês", "Curso de inglês para todos os níveis", 300.00, 5, 6, 3);
 
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (9, "Corte de Cabelo Masculino", "Corte clássico e moderno para homens", 80.00, 3, 3, 4);
+insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (9, "Corte de Cabelo Masculino", "Corte clássico e moderno para homens", 80.00, 2, 3, 4);
 
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (10, "Consultoria Nutricional", "Orientação alimentar personalizada", 400.00, 4, 4, 5);
+insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (10, "Consultoria Nutricional", "Orientação alimentar personalizada", 400.00, 3, 4, 5);
 
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (11, "Manutenção de Computadores", "Formatação, instalação de softwares e limpeza", 250.00, 5, 6, 1);
+insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (11, "Manutenção de Computadores", "Formatação, instalação de softwares e limpeza", 250.00, 4, 6, 1);
 
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (12, "Instalação de Piso", "Serviço especializado em instalação de pisos laminados", 1200.00, 3, 3, 2);
+insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (12, "Instalação de Piso", "Serviço especializado em instalação de pisos laminados", 1200.00, 4, 3, 2);
 
 insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (13, "Reforço Escolar", "Aulas de reforço para ensino fundamental", 200.00, 4, 4, 3);
 
 insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (14, "Maquiagem Profissional", "Maquiagem para eventos e festas", 250.00, 5, 6, 4);
 
-insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (15, "Personal Trainer", "Acompanhamento presencial para treinos", 700.00, 3, 3, 5);
+insert into servico (id, nome, descricao, valor, cidade_id, prestadorservico_id, categoria_id) VALUES (15, "Personal Trainer", "Acompanhamento presencial para treinos", 700.00, 5, 3, 5);
 
 
 -- ========================

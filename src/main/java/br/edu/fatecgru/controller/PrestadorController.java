@@ -43,16 +43,17 @@ public class PrestadorController {
 	
 	//LISTA OS SERVIÇOS DO PRESTADOR 
 	@GetMapping("/{idPrestador}/servicos")
-	public List<ServicoDTO> buscarServicosDoPrestador(@PathVariable int idPrestador) {
-        return prestadorService.buscarServicosCriados(idPrestador);
+	public String buscarServicosDoPrestador(@PathVariable int idPrestador) {
+        List<ServicoDTO> servicos = prestadorService.buscarServicosCriados(idPrestador);
+		return "redirect:/prestador/home";
     }
     
-	
-	
 	@GetMapping("/home")
     public String home(HttpSession session, Model model) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		List<ServicoDTO> servicos = prestadorService.buscarServicosCriados(prestador.getId());
 	    model.addAttribute("prestador", prestador);
+	    model.addAttribute("servicos", servicos);
         return "homeprestador";
     }
 
@@ -77,7 +78,11 @@ public class PrestadorController {
     }
 	
 	@GetMapping("/list")
-    public String meusServicos() {
+    public String meusServicos(HttpSession session, Model model) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		List<ServicoDTO> servicos = prestadorService.buscarServicosCriados(prestador.getId());
+	    model.addAttribute("prestador", prestador);
+	    model.addAttribute("servicos", servicos);
         return "meusServicos";
 	}
 	

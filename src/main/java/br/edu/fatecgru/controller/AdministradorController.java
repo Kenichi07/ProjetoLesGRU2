@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.edu.fatecgru.DTO.CursoCadastroDTO;
 import br.edu.fatecgru.DTO.CursoDTO;
 import br.edu.fatecgru.DTO.LoginDTO;
@@ -22,11 +21,13 @@ import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
 import br.edu.fatecgru.DTO.UsuarioDTO;
 import br.edu.fatecgru.model.entity.Administrador;
+import br.edu.fatecgru.model.entity.Categoria;
 import br.edu.fatecgru.model.entity.ConsumidorServico;
 import br.edu.fatecgru.model.entity.Curso;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Usuario;
 import br.edu.fatecgru.service.AdministradorService;
+import br.edu.fatecgru.service.CategoriaService;
 import br.edu.fatecgru.service.CursoService;
 import br.edu.fatecgru.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
@@ -49,6 +50,8 @@ public class AdministradorController {
 	@Autowired
 	private CursoService cursoService;
 	
+	@Autowired CategoriaService categoriaService;
+	
 	
 	@GetMapping("/usuarios")
 	public String listarTodosUsuarios(HttpSession session, Model model) {
@@ -64,6 +67,22 @@ public class AdministradorController {
 		usuarioService.deletarUsuario(id);
 		return "redirect:/administrador/usuarios";
 	}
+	
+	@GetMapping("/{id}/edit")
+	public String editarUsuario(HttpSession session, Model model, @PathVariable int id) {
+		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", adm);
+	    model.addAttribute("usuarioDTO", administradorService.buscarUsuarioPorId(id));
+		return "formusuario";
+	}
+	
+	/*
+	@GetMapping("/{id}/edit")
+	public String editarCurso(Model model, @PathVariable int id) {
+		Categoria categoria = categoriaService.buscarCategoriaPorId(id);
+		 
+		return "formadm";
+	}*/
 	
 	@GetMapping("/login")
     public String loginPage(Model model) {
@@ -93,7 +112,15 @@ public class AdministradorController {
 	        }
 	    }
 		return null;
-    }	
+    }
+	
+	@PostMapping("save")
+	public String salvar(@ModelAttribute UsuarioCadastroDTO dto, HttpSession session, Model model) {
+		usuarioService.cadastrarUsuario(dto);
+		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", adm);
+		return "redirect:/administrador/usuarios";
+	}
 	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO (só não esquece de att os imports)
 	
@@ -144,7 +171,7 @@ public class AdministradorController {
 	@GetMapping("/new") 
 	public String newServico(Model model) { 
   		model
-  			.addAttribute("cursoDTO", new CursoCadastroDTO())
+  			.addAttribute("cursoDTO", new CursoDTO())
   			.addAttribute("novo", true); 
   		return "formadm"; 
 	}		

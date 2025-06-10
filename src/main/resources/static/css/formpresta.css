@@ -129,6 +129,10 @@ body {
 		height: 49px;
 }
 
+.form .papel {
+	text-transform: uppercase;
+}
+
 .form div{
 	margin-top: 10px;
 	display: flex;

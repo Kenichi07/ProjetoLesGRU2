@@ -39,6 +39,12 @@
 						        Contratante
 						    </label>
 								
+								<label class="radio-button">
+						        <input type="radio" name="tipoUsuario" value="ADMINISTRADOR" th:field="*{papel}" id="contratante" onclick="atualizarVisibilidade()">
+						        <span class="custom-radio"></span>
+						        Administrador
+						    </label>
+
 						    <label class="radio-button">
 						        <input type="radio" name="tipoUsuario" value="PRESTADOR" th:field="*{papel}" id="profissional" onclick="atualizarVisibilidade()">
 						        <span class="custom-radio"></span>

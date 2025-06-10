@@ -27,8 +27,5 @@ public class CursoCadastroDTO {
 
 	public int getIdCategoria() {return idCategoria;}
 	public void setIdCategoria(int idCategoria) {this.idCategoria = idCategoria;}
-    
-	
-    
 
 }
