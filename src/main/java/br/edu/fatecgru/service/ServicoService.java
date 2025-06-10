@@ -117,6 +117,13 @@ public class ServicoService {
 		        .map(s -> new ServicoDTO(s)).toList();
 	}
 	
+	public List<ServicoDTO> buscarServicosMaisBaratos() {
+	    return servicoRepository.findTop8ByOrderByPrecoAsc()
+	            .stream()
+	            .map(ServicoDTO::new)
+	            .toList();
+	}
+	
 	//METODO AUX PARA BUSCAR TODOS SERVICOS CRIADOS PELO USUARIO
 	public List<Servico> buscarPorPrestadorId(int idPrestador){
 		return servicoRepository.findByPrestadorservicoId(idPrestador);			

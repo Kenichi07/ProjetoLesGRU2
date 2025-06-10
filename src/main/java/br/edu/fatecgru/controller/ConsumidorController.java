@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.ConsumidorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.CursoDTO;
+import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.ConsumidorServico;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.service.ConsumidorService;
 import br.edu.fatecgru.service.CursoService;
+import br.edu.fatecgru.service.ServicoService;
 import jakarta.servlet.http.HttpSession;
 
 //@RestController
@@ -34,6 +36,9 @@ public class ConsumidorController {
 	@Autowired
 	private CursoService cursoService;
 	
+	@Autowired
+	private ServicoService servicoService;
+	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
 	public String cadastrarConsumidorServico(ConsumidorServicoCadastroDTO dto) {
@@ -43,14 +48,16 @@ public class ConsumidorController {
 	
 	@GetMapping("/home")
     public String home(HttpSession session, Model model) {
+		List<ServicoDTO> servicos = servicoService.buscarServicosMaisBaratos();
 		ConsumidorServico consu = (ConsumidorServico) session.getAttribute("usuarioLogado");
 	    model.addAttribute("consu", consu);
+	    model.addAttribute("servicos",servicos);
         return "homeconsumidor";
     }
 
 	@GetMapping("/educacional")
     public String educacional(HttpSession session, Model model) {
-		List<CursoDTO> curso = cursoService.listarTodosCursos();
+		List<CursoDTO> curso = cursoService.buscarCursosMaisBaratos();
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
 	    model.addAttribute("consumidor", consumidor);
 		model.addAttribute("cursos", curso);
@@ -58,7 +65,11 @@ public class ConsumidorController {
     }
 	
 	@GetMapping("/catalogo")
-    public String catalogo() {
+    public String catalogo(HttpSession session, Model model) {
+		List<ServicoDTO> servicos = servicoService.buscarTodosServico();
+		ConsumidorServico consu = (ConsumidorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("consu", consu);
+	    model.addAttribute("servicos",servicos);
         return "catalogo";
     }
 	
@@ -70,11 +81,6 @@ public class ConsumidorController {
 	@GetMapping("/cursos")
     public String cursos() {
         return "cursoconsu";
-    }
-	
-	@GetMapping("/servicos")
-    public String servicos() {
-        return "servicos";
     }
 	
 	@GetMapping("/servico")

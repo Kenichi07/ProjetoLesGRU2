@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.fatecgru.DTO.CursoCadastroDTO;
 import br.edu.fatecgru.DTO.CursoDTO;
+import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.model.entity.Categoria;
 import br.edu.fatecgru.model.entity.Curso;
 import br.edu.fatecgru.model.entity.repository.CategoriaRepository;
@@ -24,6 +25,13 @@ public class CursoService {
 	public List<CursoDTO> listarTodosCursos() {
         return cursoRepository.findAll().stream().map(c -> new CursoDTO(c)).toList();
     }
+	
+	public List<CursoDTO> buscarCursosMaisBaratos() {
+	    return cursoRepository.findTop8By()
+	            .stream()
+	            .map(CursoDTO::new)
+	            .toList();
+	}
 	
 	//METODO PARA CADASTRO
 	public void salvarCurso(CursoCadastroDTO dto) {

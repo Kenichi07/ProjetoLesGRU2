@@ -7,7 +7,7 @@ public class ServicoDTO {
 		private int id;
 	    private String nomeServico;
 	    private String descricao;
-	    private Float valor;
+	    private Float preco;
 	    private String nomePrestadorServico;
 	    private String numeroWhatsAppPrestadorServico;
 	    private String nomeCategoria;
@@ -21,7 +21,7 @@ public class ServicoDTO {
 	        this.id = s.getId();
 	        this.nomeServico = s.getNome();
 	        this.descricao = s.getDescricao();
-	        this.valor = s.getValor();
+	        this.preco = s.getValor();
 	        this.nomePrestadorServico = s.getPrestadorservico().getNome();
 	        this.numeroWhatsAppPrestadorServico = s.getPrestadorservico().getWhatsApp();
 	        this.nomeCategoria = s.getCategoria().getNome();
@@ -39,8 +39,8 @@ public class ServicoDTO {
 		public String getDescricao() {return descricao;}
 		public void setDescricao(String descricao) {this.descricao = descricao;}
 
-		public Float getValor() {return valor;}
-		public void setValor(Float valor) {this.valor = valor;}
+		public Float getValor() {return preco;}
+		public void setValor(Float preco) {this.preco = preco;}
 
 		public String getNomePrestadorServico() {return nomePrestadorServico;}
 		public void setNomePrestadorServico(String nomePrestadorServico) {this.nomePrestadorServico = nomePrestadorServico;}

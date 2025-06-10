@@ -38,7 +38,7 @@
         <div class="card-grid">
           <div class="card" th:each="servico : ${servicos}">
               <div class="card-header">
-                  <h3 th:text="${servico.nomeServico}"></h3>
+                  <h3 th:text="${servico.NomeServico}"></h3>
               </div>
               <p th:text="${servico.Descricao}"></p>
 							<p th:text="${#numbers.formatCurrency(servico.Valor)}"></p>

@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import br.edu.fatecgru.model.entity.Curso;
+import br.edu.fatecgru.model.entity.Servico;
 
 @Repository
 public interface CursoRepository extends JpaRepository<Curso, Integer> {
@@ -16,5 +17,5 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 	//@Query("SELECT c FROM Curso c JOIN c.usuariosQueFavoritaram u WHERE u.id = :usuarioId")
 	//List<Curso> findCursosFavoritosByUsuarioId(@Param("usuarioId") int usuarioId);
 
-
+	List<Curso> findTop8By();
 }

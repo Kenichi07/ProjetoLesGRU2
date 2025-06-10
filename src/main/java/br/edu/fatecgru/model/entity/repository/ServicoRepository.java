@@ -19,6 +19,9 @@ public interface ServicoRepository extends JpaRepository<Servico, Integer> {
 	@Query("SELECT s FROM Servico s WHERE s.cidade.estado.id = :idEstado")
 	List<Servico> findServicoByIdEstado(@Param("idEstado") int idEstado);
 
+	@Query("SELECT s FROM Servico s ORDER BY s.preco ASC LIMIT 8")
+	List<Servico> findTop8ByOrderByPrecoAsc();
+	
 //	//@Query("SELECT sc.id.cidade FROM ServicoCidade sc WHERE sc.id.servico.id = :servicoId")
 //  //List<Cidade> findCidadesByServicoId(@Param("servicoId") int servicoId);
 //	

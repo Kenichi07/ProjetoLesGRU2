@@ -17,7 +17,7 @@ public class Servico {
     private int id;
     private String nome;
     private String descricao;
-    private Float valor;   
+    private Float preco;   
     @ManyToOne
     private Cidade cidade;
     @ManyToOne
@@ -27,11 +27,11 @@ public class Servico {
    
     // Construtores
     public Servico() {}
-    public Servico(String nome, String descricao, Float valor,Cidade cidade, PrestadorServico prestadorservico,
+    public Servico(String nome, String descricao, Float preco,Cidade cidade, PrestadorServico prestadorservico,
                    Categoria categoria) {
         this.nome = nome;
         this.descricao = descricao;
-        this.valor = valor;
+        this.preco = preco;
         this.cidade = cidade;
         this.prestadorservico = prestadorservico;
         this.categoria = categoria;
@@ -40,7 +40,7 @@ public class Servico {
     public Servico(Servico s) {
         this.nome = s.getNome();
         this.descricao = s.getDescricao();
-        this.valor = s.getValor();
+        this.preco = s.getValor();
         this.cidade = s.getCidade();
         this.prestadorservico = s.getPrestadorservico();
         this.categoria = s.getCategoria();
@@ -56,8 +56,8 @@ public class Servico {
     public String getDescricao() { return descricao; }
     public void setDescricao(String descricao) { this.descricao = descricao; }
 
-    public Float getValor() { return valor; }
-    public void setValor(Float valor) { this.valor = valor; }
+    public Float getValor() { return preco; }
+    public void setValor(Float valor) { this.preco = valor; }
     
     public Cidade getCidade() {return cidade;}
 	public void setCidade(Cidade cidade) {this.cidade = cidade;}
@@ -70,7 +70,7 @@ public class Servico {
 
 	//Equals e HashCode
 	@Override
-	public int hashCode() {return Objects.hash(categoria, descricao, id, nome, prestadorservico, valor);}
+	public int hashCode() {return Objects.hash(categoria, descricao, id, nome, prestadorservico, preco);}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -80,6 +80,6 @@ public class Servico {
 		Servico other = (Servico) obj;
 		return Objects.equals(categoria, other.categoria) && Objects.equals(descricao, other.descricao)
 				&& id == other.id && Objects.equals(nome, other.nome)&& Objects.equals(prestadorservico, other.prestadorservico) 
-				&& Objects.equals(valor, other.valor);
+				&& Objects.equals(preco, other.preco);
 	}
 }
