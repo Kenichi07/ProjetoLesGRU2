@@ -43,8 +43,8 @@
 	          <p th:text="${curso.descricao}"></p>
 	          <p>Link: <label th:text="${curso.linkCurso}"></label></p>
 						<div class="card-actions">
-					     <a class="edit-btn" th:href="@{/administrador/{id}/edit(id=${curso.id})}">Editar</a>
-					     <a class="delete-btn" th:href="@{/administrador/{id}/delete(id=${curso.id})}">Excluir</a>
+					     <a class="edit-btn" th:href="@{/administrador/{id}/editCurso(id=${curso.id})}">Editar</a>
+					     <a class="delete-btn" th:href="@{/administrador/{id}/deleteCurso(id=${curso.id})}">Excluir</a>
 					  </div>
 	        </div>
       	</div>

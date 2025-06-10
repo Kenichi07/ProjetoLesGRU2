@@ -3,7 +3,7 @@ package br.edu.fatecgru.DTO;
 import br.edu.fatecgru.model.entity.Curso;
 
 public class CursoDTO {
-		private int id;
+		private Integer id;
 	    private String nome;
 	    private String descricao;
 	    private String linkCurso;
@@ -29,9 +29,13 @@ public class CursoDTO {
 			return new CursoCadastroDTO(id, nome, descricao, linkCurso, nomeCategoria);		
 		}
 
+		public CursoCadastroDTO toCursoCadastroDTO() {
+            return new CursoCadastroDTO(nome, descricao, linkCurso, nomeCategoria);
+        }
+		
 		// Getters e Setters
-		public int getId() {return id;}
-		public void setId(int id) {this.id = id;}
+		public Integer getId() {return id;}
+		public void setId(Integer id) {this.id = id;}
 
 		public String getNome() {return nome;}
 		public void setNome(String nome) {this.nome = nome;}

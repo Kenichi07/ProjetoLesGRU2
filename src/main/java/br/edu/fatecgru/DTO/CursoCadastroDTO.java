@@ -17,7 +17,12 @@ public class CursoCadastroDTO {
 		this.linkCurso = linkCurso;
 		this.nomeCategoria = nomeCategoria;
 	}
-	
+	public CursoCadastroDTO(String nome, String descricao, String linkCurso, String nomeCategoria) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.linkCurso = linkCurso;
+		this.nomeCategoria = nomeCategoria;
+	}
 	
 	
 	public int getId() {return id;}
