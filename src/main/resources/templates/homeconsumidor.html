@@ -72,9 +72,9 @@
                 <h2>Serviços Favoritos</h2>
             </div>
             <div class="card-grid">
-                <div class="card">
+                <div class="card"th:each="servico : ${servicoF}">
                     <div class="card-header">
-                        <h3>Limpar Calha</h3>
+                        <h3 th:text="${servico.NomeServico}"></h3>
 												<label class="heart-checkbox">
 												  <input type="checkbox" />
 												  <svg
@@ -94,7 +94,8 @@
 												  </svg>
 												</label>
                     </div>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
+										<p th:text="${servico.Descricao}"></p>
+										<p th:text="${#numbers.formatCurrency(servico.Valor)}"></p>
                     <a th:href="@{/consumidor/servico}" class="card-link">Ver Mais...</a>
                 </div>
             </div>

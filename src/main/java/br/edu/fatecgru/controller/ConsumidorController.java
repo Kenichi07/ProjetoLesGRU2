@@ -16,9 +16,13 @@ import br.edu.fatecgru.DTO.CursoDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.ConsumidorServico;
+import br.edu.fatecgru.model.entity.CursoFavorito;
 import br.edu.fatecgru.model.entity.PrestadorServico;
+import br.edu.fatecgru.model.entity.ServicoFavorito;
 import br.edu.fatecgru.service.ConsumidorService;
+import br.edu.fatecgru.service.CursoFavoritoService;
 import br.edu.fatecgru.service.CursoService;
+import br.edu.fatecgru.service.ServicoFavoritoService;
 import br.edu.fatecgru.service.ServicoService;
 import jakarta.servlet.http.HttpSession;
 
@@ -37,7 +41,13 @@ public class ConsumidorController {
 	private CursoService cursoService;
 	
 	@Autowired
+	private CursoFavoritoService cursoFservice;
+	
+	@Autowired
 	private ServicoService servicoService;
+	
+	@Autowired
+	private ServicoFavoritoService servicoFservice;
 	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
@@ -50,8 +60,10 @@ public class ConsumidorController {
     public String home(HttpSession session, Model model) {
 		List<ServicoDTO> servicos = servicoService.buscarServicosMaisBaratos();
 		ConsumidorServico consu = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		List<ServicoDTO> servicoF = servicoFservice.listarServicosFavoritosPorUsuario(consu.getId());
 	    model.addAttribute("consu", consu);
 	    model.addAttribute("servicos",servicos);
+	    model.addAttribute("servicoF", servicoF);
         return "homeconsumidor";
     }
 
@@ -59,8 +71,10 @@ public class ConsumidorController {
     public String educacional(HttpSession session, Model model) {
 		List<CursoDTO> curso = cursoService.buscarCursosMaisBaratos();
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		List<CursoDTO> cursoF = cursoFservice.listarCursosFavoritosPorUsuario(consumidor.getId());
 	    model.addAttribute("consumidor", consumidor);
 		model.addAttribute("cursos", curso);
+		model.addAttribute("cursoF", cursoF);
         return "educacionalconsu";
     }
 	
@@ -74,12 +88,18 @@ public class ConsumidorController {
     }
 	
 	@GetMapping("/equipe")
-    public String equipe() {
+    public String equipe(HttpSession session, Model model) {
+		ConsumidorServico consu = (ConsumidorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("consu", consu);
         return "equipeconsu";
 	}
 	
 	@GetMapping("/cursos")
-    public String cursos() {
+    public String cursos(HttpSession session, Model model) {
+		List<CursoDTO> curso = cursoService.listarTodosCursos();
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("consumidor", consumidor);
+		model.addAttribute("cursos", curso);
         return "cursoconsu";
     }
 	

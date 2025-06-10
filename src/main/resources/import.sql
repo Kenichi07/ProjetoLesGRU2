@@ -142,6 +142,9 @@ insert into curso_favorito (usuario_id, curso_id) VALUES (2, 1);
 insert into curso_favorito (usuario_id, curso_id) VALUES (2, 3);
 insert into curso_favorito (usuario_id, curso_id) VALUES (5, 4);
 insert into curso_favorito (usuario_id, curso_id) VALUES (5, 5);
+insert into curso_favorito (usuario_id, curso_id) VALUES (3, 2);
+insert into curso_favorito (usuario_id, curso_id) VALUES (3, 11);
+insert into curso_favorito (usuario_id, curso_id) VALUES (3, 6);
 
 
 -- ========================

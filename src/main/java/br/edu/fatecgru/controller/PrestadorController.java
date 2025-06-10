@@ -19,6 +19,7 @@ import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
+import br.edu.fatecgru.service.CursoFavoritoService;
 import br.edu.fatecgru.service.CursoService;
 import br.edu.fatecgru.service.PrestadorService;
 import jakarta.servlet.http.HttpSession;
@@ -31,7 +32,11 @@ public class PrestadorController {
 	@Autowired
 	private PrestadorService prestadorService;
 	
-	@Autowired CursoService cursoService;
+	@Autowired 
+	private CursoService cursoService;
+			
+	@Autowired 
+	private CursoFavoritoService cursoFservice;
 	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
@@ -63,15 +68,19 @@ public class PrestadorController {
 
 	@GetMapping("/educacional")
     public String educacional(HttpSession session, Model model) {
-		List<CursoDTO> curso = cursoService.listarTodosCursos();
+		List<CursoDTO> curso = cursoService.buscarCursosMaisBaratos();
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		List<CursoDTO> cursoF = cursoFservice.listarCursosFavoritosPorUsuario(prestador.getId());
 	    model.addAttribute("prestador", prestador);
 		model.addAttribute("cursos", curso);
+		model.addAttribute("cursoF", cursoF);
         return "educacionalpresta";
     }
 	
 	@GetMapping("/equipe")
-    public String equipe() {
+    public String equipe(HttpSession session, Model model) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		model.addAttribute("prestador", prestador);
         return "equipepresta";
 	}
 	

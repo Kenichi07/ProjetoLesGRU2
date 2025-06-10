@@ -164,17 +164,33 @@ public class AdministradorController {
     }
 	
 	@GetMapping("/equipe")
-    public String equipe() {
+    public String equipe(HttpSession session, Model model) {
+		Administrador admin = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", admin);
         return "equipeadm";
 	}
 	
 	@GetMapping("/new") 
-	public String newServico(Model model) { 
+	public String newCurso(HttpSession session, Model model) { 
+		Administrador admin = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", admin);
   		model
   			.addAttribute("cursoDTO", new CursoDTO())
+  			.addAttribute("admin", admin)
   			.addAttribute("novo", true); 
   		return "formadm"; 
-	}		
+	}
+	
+	@GetMapping("/newUsuario") 
+	public String newUsuario(HttpSession session, Model model) { 
+		Administrador admin = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", admin);
+  		model
+  			.addAttribute("usuarioDTO", new UsuarioDTO())
+  			.addAttribute("admin", admin)
+  			.addAttribute("novo", true); 
+  		return "formadm"; 
+	}
 	  
 	@GetMapping("/perfil")
     public String perfil(HttpSession session, Model model) {

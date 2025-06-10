@@ -127,7 +127,7 @@ body {
 .card-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 90px;
+    gap: 60px;
 }
 
 .card {
@@ -195,3 +195,25 @@ body {
 .card.selecionado .card-actions {
   display: flex;
 }
+
+.btn-add {
+  background: linear-gradient(180deg, #2A4EFF 0%, #174EE0 100%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: background 0.3s ease;
+	margin-top: 20px;
+}
+
+.btn-add:hover {
+  background: linear-gradient(180deg, #1d3bc9 0%, #123bb3 100%);
+}
+
