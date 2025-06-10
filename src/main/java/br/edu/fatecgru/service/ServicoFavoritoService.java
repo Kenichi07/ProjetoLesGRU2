@@ -57,4 +57,5 @@ public class ServicoFavoritoService {
         return favoritos.stream()
                         .map(f -> new ServicoDTO(f.getId().getServico())).toList();
     }
+    
 }

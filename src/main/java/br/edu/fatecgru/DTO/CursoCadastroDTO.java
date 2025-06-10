@@ -1,7 +1,8 @@
 package br.edu.fatecgru.DTO;
 
 public class CursoCadastroDTO {
-    private String nome;
+    private int id;
+	private String nome;
     private String descricao;
     private String linkCurso;
     private String nomeCategoria;
@@ -9,13 +10,19 @@ public class CursoCadastroDTO {
 	public CursoCadastroDTO() {	
 	}
 
-	public CursoCadastroDTO(String nome, String descricao, String linkCurso, String nomeCategoria) {
+	public CursoCadastroDTO(int id, String nome, String descricao, String linkCurso, String nomeCategoria) {
+		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.linkCurso = linkCurso;
 		this.nomeCategoria = nomeCategoria;
 	}
 	
+	
+	
+	public int getId() {return id;}
+	public void setId(int id) {this.id = id;}
+
 	public String getNome() {return nome;}
 	public void setNome(String nome) {this.nome = nome;}
 	

@@ -5,21 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import br.edu.fatecgru.DTO.LoginDTO;
 import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
-import br.edu.fatecgru.model.entity.Administrador;
-import br.edu.fatecgru.model.entity.ConsumidorServico;
 import br.edu.fatecgru.model.entity.CursoFavorito;
 import br.edu.fatecgru.model.entity.PrestadorServico;
+import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.model.entity.ServicoFavorito;
 import br.edu.fatecgru.model.entity.Usuario;
 import br.edu.fatecgru.model.entity.repository.CursoFavoritoRepository;
 import br.edu.fatecgru.model.entity.repository.ServicoFavoritoRepository;
+import br.edu.fatecgru.model.entity.repository.ServicoRepository;
 import br.edu.fatecgru.model.entity.repository.UsuarioRepository;
-import jakarta.servlet.http.HttpSession;
 
 @Service
 public class UsuarioService {
@@ -42,6 +39,8 @@ public class UsuarioService {
 	@Autowired
 	private ServicoFavoritoRepository servicoFavoritoRepository;
 
+	@Autowired
+	private ServicoRepository servicoRepository;
 	
 	//METODO DE AUTENTICAR
 	public Usuario autenticarUsuario(LoginDTO dto) {
@@ -59,6 +58,7 @@ public class UsuarioService {
 	}*/
 	//FIM DOS METODOS DE AUTENTICAR
 	
+	//METODO PARA CADASTRAR
 	public Usuario cadastrarUsuario(UsuarioCadastroDTO dto) {
 	    if (dto.getPapel().equalsIgnoreCase("ADMINISTRADOR")) {
 	    	administradorService.salvar(dto.toAdministradorCadastroDTO());
@@ -83,27 +83,43 @@ public class UsuarioService {
 	    
 	}
 	
+	//LISTAR TODOS
 	public List<Usuario> listAll(){
 		return usuarioRepository.findAll();
 	}
 	
+	//DELETAR USUARIO
 	public void deletarUsuario(int id) {
 	    Usuario usuario = usuarioRepository.findById(id)
 	        .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+	    
+	    if (usuario instanceof PrestadorServico) {
+	        PrestadorServico prestador = (PrestadorServico) usuario;
+	        List<Servico> servicos = prestador.getServicos();
 
-	    // Remover favoritos de cursos
+	        if (servicos != null && !servicos.isEmpty()) {
+	            for (Servico servico : servicos) {
+	                List<ServicoFavorito> favoritosDoServico = servicoFavoritoRepository.findByIdServico(servico);
+	                for (ServicoFavorito favorito : favoritosDoServico) {
+	                    servicoFavoritoRepository.delete(favorito);
+	                }
+
+	                servicoRepository.delete(servico);
+	            }
+	        }
+	    }
+
 	    List<CursoFavorito> cursosFavoritos = cursoFavoritoRepository.findByIdUsuario(usuario);
 	    for (CursoFavorito cf : cursosFavoritos) {
 	        cursoFavoritoRepository.delete(cf);
 	    }
 
-	    // Remover favoritos de serviços
 	    List<ServicoFavorito> servicosFavoritos = servicoFavoritoRepository.findByIdUsuario(usuario);
 	    for (ServicoFavorito sf : servicosFavoritos) {
 	        servicoFavoritoRepository.delete(sf);
 	    }
 
-	    // Excluir usuário
 	    usuarioRepository.delete(usuario);
 	}
+
 }
