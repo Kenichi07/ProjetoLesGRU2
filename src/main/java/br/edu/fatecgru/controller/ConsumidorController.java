@@ -1,5 +1,7 @@
 package br.edu.fatecgru.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.ConsumidorServicoCadastroDTO;
+import br.edu.fatecgru.DTO.CursoDTO;
+import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.ConsumidorServico;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.service.ConsumidorService;
+import br.edu.fatecgru.service.CursoService;
 import jakarta.servlet.http.HttpSession;
 
 //@RestController
@@ -25,6 +30,9 @@ public class ConsumidorController {
 
 	@Autowired
 	private UsuarioController usuarioController;
+	
+	@Autowired
+	private CursoService cursoService;
 	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
@@ -41,7 +49,11 @@ public class ConsumidorController {
     }
 
 	@GetMapping("/educacional")
-    public String educacional() {
+    public String educacional(HttpSession session, Model model) {
+		List<CursoDTO> curso = cursoService.listarTodosCursos();
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("consumidor", consumidor);
+		model.addAttribute("cursos", curso);
         return "educacionalconsu";
     }
 	

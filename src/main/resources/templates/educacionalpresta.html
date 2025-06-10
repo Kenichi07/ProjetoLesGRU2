@@ -36,9 +36,9 @@
               <a th:href="@{/prestador/cursos}" class="link">Ver Todos</a>
           </div>
           <div class="card-grid">
-            <div class="card">
+            <div class="card" th:each="curso : ${cursos}">
               <div class="card-header">
-                <h3>Curso XPTO</h3>
+                <h3 th:text="${curso.nome}"></h3>
 								<label class="heart-checkbox">
 								  <input type="checkbox" />
 								  <svg
@@ -59,8 +59,9 @@
 								</label>
 
 		          </div>
-		          <p>Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
-		          <p>Link: </p>
+							<p th:text="${curso.nomeCategoria}"></p>
+							<p th:text="${curso.descricao}"></p>
+		          <p>Link: <label th:text="${curso.linkCurso}"></label></p>
 		          <a th:href="@{/prestador/curso}" class="card-link">Ver Mais...</a>
 		        </div>
         	</div>

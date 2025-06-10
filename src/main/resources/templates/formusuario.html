@@ -26,31 +26,6 @@
 
             <label for="senha">Senha</label>
             <input type="password" id="senha" placeholder="Insira uma senha" th:field="*{senha}" required>
-						
-						<div class="form-group" id="whatsapp-group" style="display: none;">
-						  <label for="whatsapp">WhatsApp</label>
-						  <input type="text" id="whatsapp" name="whatsapp" placeholder="Insira um número whatsapp" th:field="*{WhatsApp}" class="form-control">
-						</div>
-						
-						<div class="radio-group">
-						    <label class="radio-button">
-						        <input type="radio" name="tipoUsuario" value="CONSUMIDOR" th:field="*{papel}" id="contratante" checked onclick="atualizarVisibilidade()">
-						        <span class="custom-radio"></span>
-						        Contratante
-						    </label>
-								
-								<label class="radio-button">
-						        <input type="radio" name="tipoUsuario" value="ADMINISTRADOR" th:field="*{papel}" id="contratante" onclick="atualizarVisibilidade()">
-						        <span class="custom-radio"></span>
-						        Administrador
-						    </label>
-
-						    <label class="radio-button">
-						        <input type="radio" name="tipoUsuario" value="PRESTADOR" th:field="*{papel}" id="profissional" onclick="atualizarVisibilidade()">
-						        <span class="custom-radio"></span>
-						        Profissional
-						    </label>
-						</div>
 
             <button type="submit">Continuar</button>
         </form>
