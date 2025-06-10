@@ -1,7 +1,6 @@
 package br.edu.fatecgru.DTO;
 
 public class UsuarioCadastroDTO {
-	
 	private int id;
 	private String nome;
     private String email;
@@ -16,7 +15,6 @@ public class UsuarioCadastroDTO {
     }
     
     public UsuarioCadastroDTO(int id, String nome, String email, String senha, String whatsApp, String papel) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;

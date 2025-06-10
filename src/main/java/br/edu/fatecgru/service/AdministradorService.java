@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.edu.fatecgru.DTO.AdministradorCadastroDTO;
 import br.edu.fatecgru.DTO.CursoCadastroDTO;
-import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
 import br.edu.fatecgru.DTO.UsuarioDTO;
+import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.Usuario;
 import br.edu.fatecgru.model.entity.repository.AdministradorRepository;
 import br.edu.fatecgru.model.entity.repository.UsuarioRepository;
@@ -34,6 +34,10 @@ public class AdministradorService {
     
     public void salvar(AdministradorCadastroDTO dto) {
         administradorRepository.save(dto.toEntity());
+    }
+    
+    public void salvar(Administrador entity) {
+        administradorRepository.save(entity);
     }
     
     public List<UsuarioDTO> listarTodosUsuarios(){

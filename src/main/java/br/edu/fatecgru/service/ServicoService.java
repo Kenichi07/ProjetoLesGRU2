@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
@@ -74,6 +75,7 @@ public class ServicoService {
     }
 	
 	//METODOS PARA ATUALIZAR SERVICO
+	@Transactional
 	public void atualizarServico(ServicoDTO dto) {
 	    Servico servicoExistente = servicoRepository.findById(dto.getId())
 	        .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + dto.getId()));

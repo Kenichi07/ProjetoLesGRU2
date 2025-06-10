@@ -49,6 +49,9 @@ public class PrestadorService {
 	public void salvar(PrestadorServicoCadastroDTO dto) {
         prestadorRepository.save(dto.toEntity());
     }
+	public void salvar(PrestadorServico entity) {
+        prestadorRepository.save(entity);
+    }
 	
 	public PrestadorServico getByCode(int id) {
 		return prestadorRepository.findById(id).get();
