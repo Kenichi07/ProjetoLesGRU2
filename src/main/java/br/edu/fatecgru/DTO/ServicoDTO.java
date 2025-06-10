@@ -1,11 +1,8 @@
 package br.edu.fatecgru.DTO;
 
-import java.util.List;
-
-import br.edu.fatecgru.model.entity.Cidade;
 import br.edu.fatecgru.model.entity.Servico;
 
-	public class ServicoDTO {
+public class ServicoDTO {
 		//Atributos
 		private int id;
 	    private String nomeServico;

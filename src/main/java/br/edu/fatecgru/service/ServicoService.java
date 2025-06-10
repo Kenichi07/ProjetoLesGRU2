@@ -33,24 +33,22 @@ public class ServicoService {
 	@Autowired
 	private PrestadorServicoRepository prestadorServicoRepository;
 	
-	//METODOS PARA CADASTRO DE SERVICO. RESPONSAVEL: PrestadorService
-	
+	//METODO PARA CADASTRO DE SERVICO. RESPONSAVEL: PrestadorService
 	public void salvarServico(ServicoCadastroDTO dto) {
-        // Buscar ou criar o Estado
+        
         Estado estado = estadoRepository.findByNome(dto.getNomeEstado())
                 .orElseGet(() -> {
                     Estado novoEstado = new Estado(dto.getNomeEstado(), null);
                     return estadoRepository.save(novoEstado);
                 });
 
-        // Buscar ou criar a Cidade
         Cidade cidade = cidadeRepository.findByNomeAndEstado(dto.getNomeCidade(), estado)
                 .orElseGet(() -> {
                     Cidade novaCidade = new Cidade(dto.getNomeCidade(), estado);
                     return cidadeRepository.save(novaCidade);
                 });
 
-        // Buscar ou criar a Categoria
+      
         Categoria categoria = categoriaRepository.findByNome(dto.getNomeCategoria())
                 .orElseGet(() -> {
                     Categoria novaCategoria = new Categoria();
@@ -58,11 +56,11 @@ public class ServicoService {
                     return categoriaRepository.save(novaCategoria);
                 });
 
-        // Buscar o Prestador de Serviço
+        
         PrestadorServico prestador = prestadorServicoRepository.findById(dto.getPrestadorServicoId())
                 .orElseThrow(() -> new RuntimeException("Prestador de serviço não encontrado"));
 
-        // Criar o serviço
+       
         Servico servico = new Servico(
                 dto.getNome(),
                 dto.getDescricao(),
@@ -72,19 +70,46 @@ public class ServicoService {
                 categoria
         );
 
-        // Salvar no banco
         servicoRepository.save(servico);
     }
 	
-//	public void salvarServicoCidade(ServicoCidade servicoCidade) {
-//	    servicoCidadeRepository.save(servicoCidade);
-//	}
-//	public List<Cidade> buscarCidadesPorServicoId(int servicoId) {
-//	    return servicoCidadeRepository.findByIdServicoId(servicoId).stream()
-//	        .map(servicoCidade -> servicoCidade.getId().getCidade())
-//	        .toList();
-//	}
-	///FIM DOS METODOS DE CADASTRO/// OBS:NÃO USAR DE FORMA INDEPENDENTE, PODE GERAR INCONSISTENCIA NO BANCO DE DADOS 
+	//METODOS PARA ATUALIZAR SERVICO
+	public void atualizarServico(ServicoDTO dto) {
+	    // Buscar o serviço existente
+	    Servico servicoExistente = servicoRepository.findById(dto.getId())
+	        .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + dto.getId()));
+
+	    // Buscar ou criar a categoria
+	    Categoria categoria = categoriaRepository.findByNome(dto.getNomeCategoria())
+	        .orElseGet(() -> {
+	            Categoria nova = new Categoria();
+	            nova.setNome(dto.getNomeCategoria());
+	            return categoriaRepository.save(nova);
+	        });
+
+	    // Buscar a cidade e o estado
+	    Estado estado = estadoRepository.findByNome(dto.getEstado())
+	        .orElseThrow(() -> new RuntimeException("Estado não encontrado: " + dto.getEstado()));
+
+	    Cidade cidade = cidadeRepository.findByNomeAndEstado(dto.getCidade(), estado)
+	        .orElseThrow(() -> new RuntimeException("Cidade não encontrada: " + dto.getCidade() + ", " + dto.getEstado()));
+
+	    // Buscar o prestador de serviço
+	    PrestadorServico prestador = prestadorServicoRepository.findByNome(dto.getNomePrestadorServico())
+	        .orElseThrow(() -> new RuntimeException("Prestador de serviço não encontrado: " + dto.getNomePrestadorServico()));
+
+	    // Atualizar os dados do serviço
+	    servicoExistente.setNome(dto.getNomeServico());
+	    servicoExistente.setDescricao(dto.getDescricao());
+	    servicoExistente.setValor(dto.getValor());
+	    servicoExistente.setCategoria(categoria);
+	    servicoExistente.setCidade(cidade);
+	    servicoExistente.setPrestadorservico(prestador);
+
+	    // Salvar
+	    servicoRepository.save(servicoExistente);
+	}
+
 	
 	//METODO PARA BUSCAR TODOS SERVICOS
 	public List<ServicoDTO> buscarTodosServico(){
