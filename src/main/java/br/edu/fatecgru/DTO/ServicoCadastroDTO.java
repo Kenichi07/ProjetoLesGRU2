@@ -21,7 +21,6 @@ public class ServicoCadastroDTO {
 			this.idsCidades = idsCidades;
 			this.idEstado = idEstado;
 		}
-
 		
 		public String getNome() {
 			return nome;

@@ -44,13 +44,18 @@ public class AdministradorController {
 	
 	
 	@GetMapping("/usuarios")
-	public List<UsuarioDTO> listarTodosUsuarios() {
-	    return administradorService.listarTodosUsuarios();
+	public String listarTodosUsuarios(HttpSession session, Model model) {
+		List<UsuarioDTO> usuarios = administradorService.listarTodosUsuarios();
+		Administrador admin = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", admin);
+		model.addAttribute("usuarios", usuarios);
+		return "homeadministrador";
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deletarUsuario(@PathVariable int id) {
+	@GetMapping("/{id}/delete")
+	public String deletarUsuario(@PathVariable int id) {
 		usuarioService.deletarUsuario(id);
+		return "redirect:/administrador/usuarios";
 	}
 	
 	@GetMapping("/login")
@@ -73,7 +78,7 @@ public class AdministradorController {
 		if (usuario != null) {
 			session.setAttribute("usuarioLogado", usuario); // guarda na sessão
 	        if (usuario instanceof Administrador) {
-	            return "redirect:/administrador/home";
+	            return "redirect:/administrador/usuarios";
 	        } else if (usuario instanceof PrestadorServico) {
 	            return "redirect:/prestador/home";
 	        } else if (usuario instanceof ConsumidorServico) {
@@ -107,12 +112,13 @@ public class AdministradorController {
         return "cadastroadm";
     }
 	
+	/*
 	@GetMapping("/home")
     public String home(HttpSession session, Model model) {
 		Administrador admin = (Administrador) session.getAttribute("usuarioLogado");
 	    model.addAttribute("admin", admin);
         return "homeadministrador";
-    }
+    }*/
 
 	@GetMapping("/educacional")
     public String educacional() {
