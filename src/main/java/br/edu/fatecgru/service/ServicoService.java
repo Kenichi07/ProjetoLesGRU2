@@ -113,6 +113,42 @@ public class ServicoService {
 	    servicoRepository.save(servicoExistente);
 	}
 
+	@Transactional
+    public void atualizarServico(ServicoUpdateDTO dto) {
+        // Busca o serviço existente
+        Servico servicoExistente = servicoRepository.findById(dto.getId())
+            .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + dto.getId()));
+
+        // Categoria: busca por nome ou cria uma nova
+        Categoria categoria = categoriaRepository.findByNome(dto.getNomeCategoria())
+            .orElseGet(() -> {
+                Categoria novaCategoria = new Categoria();
+                novaCategoria.setNome(dto.getNomeCategoria());
+                return categoriaRepository.save(novaCategoria);
+            });
+
+        // Cidade (supondo que seja única por nome apenas)
+        Cidade cidade = cidadeRepository.findByNome(dto.getNomeCidade())
+            .orElseThrow(() -> new RuntimeException("Cidade não encontrada: " + dto.getNomeCidade()));
+
+        // Atualiza os campos do serviço
+        servicoExistente.setNome(dto.getNome());
+        servicoExistente.setDescricao(dto.getDescricao());
+        servicoExistente.setValor(dto.getValor());
+        servicoExistente.setCategoria(categoria);
+        servicoExistente.setCidade(cidade);
+
+        // Persiste a atualização
+        servicoRepository.save(servicoExistente);
+    }
+	
+	//METODO PARA DELETAR
+    public void deletarServico(int servicoId) {
+        Servico servico = servicoRepository.findById(servicoId)
+            .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + servicoId));
+        servicoFavoritoRepository.deleteByIdServico(servico);
+        servicoRepository.delete(servico);
+    }
 	
 	//METODO PARA BUSCAR TODOS SERVICOS
 	public List<ServicoDTO> buscarTodosServico(){
@@ -144,47 +180,40 @@ public class ServicoService {
         		.stream().map(s -> new ServicoDTO(s)).toList();
     }
 	   
-    
+    //METODO BUSCAR POR ID
     public ServicoCadastroDTO buscarServicoPorId(int servicoId) {
         	Servico s = servicoRepository.findById(servicoId).get();
         	return new ServicoCadastroDTO(s);
     }
     
-    public void deletarServico(int servicoId) {
-        Servico servico = servicoRepository.findById(servicoId)
-            .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + servicoId));
-        servicoFavoritoRepository.deleteByIdServico(servico);
-        servicoRepository.delete(servico);
-    }
     
-    @Transactional
-    public void atualizarServico(ServicoUpdateDTO dto) {
-        // Busca o serviço existente
-        Servico servicoExistente = servicoRepository.findById(dto.getId())
-            .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + dto.getId()));
-
-        // Categoria: busca por nome ou cria uma nova
-        Categoria categoria = categoriaRepository.findByNome(dto.getNomeCategoria())
-            .orElseGet(() -> {
-                Categoria novaCategoria = new Categoria();
-                novaCategoria.setNome(dto.getNomeCategoria());
-                return categoriaRepository.save(novaCategoria);
-            });
-
-        // Cidade (supondo que seja única por nome apenas)
-        Cidade cidade = cidadeRepository.findByNome(dto.getNomeCidade())
-            .orElseThrow(() -> new RuntimeException("Cidade não encontrada: " + dto.getNomeCidade()));
-
-        // Atualiza os campos do serviço
-        servicoExistente.setNome(dto.getNome());
-        servicoExistente.setDescricao(dto.getDescricao());
-        servicoExistente.setValor(dto.getValor());
-        servicoExistente.setCategoria(categoria);
-        servicoExistente.setCidade(cidade);
-
-        // Persiste a atualização
-        servicoRepository.save(servicoExistente);
+    //METODO BUSCAR POR NOME
+    public List<ServicoDTO> buscarPorNome(String nome) {
+        return servicoRepository.findByNomeContainingIgnoreCase(nome)
+            .stream()
+            .map(ServicoDTO::new)
+            .toList();
     }
+
+  //METODO BUSCAR POR FAIXA DE PRECO
+    public List<ServicoDTO> buscarPorFaixaDePreco(Float min, Float max) {
+        return servicoRepository.findByPrecoBetween(min, max)
+            .stream()
+            .map(ServicoDTO::new)
+            .toList();
+    }
+
+  //METODO BUSCAR POR NOME CATEGORIA
+    public List<ServicoDTO> buscarPorCategoria(String nomeCategoria) {
+        return servicoRepository.findByCategoriaNome(nomeCategoria)
+            .stream()
+            .map(ServicoDTO::new)
+            .toList();
+    }
+
+    
+    
+    
 
 
 }

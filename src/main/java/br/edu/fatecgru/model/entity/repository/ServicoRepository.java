@@ -25,25 +25,10 @@ public interface ServicoRepository extends JpaRepository<Servico, Integer> {
 	@Query("SELECT s FROM Servico s ORDER BY s.preco ASC LIMIT 20")
 	List<Servico> findTop20ByOrderByPrecoAsc();
 	
-//	//@Query("SELECT sc.id.cidade FROM ServicoCidade sc WHERE sc.id.servico.id = :servicoId")
-//  //List<Cidade> findCidadesByServicoId(@Param("servicoId") int servicoId);
-//	
-//
-//	List<ServicoCidade> findByIdServicoId(int servicoId);
-//	
-//	@Query("SELECT sc.id.servico FROM ServicoCidade sc WHERE sc.id.cidade.estado.nome = :nome")
-//  List<Servico> findByNomeEstado(@Param("nome") String nome);
-//
-//  @Query("SELECT sc.id.servico FROM ServicoCidade sc WHERE sc.id.cidade.nome = :nome")
-//  List<Servico> findByNomeCidade(@Param("nome") String nome);
-//
-//  @Query("SELECT sc.id.servico FROM ServicoCidade sc WHERE sc.id.cidade.estado.id = :id")
-//  List<Servico> findByEstadoId(@Param("id") int id);
-//
-//  @Query("SELECT sc.id.servico FROM ServicoCidade sc WHERE sc.id.cidade.id = :id")
-//  List<Servico> findByCidadeId(@Param("id") int id);
-//	
-//
-//	//List<ServicoCidade> findByIdServicoId(int servicoId);
+	List<Servico> findByNomeContainingIgnoreCase(String nome);
+	
+	List<Servico> findByPrecoBetween(Float min, Float max);
+
+	List<Servico> findByCategoriaNome(String nomeCategoria);
 
 }

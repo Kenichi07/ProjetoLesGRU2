@@ -18,4 +18,8 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 	//List<Curso> findCursosFavoritosByUsuarioId(@Param("usuarioId") int usuarioId);
 	
 	List<Curso> findTop8By();
+	
+	List<Curso> findByNomeContainingIgnoreCase(String nome);
+
+	List<Curso> findByCategoriaNome(String nomeCategoria);
 }

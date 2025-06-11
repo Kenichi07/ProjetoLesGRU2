@@ -89,5 +89,23 @@ public class CursoService {
 	    cursoFavoritoRepository.deleteByIdCurso(curso);
 	    cursoRepository.delete(curso);
 	}
+	
+	//METODO CONSULTAR POR NOME
+	public List<CursoDTO> buscarPorNome(String nome) {
+	    return cursoRepository.findByNomeContainingIgnoreCase(nome)
+	        .stream()
+	        .map(CursoDTO::new)
+	        .toList();
+	}
+	
+	//METODO CONSULTA POR NOME DA CATEGORIA
+	public List<CursoDTO> buscarPorCategoria(String nomeCategoria) {
+		return cursoRepository.findByCategoriaNome(nomeCategoria)
+	        .stream()
+	        .map(CursoDTO::new)
+	        .toList();
+	}
+
+	
 
 }

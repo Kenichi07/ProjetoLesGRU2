@@ -88,6 +88,7 @@ public class UsuarioService {
 	
 	//LISTAR TODOS
 	public List<Usuario> listAll(){
+		
 		return usuarioRepository.findAll();
 	}
 	
