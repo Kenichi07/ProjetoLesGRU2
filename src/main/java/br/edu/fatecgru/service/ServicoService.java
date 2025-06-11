@@ -147,6 +147,7 @@ public class ServicoService {
     }
 	
 	//METODO PARA DELETAR
+	@Transactional
     public void deletarServico(int servicoId) {
         Servico servico = servicoRepository.findById(servicoId)
             .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + servicoId));

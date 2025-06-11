@@ -89,7 +89,7 @@ public class ConsumidorController {
     public String home(HttpSession session, Model model) {
 		List<ServicoDTO> servicos = servicoService.buscarServicosMaisBaratos();
 		ConsumidorServico consu = (ConsumidorServico) session.getAttribute("usuarioLogado");
-		List<ServicoDTO> servicoF = servicoFservice.listarServicosFavoritosPorUsuario(consu.getId());
+		List<ServicoSelectDTO> servicoF = servicoFservice.listarServicosFavoritosPorUsuario(consu.getId());
 	    model.addAttribute("consu", consu);
 	    model.addAttribute("servicos",servicos);
 	    model.addAttribute("servicoF", servicoF);
@@ -100,7 +100,7 @@ public class ConsumidorController {
     public String educacional(HttpSession session, Model model) {
 		List<CursoDTO> curso = cursoService.buscarCursosMaisBaratos();
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
-		List<CursoDTO> cursoF = cursoFservice.listarCursosFavoritosPorUsuario(consumidor.getId());
+		List<CursoSelectDTO> cursoF = cursoFservice.listarCursosFavoritosPorUsuario(consumidor.getId());
 	    model.addAttribute("consumidor", consumidor);
 		model.addAttribute("cursos", curso);
 		model.addAttribute("cursoF", cursoF);
@@ -175,17 +175,17 @@ public class ConsumidorController {
 	@GetMapping("/{id}/favoritarServico")
     public String favoritarServico(HttpSession session, Model model, @PathVariable int id) {
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
-		cursoFservice.favoritar(consumidor.getId(), id);
+		servicoFservice.favoritar(consumidor.getId(), id);
 	    model.addAttribute("consumidor", consumidor);
-        return "redirect:/consumidor/educacional";
+        return "redirect:/consumidor/home";
 	}
 	
 	@GetMapping("/{id}/desfavoritarServico")
     public String desfavoritarServico(HttpSession session, Model model, @PathVariable int id) {
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
-		cursoFservice.desfavoritar(consumidor.getId(), id);
+		servicoFservice.desfavoritar(consumidor.getId(), id);
 	    model.addAttribute("consumidor", consumidor);
-        return "redirect:/consumidor/educacional";
+        return "redirect:/consumidor/home";
 	}
 	
 }
