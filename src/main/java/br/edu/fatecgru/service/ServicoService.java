@@ -81,19 +81,16 @@ public class ServicoService {
 	
 	//METODOS PARA ATUALIZAR SERVICO
 	@Transactional
-	public void atualizarServico(ServicoDTO dto) {
+	public void atualizarServico(ServicoCadastroDTO dto) {
 	    Servico servicoExistente = servicoRepository.findById(dto.getId())
 	        .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + dto.getId()));
-
-	    PrestadorServico prestador = prestadorServicoRepository.findByNome(dto.getNomePrestadorServico())
-		        .orElseThrow(() -> new RuntimeException("Prestador de serviço não encontrado: " + dto.getNomePrestadorServico()));
 	    
-	    Estado estado = estadoRepository.findByNome(dto.getEstado())
-	            .orElseThrow(() -> new RuntimeException("Estado não encontrado: " + dto.getEstado()));
+	    Estado estado = estadoRepository.findByNome(dto.getNomeEstado())
+	            .orElseThrow(() -> new RuntimeException("Estado não encontrado: " + dto.getNomeEstado()));
 
-        Cidade cidade = cidadeRepository.findByNomeAndEstado(dto.getCidade(), estado)
+        Cidade cidade = cidadeRepository.findByNomeAndEstado(dto.getNomeCidade(), estado)
                 .orElseGet(() -> {
-                    Cidade novaCidade = new Cidade(dto.getCidade(), estado);
+                    Cidade novaCidade = new Cidade(dto.getNomeCidade(), estado);
                     return cidadeRepository.save(novaCidade);
                 });
 
@@ -107,12 +104,11 @@ public class ServicoService {
     
 	     
 
-	    servicoExistente.setNome(dto.getNomeServico());
+	    servicoExistente.setNome(dto.getNome());
 	    servicoExistente.setDescricao(dto.getDescricao());
 	    servicoExistente.setValor(dto.getValor());
 	    servicoExistente.setCategoria(categoria);
 	    servicoExistente.setCidade(cidade);
-	    servicoExistente.setPrestadorservico(prestador);
 
 	    servicoRepository.save(servicoExistente);
 	}

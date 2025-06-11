@@ -31,13 +31,13 @@
     </header>
 
     <main class="container">
-			<div class="section">
+			<div class="section" th:objetc="${dto}">
        <div class="section-header">
-          <h2>Serviço: Limpar Calha</h2>
+          <h2>Serviço:<label th:text="${dto.Nome}"></label></h2>
        </div>
-         <p>Descrição: Lorem ipsum is simply dummy text of the printing and typesetting industry...</p>
-				 <p>Whatsapp: </p>
-				 <p>Preço: </p>
+         <p th:text="${dto.Descricao}"></p>
+				 <p>Whatsapp: <label th:text="${}"></label></p>
+				 <p>Preço: <label th:text="${dto.Valor}"></label></p>
        </div>
     </main>
 		<script src="/js/script.js"></script>

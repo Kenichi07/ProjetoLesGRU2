@@ -78,7 +78,8 @@ public class AdministradorController {
 	public String editarUsuario(HttpSession session, Model model, @PathVariable int id) {
 		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
 	    model.addAttribute("admin", adm);
-	    model.addAttribute("usuarioDTO", administradorService.buscarUsuarioPorId(id));
+	    model.addAttribute("usuario", administradorService.buscarUsuarioPorId(id));
+	    model.addAttribute("novo", false);
 		return "formusuario";
 	}
 	
@@ -139,7 +140,7 @@ public class AdministradorController {
 	
 	@PostMapping("save")
 	public String salvar(@ModelAttribute UsuarioCadastroDTO dto, HttpSession session, Model model) {
-		usuarioService.cadastrarUsuario(dto);
+		usuarioService.atualizarUsuario(dto);
 		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
 	    model.addAttribute("admin", adm);
 		return "redirect:/administrador/usuarios";

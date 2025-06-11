@@ -19,6 +19,7 @@ import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
 import br.edu.fatecgru.model.entity.Administrador;
+import br.edu.fatecgru.model.entity.ConsumidorServico;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.service.CursoFavoritoService;
@@ -69,6 +70,7 @@ public class PrestadorController {
     public String home(HttpSession session, Model model) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
 		List<ServicoDTO> servicos = prestadorService.buscarServicosCriados(prestador.getId());
+		System.out.println(prestador.getId());
 	    model.addAttribute("prestador", prestador);
 	    model.addAttribute("servicos", servicos);
         return "homeprestador";
@@ -93,18 +95,26 @@ public class PrestadorController {
 	}
 	
 	@GetMapping("/cursos")
-    public String cursos() {
+    public String cursos(HttpSession session, Model model) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		List<CursoDTO> curso = cursoService.listarTodosCursos();
+		model.addAttribute("prestador", prestador);
+		model.addAttribute("cursos", curso);
         return "cursopresta";
     }
 	
-	@GetMapping("/curso")
-    public String curso() {
+	@GetMapping("/{id}/curso")
+    public String curso(HttpSession session, Model model, @PathVariable int id) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("prestador", prestador);
+	    model.addAttribute("curso", cursoService.buscarPorId(id));
         return "cursoindividualpresta";
     }
 	
 	@GetMapping("/list")
     public String meusServicos(HttpSession session, Model model) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		System.out.println(prestador.getId());
 		List<ServicoDTO> servicos = prestadorService.buscarServicosCriados(prestador.getId());
 	    model.addAttribute("prestador", prestador);
 	    model.addAttribute("servicos", servicos);
@@ -130,6 +140,7 @@ public class PrestadorController {
 	public String editServico(HttpSession session, Model model, @PathVariable Integer id) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
 		ServicoCadastroDTO dto = servicoService.buscarServicoPorId(id);
+		System.out.println("Prestador logado: " + prestador);
 		model
 			.addAttribute("servicoCadastroDTO", dto)
 			.addAttribute("prestador", prestador)
@@ -138,8 +149,11 @@ public class PrestadorController {
 	}
 	
 	@GetMapping("/{id}/delete")
-	public String delete(@PathVariable Integer id) {
-		prestadorService.delete(id);
+	public String delete(HttpSession session, Model model, @PathVariable Integer id) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		model
+			.addAttribute("prestador", prestador);
+		servicoService.deletarServico(0);
 		return "redirect:/prestador/list";
 	}
 	
@@ -147,13 +161,14 @@ public class PrestadorController {
 	public String salvar(@ModelAttribute ServicoCadastroDTO dto, HttpSession session, Model model) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
 		model.addAttribute("prestador", prestador);
+	    // Forçando o id do prestador no dto para não confiar no hidden field
 		dto.setPrestadorServicoId(prestador.getId());
 		if (dto.getId() == null) {
 	        // Cadastro novo
 	        servicoService.salvarServico(dto);
 	    } else {
 	        // Atualização
-	    	servicoService.atualizarServico(dto.toServicoDTO());
+	    	servicoService.atualizarServico(dto);
 	    }
 	    
 		return "redirect:/prestador/list";

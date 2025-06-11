@@ -1,6 +1,7 @@
 package br.edu.fatecgru.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +81,7 @@ public class CursoService {
 	public CursoDTO buscarPorId(int idCurso){
 		return cursoRepository.findById(idCurso).get().toDTO();
 	}
+
 	@Transactional
 	public void deletarCurso(int cursoId) {
 	    Curso curso = cursoRepository.findById(cursoId)

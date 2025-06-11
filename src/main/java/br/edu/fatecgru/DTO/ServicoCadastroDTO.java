@@ -37,6 +37,7 @@ public class ServicoCadastroDTO {
 	
 	public ServicoCadastroDTO(Integer id, String nome, String descricao, Float valor, String nomeCategoria, String nomeCidade,
 			String nomeEstado) {
+		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.valor = valor;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.ConsumidorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.CursoDTO;
+import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.ConsumidorServico;
@@ -23,6 +24,7 @@ import br.edu.fatecgru.model.entity.ServicoFavorito;
 import br.edu.fatecgru.service.ConsumidorService;
 import br.edu.fatecgru.service.CursoFavoritoService;
 import br.edu.fatecgru.service.CursoService;
+import br.edu.fatecgru.service.PrestadorService;
 import br.edu.fatecgru.service.ServicoFavoritoService;
 import br.edu.fatecgru.service.ServicoService;
 import jakarta.persistence.Id;
@@ -50,6 +52,9 @@ public class ConsumidorController {
 	
 	@Autowired
 	private ServicoFavoritoService servicoFservice;
+	
+	@Autowired
+	private PrestadorService prestadorService;
 	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
@@ -105,13 +110,20 @@ public class ConsumidorController {
         return "cursoconsu";
     }
 	
-	@GetMapping("/servico")
-    public String servico() {
+	@GetMapping("/{id}/servico")
+    public String servico(HttpSession session, Model model, @PathVariable int id) {
+		ServicoCadastroDTO dto = servicoService.buscarServicoPorId(id);
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("consumidor", consumidor);
+	    model.addAttribute("dto", dto);
         return "servicoindividual";
     }
 	
-	@GetMapping("/curso")
-    public String curso() {
+	@GetMapping("/{id}/curso")
+    public String curso(HttpSession session, Model model, @PathVariable int id) {
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("consumidor", consumidor);
+	    model.addAttribute("curso", cursoService.buscarPorId(id));
         return "cursoindividualconsu";
     }
 
