@@ -21,4 +21,6 @@ public interface ServicoFavoritoRepository extends JpaRepository <ServicoFavorit
 	public List<ServicoFavorito> findByIdServico(Servico servico);
 	
 	public void deleteByIdServico(Servico servico);
+	
+	 List<ServicoFavorito> findByIdUsuarioId(Integer usuarioId);
 }

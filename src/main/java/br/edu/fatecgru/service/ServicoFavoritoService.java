@@ -1,13 +1,15 @@
 package br.edu.fatecgru.service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.fatecgru.DTO.ServicoDTO;
+import br.edu.fatecgru.DTO.ServicoSelectDTO;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.model.entity.ServicoFavorito;
 import br.edu.fatecgru.model.entity.ServicoFavoritoPK;
@@ -60,11 +62,31 @@ public class ServicoFavoritoService {
         }
     }
     
-    //METODO PARA LISTAR CURSOS FAVORITOS DO USUARIOAdd commentMore actions
+    //METODO PARA LISTAR CURSOS FAVORITOS DO USUARIO
     public List<ServicoDTO> listarServicosFavoritosPorUsuario(int usuarioId) {
         List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
         return favoritos.stream()
                         .map(f -> new ServicoDTO(f.getId().getServico())).toList();
     }
+    
+    
+    public List<ServicoSelectDTO> buscarTodosServicos(Integer usuarioId) {
+        List<Servico> todosServicos = servicoRepository.findAll();
+        List<ServicoFavorito> favoritosDoUsuario = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+
+        Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
+                .map(f -> f.getId().getServico().getId())
+                .collect(Collectors.toSet()); // Aqui ainda é necessário o Collectors.toSet()
+
+        return todosServicos.stream()
+                .map(servico -> {
+                    boolean favoritado = idsFavoritados.contains(servico.getId());
+                    ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+                    dto.setFavoritadoPorUsuario(favoritado);
+                    return dto;
+                })
+                .toList(); // Usando o novo método toList()
+    }
+
     
 }
