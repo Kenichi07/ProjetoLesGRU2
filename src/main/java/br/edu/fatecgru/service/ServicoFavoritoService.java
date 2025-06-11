@@ -76,7 +76,7 @@ public class ServicoFavoritoService {
 
         Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
                 .map(f -> f.getId().getServico().getId())
-                .collect(Collectors.toSet()); // Aqui ainda é necessário o Collectors.toSet()
+                .collect(Collectors.toSet()); 
 
         return todosServicos.stream()
                 .map(servico -> {
@@ -85,8 +85,5 @@ public class ServicoFavoritoService {
                     dto.setFavoritadoPorUsuario(favoritado);
                     return dto;
                 })
-                .toList(); // Usando o novo método toList()
-    }
-
-    
+                .toList();}    
 }

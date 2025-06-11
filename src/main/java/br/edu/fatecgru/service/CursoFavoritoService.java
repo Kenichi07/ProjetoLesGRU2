@@ -1,12 +1,16 @@
 package br.edu.fatecgru.service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.fatecgru.DTO.CursoDTO;
+import br.edu.fatecgru.DTO.CursoSelectDTO;
+import br.edu.fatecgru.DTO.ServicoSelectDTO;
 import br.edu.fatecgru.model.entity.Curso;
 import br.edu.fatecgru.model.entity.CursoFavorito;
 import br.edu.fatecgru.model.entity.CursoFavoritoPK;
@@ -66,4 +70,21 @@ public class CursoFavoritoService {
                         .map(f -> new CursoDTO(f.getId().getCurso())).toList();
     }
     
+    public List<CursoSelectDTO> buscarTodosCursos(Integer usuarioId) {
+        List<Curso> todosCursos = cursoRepository.findAll();
+        List<CursoFavorito> favoritosDoUsuario = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
+
+        Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
+                .map(f -> f.getId().getCurso().getId())
+                .collect(Collectors.toSet());
+
+        return todosCursos.stream()
+                .map(curso -> {
+                    boolean favoritado = idsFavoritados.contains(curso.getId());
+                    CursoSelectDTO dto = new CursoSelectDTO(curso);
+                    dto.setFavoritadoPorUsuario(favoritado);
+                    return dto;
+                })
+                .toList();
+    }
 }
