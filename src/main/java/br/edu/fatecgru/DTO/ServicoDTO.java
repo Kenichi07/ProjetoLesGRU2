@@ -28,8 +28,21 @@ public class ServicoDTO {
 	        this.cidade = s.getCidade().getNome();
 	        this.estado = s.getCidade().getEstado().getNome();
 	    }
+	    
+	    
 
-	 // Getters e Setters
+	 public ServicoDTO(int id, String nomeServico, String descricao, Float preco, String nomeCategoria,
+				String cidade) {
+			super();
+			this.id = id;
+			this.nomeServico = nomeServico;
+			this.descricao = descricao;
+			this.preco = preco;
+			this.nomeCategoria = nomeCategoria;
+			this.cidade = cidade;
+		}
+
+		// Getters e Setters
 		public int getId() {return id;}
 		public void setId(int id) {this.id = id;}
 

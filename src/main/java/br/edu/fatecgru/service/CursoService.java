@@ -80,7 +80,7 @@ public class CursoService {
 	public CursoDTO buscarPorId(int idCurso){
 		return cursoRepository.findById(idCurso).get().toDTO();
 	}
-	
+	@Transactional
 	public void deletarCurso(int cursoId) {
 	    Curso curso = cursoRepository.findById(cursoId)
 	        .orElseThrow(() -> new RuntimeException("Curso não encontrado com ID: " + cursoId)); 

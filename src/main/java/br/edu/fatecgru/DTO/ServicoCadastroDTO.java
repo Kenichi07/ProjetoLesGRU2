@@ -1,30 +1,34 @@
 package br.edu.fatecgru.DTO;
 
 public class ServicoCadastroDTO {
-	private int id; 
+	private Integer id; 
 	private String nome;
 	private String descricao;
 	private Float valor;
-	private int prestadorServicoId;
+	private int prestadorId;
 	private String nomeCategoria;
 	private String nomeCidade;
 	private String nomeEstado;
 
 	public ServicoCadastroDTO() {}
 
-	public ServicoCadastroDTO(int id, String nome, String descricao, Float valor, int prestadorServicoId, String nomeCategoria, String nomeCidade,
+	public ServicoCadastroDTO(Integer id, String nome, String descricao, Float valor, int prestadorServicoId, String nomeCategoria, String nomeCidade,
 			String nomeEstado) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.valor = valor;
-		this.prestadorServicoId = prestadorServicoId;
+		this.prestadorId = prestadorServicoId;
 		this.nomeCategoria = nomeCategoria;
 		this.nomeCidade = nomeCidade;
 		this.nomeEstado = nomeEstado;
 	}
 	
-	public int getId() {return id;}
-	public void setId(int id) {this.id = id;}
+	public ServicoDTO toServicoDTO() {
+		return new ServicoDTO(id, nome, descricao, valor, nomeCategoria, nomeCidade);	
+	}
+	
+	public Integer getId() {return id;}
+	public void setId(Integer id) {this.id = id;}
 
 	public String getNome() {return nome;}
 	public void setNome(String nome) {this.nome = nome;}
@@ -35,8 +39,8 @@ public class ServicoCadastroDTO {
 	public Float getValor() {return valor;}
 	public void setValor(Float valor) {this.valor = valor;}	
 
-	public int getPrestadorServicoId() {return prestadorServicoId;}
-	public void setPrestadorServicoId(int prestadorServicoId) {this.prestadorServicoId = prestadorServicoId;}
+	public int getPrestadorServicoId() {return prestadorId;}
+	public void setPrestadorServicoId(int prestadorServicoId) {this.prestadorId = prestadorServicoId;}
 
 	public String getNomeCategoria() {return nomeCategoria;}
 	public void setNomeCategoria(String nomeCategoria) {this.nomeCategoria = nomeCategoria;}

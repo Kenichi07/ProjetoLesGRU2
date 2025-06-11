@@ -26,6 +26,8 @@ public class PrestadorServico extends Usuario{
 	//Getters e Setters
 	public String getWhatsApp() {return whatsApp;}
 	public void setWhatsApp(String whatsApp) {this.whatsApp = whatsApp;}
+	
+	
 
 	public List<Servico> getServicos() {return servicos;}
 	public void setServicos(List<Servico> servicos) {this.servicos = servicos;}
