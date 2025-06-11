@@ -185,7 +185,11 @@ public class ServicoService {
         	Servico s = servicoRepository.findById(servicoId).get();
         	return new ServicoCadastroDTO(s);
     }
-    
+
+    public ServicoDTO buscarServicoDTOPorId(int servicoId) {
+    	Servico s = servicoRepository.findById(servicoId).get();
+    	return new ServicoDTO(s);
+    }
     
     //METODO BUSCAR POR NOME
     public List<ServicoDTO> buscarPorNome(String nome) {

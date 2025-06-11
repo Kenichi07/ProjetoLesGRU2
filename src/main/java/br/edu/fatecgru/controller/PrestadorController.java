@@ -174,9 +174,16 @@ public class PrestadorController {
 		return "redirect:/prestador/list";
 	}	
 	
-	@GetMapping("/prefil")
-    public String perfil() {
-        return "meuperfil";
+	@GetMapping("/perfil")
+    public String perfil(HttpSession session, Model model) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		model.addAttribute("prestador", prestador);
+        return "perfilpresta";
+	}
+	
+	@GetMapping("/sair")
+	public String sair() {
+		return "index";
 	}
 	
 }

@@ -24,7 +24,7 @@
 				<div class="dropdown">	  
 					<img src="/imagem/Group.png" alt="Profile" class="dropbtn" onclick="toggleDropdown()">
 				  <div id="myDropdown" class="dropdown-content">
-				    <a th:href="@{/consumidor/perfil}"><input type="hidden"/>Perfil</a>
+				    <a th:href="@{/consumidor/perfil}">Perfil</a>
 				    <a th:href="@{/consumidor/sair}">Sair</a>
 				  </div>
 				</div>
@@ -76,8 +76,8 @@
                 <div class="card" th:each="servico : ${servicoF}">
                     <div class="card-header">
                         <h3 th:text="${servico.NomeServico}"></h3>
-												<a th:href="@{/consumidor/{id}/desfavoritar}">
 												<label class="heart-checkbox">
+												<a th:href="@{/consumidor/{id}/desfavoritar}">
 												  <input type="checkbox" />
 												  <svg
 												    class="Heart"
@@ -94,8 +94,8 @@
 												      1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
 												    />
 												  </svg>
-												</label>
 												</a>
+												</label>
                     </div>
 										<p th:text="${servico.Descricao}"></p>
 										<p th:text="${#numbers.formatCurrency(servico.Valor)}"></p>

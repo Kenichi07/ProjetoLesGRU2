@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+					<a th:href="@{/administrador/index}">
+						<img src="/imagem/logo.png" alt="Logo">
+					</a>
+        </div>
+				<div class="dropdown">	  
+					<img src="/imagem/Group.png" alt="Profile" class="dropbtn" onclick="toggleDropdown()">
+				  <div id="myDropdown" class="dropdown-content">
+						<div>
+							Olá faça seu <a th:href="@{/administrador/login}">login</a>
+						</div>
+						ou <a th:href="@{/administrador/cadastro}" >Cadastre-se</a>
+				  </div>
+				</div>
+    </header>
+
+		<section class="hero">
+        <div class="hero-text">
+            <h1>Encontre ou ofereça serviços de forma simples e segura</h1>
+            <p>Conectamos prestadores e contratantes em um só lugar.</p>
+            <a th:href="@{/administrador/cadastro}" class="btn btn-primary">Quero contratar</a>
+            <a th:href="@{/administrador/cadastro}" class="btn btn-secondary">Quero prestar serviço</a>
+        </div>
+     </section>
+
+	    <section class="how-it-works">
+	        <h2>Como Funciona</h2>
+	        <div class="cards">
+	            <div class="card">
+	                <h3>Cadastre-se</h3>
+	                <p>Crie uma conta gratuita.</p>
+	            </div>
+	            <div class="card">
+	                <h3>Escolha ou Ofereça</h3>
+	                <p>Navegue ou publique serviços.</p>
+	            </div>
+	            <div class="card">
+	                <h3>Contrate com segurança</h3>
+	                <p>Feche contratos com tranquilidade.</p>
+	            </div>
+	        </div>
+	    </section>
+
+	    <footer>
+	        <a href="#">Sobre</a> | 
+	        <a href="#">Contato</a> | 
+	        <a href="#">Termos de Uso</a> | 
+	        <a href="#">Política de Privacidade</a>
+	    </footer>
+		<script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 package br.edu.fatecgru.DTO;
 
 public class UsuarioCadastroDTO {
-	private int id;
+	private Integer id;
 	private String nome;
     private String email;
     private String senha;
@@ -14,7 +14,7 @@ public class UsuarioCadastroDTO {
     	return new AdministradorCadastroDTO(nome,email,senha);	
     }
     
-    public UsuarioCadastroDTO(int id, String nome, String email, String senha, String whatsApp, String papel) {
+    public UsuarioCadastroDTO(Integer id, String nome, String email, String senha, String whatsApp, String papel) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -31,11 +31,11 @@ public class UsuarioCadastroDTO {
     	return new PrestadorServicoCadastroDTO(nome,email,senha, whatsApp);	
     }
     
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -56,11 +56,20 @@ public class AdministradorController {
 	
 	@Autowired CategoriaService categoriaService;
 	
+	@GetMapping("/index")
+	public String index() {
+		return "index";
+	}
+	
+	@GetMapping("/sair")
+	public String sair() {
+		return "index";
+	}
 	
 	@GetMapping("/usuarios")
 	public String listarTodosUsuarios(HttpSession session, Model model) {
-		List<UsuarioDTO> usuarios = administradorService.listarTodosUsuarios();
 		Administrador admin = (Administrador) session.getAttribute("usuarioLogado");
+		List<UsuarioDTO> usuarios = administradorService.listarTodosUsuarios(admin.getId());
 	    model.addAttribute("admin", admin);
 		model.addAttribute("usuarios", usuarios);
 		return "homeadministrador";
@@ -140,10 +149,15 @@ public class AdministradorController {
 	
 	@PostMapping("save")
 	public String salvar(@ModelAttribute UsuarioCadastroDTO dto, HttpSession session, Model model) {
-		usuarioService.atualizarUsuario(dto);
+		if (dto.getId() == null) {
+			dto.setPapel("ADMINISTRADOR");
+			usuarioService.cadastrarUsuario(dto);
+		} else {			
+			usuarioService.atualizarUsuario(dto);
+		}
 		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
 	    model.addAttribute("admin", adm);
-		return "redirect:/administrador/usuarios";
+	    return "redirect:/administrador/usuarios";
 	}
 	
 	@PostMapping("saveCurso")
@@ -179,11 +193,6 @@ public class AdministradorController {
 	    }
 		return null;
 	}
-	
-	@GetMapping("/cadastroadm")
-    public String cadastroAdmPage() {
-        return "cadastroadm";
-    }
 	
 	/*
 	@GetMapping("/home")
@@ -225,10 +234,10 @@ public class AdministradorController {
 		Administrador admin = (Administrador) session.getAttribute("usuarioLogado");
 	    model.addAttribute("admin", admin);
   		model
-  			.addAttribute("usuarioDTO", new UsuarioDTO())
+  			.addAttribute("usuario", new UsuarioCadastroDTO())
   			.addAttribute("admin", admin)
   			.addAttribute("novo", true); 
-  		return "formadm"; 
+  		return "formusuario"; 
 	}
 	  
 	@GetMapping("/perfil")

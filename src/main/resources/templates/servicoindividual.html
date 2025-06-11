@@ -33,11 +33,11 @@
     <main class="container">
 			<div class="section" th:objetc="${dto}">
        <div class="section-header">
-          <h2>Serviço:<label th:text="${dto.Nome}"></label></h2>
+          <h2>Serviço:<label th:text="${dto.NomeServico}"></label></h2>
        </div>
          <p th:text="${dto.Descricao}"></p>
-				 <p>Whatsapp: <label th:text="${}"></label></p>
-				 <p>Preço: <label th:text="${dto.Valor}"></label></p>
+				 <p>Whatsapp: <label th:text="${dto.NumeroWhatsAppPrestadorServico}"></label></p>
+				 <p>Preço: <label th:text="'R$: ' + ${#numbers.formatDecimal(dto.Valor, 1, 'POINT', 2, 'COMMA')}"></label></p>
        </div>
     </main>
 		<script src="/js/script.js"></script>

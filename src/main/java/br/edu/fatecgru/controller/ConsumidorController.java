@@ -6,16 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.ConsumidorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.CursoDTO;
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
+import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
 import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.ConsumidorServico;
 import br.edu.fatecgru.model.entity.CursoFavorito;
@@ -27,6 +30,7 @@ import br.edu.fatecgru.service.CursoService;
 import br.edu.fatecgru.service.PrestadorService;
 import br.edu.fatecgru.service.ServicoFavoritoService;
 import br.edu.fatecgru.service.ServicoService;
+import br.edu.fatecgru.service.UsuarioService;
 import jakarta.persistence.Id;
 import jakarta.servlet.http.HttpSession;
 
@@ -56,11 +60,27 @@ public class ConsumidorController {
 	@Autowired
 	private PrestadorService prestadorService;
 	
+	@Autowired
+	private UsuarioService usuarioService;
+	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
 	public String cadastrarConsumidorServico(ConsumidorServicoCadastroDTO dto) {
 	    consumidorService.salvar(dto);
 		return "redirect:/consumidor/home";
+	}
+	
+	@GetMapping("/sair")
+	public String sair() {
+		return "index";
+	}
+	
+	@PostMapping("save")
+	public String salvar(@ModelAttribute UsuarioCadastroDTO dto, HttpSession session, Model model) {
+		usuarioService.atualizarUsuario(dto);
+		ConsumidorServico adm = (ConsumidorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", adm);
+	    return "redirect:/consumidor/home";
 	}
 	
 	@GetMapping("/home")
@@ -112,7 +132,7 @@ public class ConsumidorController {
 	
 	@GetMapping("/{id}/servico")
     public String servico(HttpSession session, Model model, @PathVariable int id) {
-		ServicoCadastroDTO dto = servicoService.buscarServicoPorId(id);
+		ServicoDTO dto = servicoService.buscarServicoDTOPorId(id);
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
 	    model.addAttribute("consumidor", consumidor);
 	    model.addAttribute("dto", dto);
@@ -128,12 +148,12 @@ public class ConsumidorController {
     }
 
 	@GetMapping("/perfil")
-    public String perfil(Model model) {
-		model
-		.addAttribute("consumidor", new ConsumidorServico());
+    public String perfil(HttpSession session, Model model) {
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		model.addAttribute("consumidor", consumidor);
         return "perfilconsu";
 	}
-	
+
 	@GetMapping("/{id}/favoritar")
     public String favoritar(HttpSession session, Model model, @PathVariable int id) {
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
