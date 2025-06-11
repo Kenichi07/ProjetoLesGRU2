@@ -4,7 +4,7 @@ import br.edu.fatecgru.model.entity.Servico;
 
 public class ServicoDTO {
 		//Atributos
-		private int id;
+		private Integer id;
 	    private String nomeServico;
 	    private String descricao;
 	    private Float preco;
@@ -29,7 +29,11 @@ public class ServicoDTO {
 	        this.estado = s.getCidade().getEstado().getNome();
 	    }
 	    
-	 public ServicoDTO(int id, String nomeServico, String descricao, Float preco, String nomeCategoria,
+	    public ServicoCadastroDTO toServicoCadastroDTO() {
+			return new ServicoCadastroDTO(id, nomeServico, descricao, preco, nomeCategoria, cidade, estado);	
+		}
+	    
+	    public ServicoDTO(int id, String nomeServico, String descricao, Float preco, String nomeCategoria,
 				String cidade) {
 			super();
 			this.id = id;
@@ -42,7 +46,7 @@ public class ServicoDTO {
 	 
 		// Getters e Setters
 
-		public int getId() {return id;}
+		public Integer getId() {return id;}
 		public void setId(int id) {this.id = id;}
 
 		public String getNomeServico() {return nomeServico;}
@@ -66,6 +70,6 @@ public class ServicoDTO {
 		public String getCidade() {return cidade;}
 		public void setCidade(String cidade) {this.cidade = cidade;}
 
-		public String getEstado() {return estado;}
+		public String getNomeEstado() {return estado;}
 		public void setEstado(String estado) {this.estado = estado;}
 	}

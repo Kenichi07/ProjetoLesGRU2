@@ -32,6 +32,7 @@
     <main class="container">
 			<h1><label th:text="${novo} ?'Novo ' : 'Editar '"></label> Serviço</h1>
         <form class="form" th:action="@{/prestador/save}" th:object="${servicoCadastroDTO}" method="post">
+					<input type="hidden" th:field="*{prestadorServicoId}" />
 					<input type="hidden" th:field="*{id}"/>
 					
 					<label for="nome">Nome do Serviço:</label>

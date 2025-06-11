@@ -36,6 +36,14 @@ public class Servico {
         this.prestadorservico = prestadorservico;
         this.categoria = categoria;
     }
+    public Servico(String nome, String descricao, Float preco,Cidade cidade,
+            Categoria categoria) {
+	 this.nome = nome;
+	 this.descricao = descricao;
+	 this.preco = preco;
+	 this.cidade = cidade;
+	 this.categoria = categoria;
+	}
 
     public Servico(Servico s) {
         this.nome = s.getNome();
@@ -44,7 +52,7 @@ public class Servico {
         this.cidade = s.getCidade();
         this.prestadorservico = s.getPrestadorservico();
         this.categoria = s.getCategoria();
-        }
+    }
 
     // Getters e Setters
     public int getId() { return id; }

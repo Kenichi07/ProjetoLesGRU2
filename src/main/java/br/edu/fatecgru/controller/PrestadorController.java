@@ -131,8 +131,8 @@ public class PrestadorController {
 	@GetMapping("/{id}/edit")
 	public String editServico(HttpSession session, Model model, @PathVariable Integer id) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
-		System.out.println(prestador.getId());
 		ServicoCadastroDTO dto = servicoService.buscarServicoPorId(id);
+		System.out.println("Prestador logado: " + prestador);
 		model
 			.addAttribute("servicoCadastroDTO", dto)
 			.addAttribute("prestador", prestador)
@@ -153,13 +153,14 @@ public class PrestadorController {
 	public String salvar(@ModelAttribute ServicoCadastroDTO dto, HttpSession session, Model model) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
 		model.addAttribute("prestador", prestador);
+	    // Forçando o id do prestador no dto para não confiar no hidden field
 		dto.setPrestadorServicoId(prestador.getId());
 		if (dto.getId() == null) {
 	        // Cadastro novo
 	        servicoService.salvarServico(dto);
 	    } else {
 	        // Atualização
-	    	servicoService.atualizarServico(dto.toServicoDTO());
+	    	servicoService.atualizarServico(dto);
 	    }
 	    
 		return "redirect:/prestador/list";
