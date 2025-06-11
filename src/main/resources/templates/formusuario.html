@@ -3,33 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="/css/cadastro.css">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="/css/formpresta.css">
 </head>
 <body>
     <header class="header">
-			<nav>
-				<div class="logo">
-            <img src="/imagem/logo.png" alt="Logo">
+        <div class="logo">
+					<a th:href="@{/administrador/index}">
+						<img src="/imagem/logo.png" alt="Logo">
+					</a>
         </div>
-			</nav>
+        <nav>
+          <ul class="nav-links">
+            <li><a th:href="@{/administrador/home}">Home</a></li>
+            <li><a th:href="@{/administrador/educacional}">Educacional</a></li>
+            <li><a th:href="@{/administrador/equipe}">Sobre Nós</a></li>
+          </ul>
+        </nav>
+				<div class="dropdown">	  
+					<img src="/imagem/Group.png" alt="Profile" class="dropbtn" onclick="toggleDropdown()">
+				  <div id="myDropdown" class="dropdown-content">
+				    <a th:href="@{/administrador/perfil}">Perfil</a>
+				    <a th:href="@{/administrador/sair}">Sair</a>
+				  </div>
+				</div>
     </header>
 
     <main class="container">
-        <h1>Cadastre-se</h1>
-        <form class="form" th:action="@{/administrador/cadastro}" th:object="${usuarioCadastroDTO}" method="post">
-						<label for="nome">Nome completo</label>
-					  <input type="text" id="nome" placeholder="Insira seu nome completo" th:field="*{nome}" required>
+			<h1><label th:text="${novo} ?'Novo ' : 'Editar '"></label> Usuário</h1>
+        <form class="form" th:action="@{/administrador/save}" th:object="${usuario}" method="post">
+					<input type="hidden" th:field="*{id}"/>
 					
-            <label for="email">E-mail</label>
-            <input type="email" id="email" placeholder="Insira seu e-mail" th:field="*{email}" required>
+					<label for="nome">Nome Completo:</label>
+				  <input type="text" id="servico" placeholder="Insira o nome completo" th:field="*{nome}" required>
+				
+          <label for="descricao">Email:</label>
+          <input type="email" id="descricao" placeholder="Insira o email" th:field="*{email}" required>
 
-            <label for="senha">Senha</label>
-            <input type="password" id="senha" placeholder="Insira uma senha" th:field="*{senha}" required>
-
-            <button type="submit">Continuar</button>
+          <label for="valor">Senha:</label>
+          <input type="password" id="valor" placeholder="Insira a senha" th:field="*{senha}" required>
+					
+					<div>
+						<button type="submit" class="btn">Salvar</button>
+						<a th:href="@{/administrador/usuarios}" class="btn">Voltar</a>
+					</div>
         </form>
-        <p class="cadastro">Já possui uma conta? <a th:href="@{/administrador/login}">Faça o login</a></p>
     </main>
 		<script src="/js/script.js"></script>
 </body>

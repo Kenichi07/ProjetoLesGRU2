@@ -15,7 +15,7 @@ public class Curso {
 	//Atributos
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String nome;
     private String descricao;
     private String linkCurso;
@@ -37,7 +37,7 @@ public class Curso {
     }
 
     // Getters e Setters
-    public int getId() { return id; }
+    public Integer getId() { return id; }
     public void setId(int id) { this.id = id; }
 
     public String getNome() { return nome; }

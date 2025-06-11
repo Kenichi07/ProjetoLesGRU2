@@ -94,7 +94,11 @@ public class PrestadorController {
 	}
 	
 	@GetMapping("/cursos")
-    public String cursos() {
+    public String cursos(HttpSession session, Model model) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		List<CursoDTO> curso = cursoService.listarTodosCursos();
+		model.addAttribute("prestador", prestador);
+		model.addAttribute("cursos", curso);
         return "cursopresta";
     }
 	
