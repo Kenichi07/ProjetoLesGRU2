@@ -63,11 +63,19 @@ public class ServicoFavoritoService {
     }
     
     //METODO PARA LISTAR CURSOS FAVORITOS DO USUARIO
-    public List<ServicoDTO> listarServicosFavoritosPorUsuario(int usuarioId) {
+    public List<ServicoSelectDTO> listarServicosFavoritosPorUsuario(int usuarioId) {
         List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+
         return favoritos.stream()
-                        .map(f -> new ServicoDTO(f.getId().getServico())).toList();
+                .map(f -> {
+                    Servico servico = f.getId().getServico();
+                    ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+                    dto.setFavoritadoPorUsuario(true);
+                    return dto;
+                })
+                .toList();
     }
+
     
     
     public List<ServicoSelectDTO> buscarTodosServicos(Integer usuarioId) {

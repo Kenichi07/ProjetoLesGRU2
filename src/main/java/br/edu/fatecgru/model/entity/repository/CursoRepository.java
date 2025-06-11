@@ -22,4 +22,7 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 	List<Curso> findByNomeContainingIgnoreCase(String nome);
 
 	List<Curso> findByCategoriaNome(String nomeCategoria);
+
+	List<Curso> findTop8ByOrderByNomeAsc();
+
 }

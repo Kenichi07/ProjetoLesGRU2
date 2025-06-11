@@ -64,11 +64,24 @@ public class CursoFavoritoService {
     }
     
     //METODO PARA LISTAR OS CURSOS FAVORITADOS PELO USUARIO
-    public List<CursoDTO> listarCursosFavoritosPorUsuario(int usuarioId) {
+    public List<CursoSelectDTO> listarCursosFavoritosPorUsuario(int usuarioId) {
         List<CursoFavorito> favoritos = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
+
         return favoritos.stream()
-                        .map(f -> new CursoDTO(f.getId().getCurso())).toList();
+                .map(f -> {
+                    Curso curso = f.getId().getCurso();
+                    return new CursoSelectDTO(
+                        curso.getId(),
+                        curso.getNome(),
+                        curso.getDescricao(),
+                        curso.getLinkCurso(),
+                        curso.getCategoria().getNome(),
+                        true // como veio da lista de favoritos, é true
+                    );
+                })
+                .toList();
     }
+
     
     public List<CursoSelectDTO> buscarTodosCursos(Integer usuarioId) {
         List<Curso> todosCursos = cursoRepository.findAll();

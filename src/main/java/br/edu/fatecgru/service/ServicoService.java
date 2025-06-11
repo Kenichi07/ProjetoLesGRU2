@@ -1,6 +1,8 @@
 package br.edu.fatecgru.service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,12 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
+import br.edu.fatecgru.DTO.ServicoSelectDTO;
 import br.edu.fatecgru.DTO.ServicoUpdateDTO;
 import br.edu.fatecgru.model.entity.Categoria;
 import br.edu.fatecgru.model.entity.Cidade;
 import br.edu.fatecgru.model.entity.Estado;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
+import br.edu.fatecgru.model.entity.ServicoFavorito;
 import br.edu.fatecgru.model.entity.repository.CategoriaRepository;
 import br.edu.fatecgru.model.entity.repository.CidadeRepository;
 import br.edu.fatecgru.model.entity.repository.EstadoRepository;
@@ -162,6 +166,29 @@ public class ServicoService {
 	            .map(ServicoDTO::new)
 	            .toList();
 	}
+
+	public List<ServicoSelectDTO> buscarServicosMaisBaratos(int usuarioId) {
+	    // Buscar os 8 serviços mais baratos ordenados por preço
+	    List<Servico> servicos = servicoRepository.findTop8ByOrderByPrecoAsc();
+
+	    // Buscar os favoritos do usuário
+	    List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+
+	    // Criar um set com os IDs dos serviços favoritados
+	    Set<Integer> idsFavoritados = favoritos.stream()
+	            .map(f -> f.getId().getServico().getId())
+	            .collect(Collectors.toSet());
+
+	    // Mapear os serviços para DTOs, marcando se são favoritados
+	    return servicos.stream()
+	            .map(servico -> {
+	                ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+	                dto.setFavoritadoPorUsuario(idsFavoritados.contains(servico.getId()));
+	                return dto;
+	            })
+	            .toList();
+	}
+
 	
 	//METODO AUX PARA BUSCAR TODOS SERVICOS CRIADOS PELO PRESTADOR
 	public List<Servico> buscarPorPrestadorId(int idPrestador){
@@ -214,10 +241,4 @@ public class ServicoService {
             .map(ServicoDTO::new)
             .toList();
     }
-
-    
-    
-    
-
-
 }
