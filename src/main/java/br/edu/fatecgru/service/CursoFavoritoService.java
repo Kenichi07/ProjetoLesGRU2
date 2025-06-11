@@ -65,5 +65,5 @@ public class CursoFavoritoService {
         return favoritos.stream()
                         .map(f -> new CursoDTO(f.getId().getCurso())).toList();
     }
-
+    
 }

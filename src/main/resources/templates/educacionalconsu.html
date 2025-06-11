@@ -42,6 +42,7 @@
                 <h3 th:text="${curso.nome}"></h3>
 								<label class="heart-checkbox">
 								  <input type="checkbox" />
+									<a th:href="@{/consumidor/{id}/favoritar(id=${curso.id})}">
 								  <svg
 								    class="heart"
 								    viewBox="0 0 24 24"
@@ -57,8 +58,8 @@
 								      1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
 								    />
 								  </svg>
+									</a>
 								</label>
-
 		          </div>
 							<p th:text="${curso.nomeCategoria}"></p>
 							<p th:text="${curso.descricao}"></p>
@@ -68,7 +69,7 @@
         	</div>
         </div>
 
-        <div class="section">
+        <div class="section" th:if="${not #lists.isEmpty(cursoF)}">
           <div class="section-header">
               <h2>Cursos Favoritos</h2>
           </div>
@@ -78,6 +79,7 @@
                 <h3 th:text="${curso.nome}"></h3>
 								<label class="heart-checkbox">
 								  <input type="checkbox" />
+									<a th:href="@{/consumidor/{id}/desfavoritar(id=${curso.id})}">
 								  <svg
 								    class="Heart"
 								    viewBox="0 0 24 24"
@@ -93,6 +95,7 @@
 								      1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
 								    />
 								  </svg>
+									</a>
 								</label>
               </div>
 							<p th:text="${curso.nomeCategoria}"></p>

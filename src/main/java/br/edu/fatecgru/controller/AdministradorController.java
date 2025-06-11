@@ -28,6 +28,7 @@ import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Usuario;
 import br.edu.fatecgru.service.AdministradorService;
 import br.edu.fatecgru.service.CategoriaService;
+import br.edu.fatecgru.service.CursoFavoritoService;
 import br.edu.fatecgru.service.CursoService;
 import br.edu.fatecgru.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
@@ -50,6 +51,9 @@ public class AdministradorController {
 	@Autowired
 	private CursoService cursoService;
 	
+	@Autowired
+	private CursoFavoritoService cursoFservice;
+	
 	@Autowired CategoriaService categoriaService;
 	
 	
@@ -63,8 +67,10 @@ public class AdministradorController {
 	}
 	
 	@GetMapping("/{id}/delete")
-	public String deletarUsuario(@PathVariable int id) {
+	public String deletarUsuario(HttpSession session, Model model, @PathVariable int id) {
 		usuarioService.deletarUsuario(id);
+		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", adm);
 		return "redirect:/administrador/usuarios";
 	}
 	
@@ -77,9 +83,11 @@ public class AdministradorController {
 	}
 	
 	@GetMapping("/{id}/deleteCurso")
-	public String deletarCurso(@PathVariable int id) {
-		
-		return "redirect:/administrador/usuarios";
+	public String deletarCurso(HttpSession session, Model model, @PathVariable int id) {
+		cursoService.deletarCurso(id);
+		Administrador adm = (Administrador) session.getAttribute("usuarioLogado");
+	    model.addAttribute("admin", adm);
+		return "redirect:/administrador/educacional";
 	}
 	
 	@GetMapping("/{id}/editCurso")

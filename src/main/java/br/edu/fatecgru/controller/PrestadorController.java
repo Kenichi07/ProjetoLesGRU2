@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,12 +17,14 @@ import br.edu.fatecgru.DTO.CursoDTO;
 import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
+import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
 import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.service.CursoFavoritoService;
 import br.edu.fatecgru.service.CursoService;
 import br.edu.fatecgru.service.PrestadorService;
+import br.edu.fatecgru.service.ServicoService;
 import jakarta.servlet.http.HttpSession;
 
 //@RestController
@@ -38,6 +41,9 @@ public class PrestadorController {
 	@Autowired 
 	private CursoFavoritoService cursoFservice;
 	
+	@Autowired
+	private ServicoService servicoService;
+	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
 	public void cadastrarPrestadorServico(@RequestBody PrestadorServicoCadastroDTO dto) {
@@ -52,8 +58,10 @@ public class PrestadorController {
 	
 	//LISTA OS SERVIÇOS DO PRESTADOR 
 	@GetMapping("/{idPrestador}/servicos")
-	public String buscarServicosDoPrestador(@PathVariable int idPrestador) {
+	public String buscarServicosDoPrestador(HttpSession session, Model model, @PathVariable int idPrestador) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
         List<ServicoDTO> servicos = prestadorService.buscarServicosCriados(idPrestador);
+        model.addAttribute("prestador", prestador);
 		return "redirect:/prestador/home";
     }
     
@@ -109,18 +117,21 @@ public class PrestadorController {
 	}
 	
 	@GetMapping("/new")
-	public String newServico(Model model) {
+	public String newServico(HttpSession session, Model model) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
 		model
-			.addAttribute("servico", new Servico())
+			.addAttribute("servicoCadastroDTO", new ServicoCadastroDTO())
+			.addAttribute("prestador", prestador)
 			.addAttribute("novo", true);
 		return "formpresta";
 	}
 	
 	@GetMapping("/{id}/edit")
-	public String editServico(Model model, @PathVariable Integer id) {
-		PrestadorServico servico = prestadorService.getByCode(id);
+	public String editServico(HttpSession session, Model model, @PathVariable Integer id) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		
 		model
-			.addAttribute("servico", servico)
+			.addAttribute("prestador", prestador)
 			.addAttribute("novo", false);
 		return "formpresta";
 	}
@@ -130,6 +141,22 @@ public class PrestadorController {
 		prestadorService.delete(id);
 		return "redirect:/prestador/list";
 	}
+	
+	@PostMapping("save")
+	public String salvar(@ModelAttribute ServicoCadastroDTO dto, HttpSession session, Model model) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		model.addAttribute("prestador", prestador);
+		dto.setPrestadorServicoId(prestador.getId());
+		if (dto.getId() == null) {
+	        // Cadastro novo
+	        servicoService.salvarServico(dto);
+	    } else {
+	        // Atualização
+	    	servicoService.atualizarServico(dto.toServicoDTO());
+	    }
+	    
+		return "redirect:/prestador/list";
+	}	
 	
 	@GetMapping("/prefil")
     public String perfil() {

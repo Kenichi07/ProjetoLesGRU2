@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import br.edu.fatecgru.service.CursoFavoritoService;
 import br.edu.fatecgru.service.CursoService;
 import br.edu.fatecgru.service.ServicoFavoritoService;
 import br.edu.fatecgru.service.ServicoService;
+import jakarta.persistence.Id;
 import jakarta.servlet.http.HttpSession;
 
 //@RestController
@@ -119,4 +121,37 @@ public class ConsumidorController {
 		.addAttribute("consumidor", new ConsumidorServico());
         return "perfilconsu";
 	}
+	
+	@GetMapping("/{id}/favoritar")
+    public String favoritar(HttpSession session, Model model, @PathVariable int id) {
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		cursoFservice.favoritar(consumidor.getId(), id);
+	    model.addAttribute("consumidor", consumidor);
+        return "redirect:/consumidor/educacional";
+	}
+	
+	@GetMapping("/{id}/desfavoritar")
+    public String desfavoritar(HttpSession session, Model model, @PathVariable int id) {
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		cursoFservice.desfavoritar(consumidor.getId(), id);
+	    model.addAttribute("consumidor", consumidor);
+        return "redirect:/consumidor/educacional";
+	}
+	
+	@GetMapping("/{id}/favoritarServico")
+    public String favoritarServico(HttpSession session, Model model, @PathVariable int id) {
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		cursoFservice.favoritar(consumidor.getId(), id);
+	    model.addAttribute("consumidor", consumidor);
+        return "redirect:/consumidor/educacional";
+	}
+	
+	@GetMapping("/{id}/desfavoritarServico")
+    public String desfavoritarServico(HttpSession session, Model model, @PathVariable int id) {
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		cursoFservice.desfavoritar(consumidor.getId(), id);
+	    model.addAttribute("consumidor", consumidor);
+        return "redirect:/consumidor/educacional";
+	}
+	
 }
