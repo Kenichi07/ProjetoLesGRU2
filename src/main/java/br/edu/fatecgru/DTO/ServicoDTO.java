@@ -39,7 +39,7 @@ public class ServicoDTO {
 			this.nomeCategoria = nomeCategoria;
 			this.cidade = cidade;
 		}
-
+	 
 		// Getters e Setters
 
 		public int getId() {return id;}

@@ -42,8 +42,8 @@
 							 <p th:text="${servico.Descricao}"></p>
 							 <p th:text="${#numbers.formatCurrency(servico.Valor)}"></p>
 							 <div class="card-actions">
-						     <a class="edit-btn" th:href="@{/prestador/{id}/edit}">Editar</a>
-						     <a class="delete-btn" th:href="@{/prestador/{id}/delete}">Excluir</a>
+						     <a class="edit-btn" th:href="@{/prestador/{id}/edit(id=${servico.id})}">Editar</a>
+						     <a class="delete-btn" th:href="@{/prestador/{id}/(id=${servico.id})}">Excluir</a>
 						   </div>
            </div>
          </div>

@@ -148,9 +148,9 @@ public class ServicoService {
         		.stream().map(s -> new ServicoDTO(s)).toList();
     }
 	   
-    public ServicoDTO buscarServicoPorId(int servicoId) {
+    public ServicoCadastroDTO buscarServicoPorId(int servicoId) {
     	Servico s = servicoRepository.findById(servicoId).get();
-    	return new ServicoDTO(s);
+    	return new ServicoCadastroDTO(s);
     }
     
     public void deletarServico(int servicoId) {

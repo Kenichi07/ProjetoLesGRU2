@@ -1,5 +1,7 @@
 package br.edu.fatecgru.DTO;
 
+import br.edu.fatecgru.model.entity.Servico;
+
 public class ServicoCadastroDTO {
 	private Integer id; 
 	private String nome;
@@ -18,6 +20,26 @@ public class ServicoCadastroDTO {
 		this.descricao = descricao;
 		this.valor = valor;
 		this.prestadorId = prestadorServicoId;
+		this.nomeCategoria = nomeCategoria;
+		this.nomeCidade = nomeCidade;
+		this.nomeEstado = nomeEstado;
+	}
+	
+	public ServicoCadastroDTO(Servico s) {
+        this.id = s.getId();
+        this.nome = s.getNome();
+        this.descricao = s.getDescricao();
+        this.valor = s.getValor();
+        this.nomeCategoria = s.getCategoria().getNome();
+        this.nomeCidade = s.getCidade().getNome();
+        this.nomeEstado = s.getCidade().getEstado().getNome();
+    }
+	
+	public ServicoCadastroDTO(Integer id, String nome, String descricao, Float valor, String nomeCategoria, String nomeCidade,
+			String nomeEstado) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.valor = valor;
 		this.nomeCategoria = nomeCategoria;
 		this.nomeCidade = nomeCidade;
 		this.nomeEstado = nomeEstado;

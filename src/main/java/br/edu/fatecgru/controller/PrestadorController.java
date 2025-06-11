@@ -129,8 +129,9 @@ public class PrestadorController {
 	@GetMapping("/{id}/edit")
 	public String editServico(HttpSession session, Model model, @PathVariable Integer id) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
-		
+		ServicoCadastroDTO dto = servicoService.buscarServicoPorId(id);
 		model
+			.addAttribute("servicoCadastroDTO", dto)
 			.addAttribute("prestador", prestador)
 			.addAttribute("novo", false);
 		return "formpresta";
