@@ -62,7 +62,7 @@
 							<p th:text="${curso.nomeCategoria}"></p>
 							<p th:text="${curso.descricao}"></p>
 		          <p>Link: <label th:text="${curso.linkCurso}"></label></p>
-		          <a th:href="@{/prestador/curso}" class="card-link">Ver Mais...</a>
+		          <a th:href="@{/prestador/{id}/curso(id=${curso.id})}" class="card-link">Ver Mais...</a>
 		        </div>
         	</div>
         </div>
@@ -97,7 +97,7 @@
 							<p th:text="${curso.nomeCategoria}"></p>
 							<p th:text="${curso.descricao}"></p>
 		          <p>Link: <label th:text="${curso.linkCurso}"></label></p>
-              <a th:href="@{/prestador/curso}" class="card-link">Ver Mais...</a>
+              <a th:href="@{/prestador/{id}/curso(id=${curso.id})}" class="card-link">Ver Mais...</a>
             </div>
           </div>
         </div>

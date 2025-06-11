@@ -63,7 +63,7 @@
                     </div>
 										<p th:text="${servico.Descricao}"></p>
 										<p th:text="${#numbers.formatCurrency(servico.Valor)}"></p>
-                    <a th:href="@{/consumidor/servico}" class="card-link">Ver Mais...</a>
+                    <a th:href="@{/consumidor/{id}/servico(id=${servico.id})}" class="card-link">Ver Mais...</a>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                 <h2>Serviços Favoritos</h2>
             </div>
             <div class="card-grid">
-                <div class="card"th:each="servico : ${servicoF}">
+                <div class="card" th:each="servico : ${servicoF}">
                     <div class="card-header">
                         <h3 th:text="${servico.NomeServico}"></h3>
 												<a th:href="@{/consumidor/{id}/desfavoritar}">
@@ -99,7 +99,7 @@
                     </div>
 										<p th:text="${servico.Descricao}"></p>
 										<p th:text="${#numbers.formatCurrency(servico.Valor)}"></p>
-                    <a th:href="@{/consumidor/servico}" class="card-link">Ver Mais...</a>
+                    <a th:href="@{/consumidor/{id}/servico(id=${servico.id})}" class="card-link">Ver Mais...</a>
                 </div>
             </div>
         </div>

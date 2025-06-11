@@ -19,6 +19,7 @@ import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
 import br.edu.fatecgru.model.entity.Administrador;
+import br.edu.fatecgru.model.entity.ConsumidorServico;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.Servico;
 import br.edu.fatecgru.service.CursoFavoritoService;
@@ -102,8 +103,11 @@ public class PrestadorController {
         return "cursopresta";
     }
 	
-	@GetMapping("/curso")
-    public String curso() {
+	@GetMapping("/{id}/curso")
+    public String curso(HttpSession session, Model model, @PathVariable int id) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("prestador", prestador);
+	    model.addAttribute("curso", cursoService.buscarPorId(id));
         return "cursoindividualpresta";
     }
 	
