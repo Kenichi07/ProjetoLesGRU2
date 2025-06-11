@@ -19,7 +19,7 @@ public class CidadeService {
 	}
 	
 	public Cidade buscarCidadePorNome(String nome) {
-		return cidadeRepository.findByNome(nome);
+		return cidadeRepository.findByNome(nome).get();
 	}
 	
 	public List<Cidade> buscarTodasCidadesPorId(List<Integer> idsCidades){

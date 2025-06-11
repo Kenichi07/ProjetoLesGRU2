@@ -11,7 +11,7 @@ import br.edu.fatecgru.model.entity.Estado;
 @Repository
 public interface CidadeRepository extends JpaRepository<Cidade, Integer> { 
 	
-	public Cidade findByNome(String nome);
+	public Optional<Cidade> findByNome(String nome);
 	
 	public Optional<Cidade> findByNomeAndEstado(String nome, Estado estado);
 }

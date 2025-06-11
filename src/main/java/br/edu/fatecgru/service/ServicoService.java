@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
+import br.edu.fatecgru.DTO.ServicoUpdateDTO;
 import br.edu.fatecgru.model.entity.Categoria;
 import br.edu.fatecgru.model.entity.Cidade;
 import br.edu.fatecgru.model.entity.Estado;
@@ -130,7 +131,7 @@ public class ServicoService {
 	            .toList();
 	}
 	
-	//METODO AUX PARA BUSCAR TODOS SERVICOS CRIADOS PELO USUARIO
+	//METODO AUX PARA BUSCAR TODOS SERVICOS CRIADOS PELO PRESTADOR
 	public List<Servico> buscarPorPrestadorId(int idPrestador){
 		return servicoRepository.findByPrestadorservicoId(idPrestador);			
 	}
@@ -147,11 +148,46 @@ public class ServicoService {
         		.stream().map(s -> new ServicoDTO(s)).toList();
     }
 	   
+    public ServicoDTO buscarServicoPorId(int servicoId) {
+    	Servico s = servicoRepository.findById(servicoId).get();
+    	return new ServicoDTO(s);
+    }
+    
     public void deletarServico(int servicoId) {
         Servico servico = servicoRepository.findById(servicoId)
             .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + servicoId));
         servicoFavoritoRepository.deleteByIdServico(servico);
         servicoRepository.delete(servico);
     }
+    
+    @Transactional
+    public void atualizarServico(ServicoUpdateDTO dto) {
+        // Busca o serviço existente
+        Servico servicoExistente = servicoRepository.findById(dto.getId())
+            .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + dto.getId()));
+
+        // Categoria: busca por nome ou cria uma nova
+        Categoria categoria = categoriaRepository.findByNome(dto.getNomeCategoria())
+            .orElseGet(() -> {
+                Categoria novaCategoria = new Categoria();
+                novaCategoria.setNome(dto.getNomeCategoria());
+                return categoriaRepository.save(novaCategoria);
+            });
+
+        // Cidade (supondo que seja única por nome apenas)
+        Cidade cidade = cidadeRepository.findByNome(dto.getNomeCidade())
+            .orElseThrow(() -> new RuntimeException("Cidade não encontrada: " + dto.getNomeCidade()));
+
+        // Atualiza os campos do serviço
+        servicoExistente.setNome(dto.getNome());
+        servicoExistente.setDescricao(dto.getDescricao());
+        servicoExistente.setValor(dto.getValor());
+        servicoExistente.setCategoria(categoria);
+        servicoExistente.setCidade(cidade);
+
+        // Persiste a atualização
+        servicoRepository.save(servicoExistente);
+    }
+
 
 }

@@ -29,6 +29,8 @@ public class ServicoDTO {
 	        this.estado = s.getCidade().getEstado().getNome();
 	    }
 
+	    
+	    
 	 // Getters e Setters
 		public int getId() {return id;}
 		public void setId(int id) {this.id = id;}
