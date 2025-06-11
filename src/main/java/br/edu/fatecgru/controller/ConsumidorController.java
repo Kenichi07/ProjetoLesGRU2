@@ -18,6 +18,7 @@ import br.edu.fatecgru.DTO.ConsumidorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.CursoDTO;
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
+import br.edu.fatecgru.DTO.ServicoSelectDTO;
 import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
 import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.ConsumidorServico;
@@ -107,8 +108,8 @@ public class ConsumidorController {
 	
 	@GetMapping("/catalogo")
     public String catalogo(HttpSession session, Model model) {
-		List<ServicoDTO> servicos = servicoService.buscarTodosServico();
 		ConsumidorServico consu = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		List<ServicoSelectDTO> servicos = servicoFservice.buscarTodosServicos(consu.getId());
 	    model.addAttribute("consu", consu);
 	    model.addAttribute("servicos",servicos);
         return "catalogo";
