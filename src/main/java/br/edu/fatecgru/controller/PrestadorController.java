@@ -69,6 +69,7 @@ public class PrestadorController {
     public String home(HttpSession session, Model model) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
 		List<ServicoDTO> servicos = prestadorService.buscarServicosCriados(prestador.getId());
+		System.out.println(prestador.getId());
 	    model.addAttribute("prestador", prestador);
 	    model.addAttribute("servicos", servicos);
         return "homeprestador";
@@ -105,6 +106,7 @@ public class PrestadorController {
 	@GetMapping("/list")
     public String meusServicos(HttpSession session, Model model) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		System.out.println(prestador.getId());
 		List<ServicoDTO> servicos = prestadorService.buscarServicosCriados(prestador.getId());
 	    model.addAttribute("prestador", prestador);
 	    model.addAttribute("servicos", servicos);
@@ -129,6 +131,7 @@ public class PrestadorController {
 	@GetMapping("/{id}/edit")
 	public String editServico(HttpSession session, Model model, @PathVariable Integer id) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		System.out.println(prestador.getId());
 		ServicoCadastroDTO dto = servicoService.buscarServicoPorId(id);
 		model
 			.addAttribute("servicoCadastroDTO", dto)
@@ -138,8 +141,11 @@ public class PrestadorController {
 	}
 	
 	@GetMapping("/{id}/delete")
-	public String delete(@PathVariable Integer id) {
-		prestadorService.delete(id);
+	public String delete(HttpSession session, Model model, @PathVariable Integer id) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		model
+			.addAttribute("prestador", prestador);
+		servicoService.deletarServico(0);
 		return "redirect:/prestador/list";
 	}
 	
