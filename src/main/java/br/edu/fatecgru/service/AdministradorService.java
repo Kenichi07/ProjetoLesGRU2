@@ -40,9 +40,15 @@ public class AdministradorService {
         administradorRepository.save(entity);
     }
     
-    public List<UsuarioDTO> listarTodosUsuarios(){
-		return usuarioRepository.findAll().stream().map(u -> new UsuarioDTO(u)).toList();
-	}
+    public List<UsuarioDTO> listarTodosUsuarios(int idUsuarioLogado) {
+        List<UsuarioDTO> dto = usuarioRepository.findAll().stream()
+                .filter(u -> u.getId() != idUsuarioLogado) // Filtra para remover o usuário logado
+                .map(UsuarioDTO::new)
+                .toList();
+
+        return dto;
+    }
+
     
     public void cadastrarCurso(CursoCadastroDTO dto) {
     	cursoService.salvarCurso(dto);

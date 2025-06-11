@@ -15,24 +15,23 @@
         </div>
 				<nav>
           <ul class="nav-links">
-              <li><a th:href="@{/consumidor/home}">Home</a></li>
-              <li><a th:href="@{/consumidor/educacional}">Educacional</a></li>
-              <li><a th:href="@{/consumidor/catalogo}">Catálogo de Serviços</a></li>
-              <li><a th:href="@{/consumidor/equipe}">Sobre Nós</a></li>
+              <li><a th:href="@{/prestador/home}">Home</a></li>
+              <li><a th:href="@{/prestador/educacional}">Educacional</a></li>
+              <li><a th:href="@{/prestador/equipe}">Sobre Nós</a></li>
           </ul>
         </nav>
 				<div class="dropdown">	  
 					<img src="/imagem/Group.png" alt="Profile" class="dropbtn" onclick="toggleDropdown()">
 				  <div id="myDropdown" class="dropdown-content">
-				    <a th:href="@{/consumidor/perfil}">Perfil</a>
-				    <a th:href="@{/consumidor/sair}">Sair</a>
+				    <a th:href="@{/prestador/perfil}">Perfil</a>
+				    <a th:href="@{/prestador/sair}">Sair</a>
 				  </div>
 				</div>
     </header>
 
     <main class="container">
 			<h1>Perfil</h1>
-        <form class="form" th:action="@{/consumidor/save}" th:object="${consumidor}" method="post">
+        <form class="form" th:action="@{/prestador/save}" th:object="${prestador}" method="post">
 					<input type="hidden" th:field="*{id}"/>
 					
 					<label for="nome">Nome:</label>
@@ -44,9 +43,12 @@
           <label for="valor">Senha:</label>
           <input type="password" id="valor" placeholder="Insira a senha" th:field="*{senha}" required>
 					
+					<label for="valor">WhatSapp:</label>
+					<input type="text" id="valor" placeholder="Insira o whatsapp" th:field="*{whatsApp}" maxlength="11" pattern="[0-9]{11}" required>
+				
 					<div>
 						<button type="submit" class="btn">Salvar</button>
-						<a th:href="@{/consumidor/home}" class="btn">Voltar</a>
+						<a th:href="@{/prestador/home}" class="btn">Voltar</a>
 					</div>
         </form>
     </main>

@@ -15,7 +15,7 @@
         </div>
         <nav>
           <ul class="nav-links">
-            <li><a th:href="@{/administrador/home}">Home</a></li>
+            <li><a th:href="@{/administrador/usuarios}">Home</a></li>
             <li><a th:href="@{/administrador/educacional}">Educacional</a></li>
             <li><a th:href="@{/administrador/equipe}">Sobre Nós</a></li>
           </ul>
@@ -41,10 +41,11 @@
           <input type="email" id="descricao" placeholder="Insira o email" th:field="*{email}" required>
 
           <label for="valor">Senha:</label>
-          <input type="text" id="valor" placeholder="Insira a senha" th:field="*{senha}" required>
+          <input type="password" id="valor" placeholder="Insira a senha" th:field="*{senha}" required>
 					
 					<div>
 						<button type="submit" class="btn">Salvar</button>
+						<a th:href="@{/administrador/usuarios}" class="btn">Voltar</a>
 					</div>
         </form>
     </main>

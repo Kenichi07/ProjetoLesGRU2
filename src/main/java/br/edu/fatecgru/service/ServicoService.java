@@ -149,6 +149,11 @@ public class ServicoService {
     	return new ServicoCadastroDTO(s);
     }
     
+    public ServicoDTO buscarServicoDTOPorId(int servicoId) {
+    	Servico s = servicoRepository.findById(servicoId).get();
+    	return new ServicoDTO(s);
+    }
+    
     public void deletarServico(int servicoId) {
         Servico servico = servicoRepository.findById(servicoId)
             .orElseThrow(() -> new RuntimeException("Serviço não encontrado com ID: " + servicoId));

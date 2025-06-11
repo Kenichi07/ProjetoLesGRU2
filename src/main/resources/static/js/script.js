@@ -38,3 +38,20 @@ function atualizarVisibilidade() {
     whatsappGroup.style.display = 'none';
   }
 }
+
+function toggleFavorito(checkbox) {
+  const cursoId = checkbox.getAttribute('data-id');
+  const url = checkbox.checked
+    ? `/curso/favoritar/${cursoId}`
+    : `/curso/desfavoritar/${cursoId}`;
+
+  fetch(url, { method: 'POST' })
+    .then(res => {
+      if (!res.ok) throw new Error('Erro ao atualizar favorito');
+    })
+    .catch(err => {
+      alert(err.message);
+      checkbox.checked = !checkbox.checked; // Reverte em caso de erro
+    });
+}
+

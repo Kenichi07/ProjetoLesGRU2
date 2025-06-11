@@ -1,0 +1,172 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+		background-color: #f9f9ff;
+	  color: #111;
+		height: 100vh;
+    justify-content: space-between;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    background-color: white;
+}
+
+.logo img {
+    width: 71px;
+    height: 69px;
+		justify-content: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #111;
+    font-weight: 500;
+		font-size: 18px;
+}
+
+.nav-links li a.active {
+    color: #0062ff;
+    font-weight: 600;
+}
+
+/* Container do dropdown */
+.dropdown {
+  display: flex;
+  flex-direction: row;
+	gap: 10px;
+}
+
+.dropdown-content {
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+.dropdown-content a {
+	text-decoration: none;
+  color: #111;
+  font-weight: 500;
+	font-size: 18px;
+}
+
+.dropdown-content a:hover{
+	color: #0062ff;
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 30px;
+    background-color: #f9f9f9;
+}
+
+.hero-text {
+    max-width: 50%;
+}
+
+.hero-text h1 {
+    font-size: 36px;
+    color: #2563eb;
+}
+
+.hero-text p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.hero-text .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #ddd;
+    color: #333;
+}
+
+.hero img {
+    max-width: 40%;
+    border-radius: 10px;
+}
+
+.how-it-works {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.how-it-works h2 {
+    margin-bottom: 30px;
+    color: #2563eb;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 250px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    background-color: #f1f1f1;
+		margin-top: auto;
+}
+
+footer a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #2563eb;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
