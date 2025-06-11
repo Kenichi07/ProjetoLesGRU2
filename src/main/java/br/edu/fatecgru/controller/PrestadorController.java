@@ -85,7 +85,7 @@ public class PrestadorController {
     public String educacional(HttpSession session, Model model) {
 		List<CursoDTO> curso = cursoService.buscarCursosMaisBaratos();
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
-		List<CursoDTO> cursoF = cursoFservice.listarCursosFavoritosPorUsuario(prestador.getId());
+		List<CursoSelectDTO> cursoF = cursoFservice.listarCursosFavoritosPorUsuario(prestador.getId());
 	    model.addAttribute("prestador", prestador);
 		model.addAttribute("cursos", curso);
 		model.addAttribute("cursoF", cursoF);
@@ -158,7 +158,7 @@ public class PrestadorController {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
 		model
 			.addAttribute("prestador", prestador);
-		servicoService.deletarServico(0);
+		servicoService.deletarServico(id);
 		return "redirect:/prestador/list";
 	}
 	
