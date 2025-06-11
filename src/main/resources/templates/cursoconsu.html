@@ -40,7 +40,7 @@
             <div class="card-header">
               <h3 th:text="${curso.nome}"></h3>
 							<label class="heart-checkbox">
-							  <input type="checkbox" />
+							  <input type="checkbox" th:checked="${curso.isFavoritadoPorUsuario}"/>
 							  <svg
 							    class="heart"
 							    viewBox="0 0 24 24"

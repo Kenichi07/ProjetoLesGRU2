@@ -184,7 +184,7 @@ public class AdministradorController {
 	    if (usuario != null) {
 			session.setAttribute("usuarioLogado", usuario); // guarda na sessão
 	        if (usuario instanceof Administrador) {
-	            return "redirect:/administrador/home";
+	            return "redirect:/administrador/usuarios";
 	        } else if (usuario instanceof PrestadorServico) {
 	            return "redirect:/prestador/home";
 	        } else if (usuario instanceof ConsumidorServico) {

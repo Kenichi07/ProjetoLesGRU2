@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.CursoDTO;
+import br.edu.fatecgru.DTO.CursoSelectDTO;
 import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
@@ -26,6 +27,7 @@ import br.edu.fatecgru.service.CursoFavoritoService;
 import br.edu.fatecgru.service.CursoService;
 import br.edu.fatecgru.service.PrestadorService;
 import br.edu.fatecgru.service.ServicoService;
+import br.edu.fatecgru.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 
 //@RestController
@@ -44,6 +46,9 @@ public class PrestadorController {
 	
 	@Autowired
 	private ServicoService servicoService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	//CADASTRO JA PRONTO - TESTA AI PRA VER SE O CABRA É BOM MESMO
 	@PostMapping("/cadastro")
@@ -97,7 +102,7 @@ public class PrestadorController {
 	@GetMapping("/cursos")
     public String cursos(HttpSession session, Model model) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
-		List<CursoDTO> curso = cursoService.listarTodosCursos();
+		List<CursoSelectDTO> curso = cursoFservice.buscarTodosCursos(prestador.getId());
 		model.addAttribute("prestador", prestador);
 		model.addAttribute("cursos", curso);
         return "cursopresta";
@@ -172,7 +177,15 @@ public class PrestadorController {
 	    }
 	    
 		return "redirect:/prestador/list";
-	}	
+	}
+	
+	@PostMapping("savePrestador")
+	public String atualizar(@ModelAttribute PrestadorServico dto, HttpSession session, Model model) {
+		prestadorService.salvar(dto);
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+	    model.addAttribute("prestador", prestador);
+	    return "redirect:/prestador/home";
+	}
 	
 	@GetMapping("/perfil")
     public String perfil(HttpSession session, Model model) {

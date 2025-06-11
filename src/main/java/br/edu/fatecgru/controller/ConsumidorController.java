@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.ConsumidorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.CursoDTO;
+import br.edu.fatecgru.DTO.CursoSelectDTO;
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
 import br.edu.fatecgru.DTO.ServicoSelectDTO;
@@ -124,8 +125,8 @@ public class ConsumidorController {
 	
 	@GetMapping("/cursos")
     public String cursos(HttpSession session, Model model) {
-		List<CursoDTO> curso = cursoService.listarTodosCursos();
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		List<CursoSelectDTO> curso = cursoFservice.buscarTodosCursos(consumidor.getId());
 	    model.addAttribute("consumidor", consumidor);
 		model.addAttribute("cursos", curso);
         return "cursoconsu";
