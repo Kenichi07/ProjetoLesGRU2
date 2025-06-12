@@ -25,4 +25,6 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 
 	List<Curso> findTop8ByOrderByNomeAsc();
 
+	List<Curso> findByCategoriaId(Integer categoriaId);
+
 }

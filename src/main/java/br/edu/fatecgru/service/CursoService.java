@@ -118,21 +118,55 @@ public class CursoService {
 	    cursoRepository.delete(curso);
 	}
 	
-	//METODO CONSULTAR POR NOME
-	public List<CursoDTO> buscarPorNome(String nome) {
-	    return cursoRepository.findByNomeContainingIgnoreCase(nome)
-	        .stream()
-	        .map(CursoDTO::new)
-	        .toList();
+	public List<CursoSelectDTO> buscarPorNome(String nome, int usuarioId) {
+	    // Buscar cursos com nome correspondente (ignorando maiúsculas/minúsculas)
+	    List<Curso> cursos = cursoRepository.findByNomeContainingIgnoreCase(nome);
+
+	    // Buscar cursos favoritados pelo usuário
+	    List<CursoFavorito> favoritosDoUsuario = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
+
+	    // Obter os IDs dos cursos favoritados
+	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
+	            .map(f -> f.getId().getCurso().getId())
+	            .collect(Collectors.toSet());
+
+	    // Montar DTOs com a flag de favorito
+	    return cursos.stream()
+	            .map(curso -> {
+	                boolean favoritado = idsFavoritados.contains(curso.getId());
+	                CursoSelectDTO dto = new CursoSelectDTO(curso);
+	                dto.setFavoritadoPorUsuario(favoritado);
+	                return dto;
+	            })
+	            .toList();
 	}
+
 	
 	//METODO CONSULTA POR NOME DA CATEGORIA
-	public List<CursoDTO> buscarPorCategoria(String nomeCategoria) {
-		return cursoRepository.findByCategoriaNome(nomeCategoria)
-	        .stream()
-	        .map(CursoDTO::new)
-	        .toList();
+	public List<CursoSelectDTO> buscarPorCategoriaId(int categoriaId, int usuarioId) {
+	    // Buscar cursos pela categoria pelo ID
+	    List<Curso> cursos = cursoRepository.findByCategoriaId(categoriaId);
+
+	    // Buscar cursos favoritados pelo usuário
+	    List<CursoFavorito> favoritosDoUsuario = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
+
+	    // Obter os IDs dos cursos favoritados
+	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
+	            .map(f -> f.getId().getCurso().getId())
+	            .collect(Collectors.toSet());
+
+	    // Montar DTOs com a flag de favorito
+	    return cursos.stream()
+	            .map(curso -> {
+	                boolean favoritado = idsFavoritados.contains(curso.getId());
+	                CursoSelectDTO dto = new CursoSelectDTO(curso);
+	                dto.setFavoritadoPorUsuario(favoritado);
+	                return dto;
+	            })
+	            .toList();
 	}
+
+
 
 	public List<CursoSelectDTO> buscarOitoPrimeirosCursosNaoFavoritados(int usuarioId) {
 	    // Buscar todos os cursos
