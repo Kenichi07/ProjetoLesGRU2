@@ -23,13 +23,35 @@
 				<div class="dropdown">	  
 					<img src="/imagem/Group.png" alt="Profile" class="dropbtn" onclick="toggleDropdown()">
 				  <div id="myDropdown" class="dropdown-content">
-				    <a th:href="prestador/perfil">Perfil</a>
-				    <a th:href="prestador/sair">Sair</a>
+				    <a th:href="@{/prestador/perfil}">Perfil</a>
+				    <a th:href="@{/prestador/sair}">Sair</a>
 				  </div>
 				</div>
     </header>
 
     <main class="container">
+			<div class="search-box" style="position: relative;">
+			    <form action="/prestador/buscar" method="get" class="search-form">
+			        <input type="text" name="nome" placeholder="Pesquisar Curso" />
+			        <button class="search-btn" type="submit">
+			            <img src="/imagem/lupa.png" alt="Logo">
+			        </button>
+
+			        <div class="filter-container" style="position: relative;">
+			            <button class="filter-btn" id="filterButton" type="button">
+			                <img src="/imagem/filtro.png" alt="Logo">
+			            </button>
+
+			            <!-- Dropdown do filtro -->
+			            <div id="filterDropdown" class="filter-dropdown hidden">
+			                <a href="#">Preço</a>
+			                <a href="#">Categoria</a>
+			                <a href="#">Avaliação</a>
+			            </div>
+			        </div>
+			    </form>
+			</div>
+						
       <div class="section">
         <div class="section-header">
             <h2>Cursos</h2>
