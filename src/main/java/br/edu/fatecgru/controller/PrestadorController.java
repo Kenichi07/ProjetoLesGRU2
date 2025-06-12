@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.fatecgru.DTO.CursoDTO;
@@ -18,6 +19,7 @@ import br.edu.fatecgru.DTO.CursoSelectDTO;
 import br.edu.fatecgru.DTO.PrestadorServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoCadastroDTO;
 import br.edu.fatecgru.DTO.ServicoDTO;
+import br.edu.fatecgru.DTO.ServicoSelectDTO;
 import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
 import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.ConsumidorServico;

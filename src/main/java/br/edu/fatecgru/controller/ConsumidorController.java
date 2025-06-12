@@ -193,10 +193,19 @@ public class ConsumidorController {
 	
 	@GetMapping("/buscar")
 	public String buscarPorNome(@RequestParam("nome") String nome, HttpSession session, Model model) {
-		
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		List<CursoSelectDTO> cursos = cursoService.buscarPorNome(nome, consumidor.getId());
 		model.addAttribute("consumidor", consumidor);
-		
-		return "redirect:/consumidor/cursos";
+		model.addAttribute("cursos", cursos);
+		return "cursoconsu";
+	}
+	
+	@GetMapping("/buscarServico")
+	public String buscarPorNomeServico(@RequestParam("nome") String nome, HttpSession session, Model model) {
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		List<ServicoSelectDTO> servicos = servicoService.buscarServicoPorNome(nome, consumidor.getId());
+		model.addAttribute("prestador", consumidor);
+		model.addAttribute("servicos", servicos);
+		return "catalogo";
 	}
 }
