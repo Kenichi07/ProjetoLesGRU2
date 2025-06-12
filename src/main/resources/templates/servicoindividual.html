@@ -9,37 +9,50 @@
 <body>
     <header class="header">
         <div class="logo">
-					<a th:href="@{/administrador/index}">
-						<img src="/imagem/logo.png" alt="Logo">
-					</a>
+            <a th:href="@{/administrador/index}">
+                <img src="/imagem/logo.png" alt="Logo">
+            </a>
         </div>
         <nav>
-          <ul class="nav-links">
-            <li><a th:href="@{/consumidor/home}">Home</a></li>
-            <li><a th:href="@{/consumidor/educacional}">Educacional</a></li>
-						<li><a th:href="@{/consumidor/catalogo}" class="active">Catálogo de Serviços</a></li>
-            <li><a th:href="@{/consumidor/equipe}">Sobre Nós</a></li>
-          </ul>
+            <ul class="nav-links">
+                <li><a th:href="@{/consumidor/home}">Home</a></li>
+                <li><a th:href="@{/consumidor/educacional}">Educacional</a></li>
+                <li><a th:href="@{/consumidor/catalogo}" class="active">Catálogo de Serviços</a></li>
+                <li><a th:href="@{/consumidor/equipe}">Sobre Nós</a></li>
+            </ul>
         </nav>
-				<div class="dropdown">	  
-					<img src="/imagem/Group.png" alt="Profile" class="dropbtn" onclick="toggleDropdown()">
-				  <div id="myDropdown" class="dropdown-content">
-				    <a th:href="@{/consumidor/perfil}">Perfil</a>
-				    <a th:href="@{/consumidor/sair}">Sair</a>
-				  </div>
-				</div>
+        <div class="dropdown">	  
+            <img src="/imagem/Group.png" alt="Profile" class="dropbtn" onclick="toggleDropdown()">
+            <div id="myDropdown" class="dropdown-content">
+                <a th:href="@{/consumidor/perfil}">Perfil</a>
+                <a th:href="@{/consumidor/sair}">Sair</a>
+            </div>
+        </div>
     </header>
 
     <main class="container">
-			<div class="section" th:objetc="${dto}">
-       <div class="section-header">
-          <h2>Serviço: <label th:text="${dto.NomeServico}"></label></h2>
-       </div>
-         <p th:text="${dto.Descricao}"></p>
-				 <p>Whatsapp: <label th:text="${dto.NumeroWhatsAppPrestadorServico}"></label></p>
-				 <p>Preço: <label th:text="'R$: ' + ${#numbers.formatDecimal(dto.Valor, 1, 'POINT', 2, 'COMMA')}"></label></p>
-       </div>
+        <div class="section" th:object="${dto}">
+            <div class="section-header">
+                <h2>Serviço: <span th:text="*{nomeServico}"></span></h2>
+            </div>
+            <p><strong>Descrição:</strong></p>
+            <p th:text="*{descricao}"></p>
+            <p><strong>Preço:</strong> <span th:text="'R$: ' + ${#numbers.formatDecimal(dto.valor, 1, 'POINT', 2, 'COMMA')}"></span></p>
+            <p><strong>Cidade:</strong> <span th:text="*{cidade}"></span>, <span th:text="*{nomeEstado}"></span></p>
+			<p>
+			  <strong>Prestador:</strong>
+			  <span th:text="*{nomePrestadorServico}"></span>
+			  <p>
+			    <strong>Contato:</strong>
+			    <span th:text="'(' + ${dto.numeroWhatsAppPrestadorServico.substring(0, 2)} + ') ' 
+			                      + ${dto.numeroWhatsAppPrestadorServico.substring(2, 7)} + '-' 
+			                      + ${dto.numeroWhatsAppPrestadorServico.substring(7)}"></span>
+			  </p>
+			</p>
+
+        </div>
     </main>
-		<script src="/js/script.js"></script>
+    
+    <script src="/js/script.js"></script>
 </body>
 </html>
