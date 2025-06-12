@@ -8,15 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.edu.fatecgru.DTO.CursoDTO;
 import br.edu.fatecgru.DTO.CursoSelectDTO;
-import br.edu.fatecgru.DTO.ServicoSelectDTO;
 import br.edu.fatecgru.model.entity.Curso;
 import br.edu.fatecgru.model.entity.CursoFavorito;
 import br.edu.fatecgru.model.entity.CursoFavoritoPK;
 import br.edu.fatecgru.model.entity.Usuario;
 import br.edu.fatecgru.model.entity.repository.CursoFavoritoRepository;
 import br.edu.fatecgru.model.entity.repository.CursoRepository;
+import br.edu.fatecgru.model.entity.repository.PrestadorServicoRepository;
 import br.edu.fatecgru.model.entity.repository.UsuarioRepository;
 
 @Service
@@ -30,6 +29,9 @@ public class CursoFavoritoService {
 
     @Autowired
     private CursoRepository cursoRepository;
+    
+    @Autowired
+    private PrestadorServicoRepository prestadorRepository;
   
     //METODO PARA FAVORITAR CURSO
     @Transactional
@@ -100,4 +102,5 @@ public class CursoFavoritoService {
                 })
                 .toList();
     }
+  
 }

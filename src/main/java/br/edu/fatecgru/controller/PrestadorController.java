@@ -1,6 +1,7 @@
 package br.edu.fatecgru.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -109,22 +110,6 @@ public class PrestadorController {
 		model.addAttribute("cursos", curso);
         return "cursopresta";
     }
-	
-	@GetMapping("/{id}/favoritarCurso")
-    public String favoritarCurso(HttpSession session, Model model, @PathVariable int id) {
-		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
-		cursoFservice.favoritar(prestador.getId(), id);
-	    model.addAttribute("prestador", prestador);
-        return "redirect:/prestador/cursos";
-	}
-	
-	@GetMapping("/{id}/desfavoritarCurso")
-    public String desfavoritarCurso(HttpSession session, Model model, @PathVariable int id) {
-		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
-		cursoFservice.favoritar(prestador.getId(), id);
-	    model.addAttribute("prestador", prestador);
-        return "redirect:/prestador/cursos";
-	}
 	
 	@GetMapping("/{id}/curso")
     public String curso(HttpSession session, Model model, @PathVariable int id) {
@@ -242,4 +227,5 @@ public class PrestadorController {
 	    model.addAttribute("prestador", prestador);
         return "redirect:/prestador/educacional";
 	}
+
 }
