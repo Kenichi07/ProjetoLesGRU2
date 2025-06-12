@@ -225,19 +225,7 @@ public class ServicoService {
 	public List<Servico> buscarPorPrestadorId(int idPrestador){
 		return servicoRepository.findByPrestadorservicoId(idPrestador);			
 	}
-	
-	//METODO PARA LISTAR POR ID CIDADE
-    public List<ServicoDTO> buscarServicoPorCidade(int idCidade) {
-        return servicoRepository.findServicoByIdCidade(idCidade)
-        		.stream().map(s -> new ServicoDTO(s)).toList();
-    }
-    
-    //METODO PARA LISTAR POR ID ESTADO
-    public List<ServicoDTO> buscarServicoPorEstado(int idEstado) {
-        return servicoRepository.findServicoByIdEstado(idEstado)
-        		.stream().map(s -> new ServicoDTO(s)).toList();
-    }
-	   
+   
     //METODO BUSCAR POR ID
     public ServicoCadastroDTO buscarServicoPorId(int servicoId) {
         	Servico s = servicoRepository.findById(servicoId).get();
@@ -250,14 +238,26 @@ public class ServicoService {
     }
     
     //METODO BUSCAR POR NOME
-    public List<ServicoDTO> buscarPorNome(String nome) {
-        return servicoRepository.findByNomeContainingIgnoreCase(nome)
-            .stream()
-            .map(ServicoDTO::new)
+    public List<ServicoSelectDTO> buscarServicoPorNome(String nome, int usuarioId) {
+        List<Servico> servicos = servicoRepository.findByNomeContainingIgnoreCase(nome);
+
+        List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+        Set<Integer> idsFavoritados = favoritos.stream()
+            .map(f -> f.getId().getServico().getId())
+            .collect(Collectors.toSet());
+
+        return servicos.stream()
+            .map(servico -> {
+                ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+                dto.setFavoritadoPorUsuario(idsFavoritados.contains(servico.getId()));
+                return dto;
+            })
+            .sorted(Comparator.comparing(ServicoSelectDTO::getNomeServico, String.CASE_INSENSITIVE_ORDER))
             .toList();
     }
 
-  //METODO BUSCAR POR FAIXA DE PRECO
+
+    //METODO BUSCAR POR FAIXA DE PRECO
     public List<ServicoDTO> buscarPorFaixaDePreco(Float min, Float max) {
         return servicoRepository.findByPrecoBetween(min, max)
             .stream()
@@ -266,10 +266,103 @@ public class ServicoService {
     }
 
   //METODO BUSCAR POR NOME CATEGORIA
-    public List<ServicoDTO> buscarPorCategoria(String nomeCategoria) {
-        return servicoRepository.findByCategoriaNome(nomeCategoria)
-            .stream()
-            .map(ServicoDTO::new)
+    public List<ServicoSelectDTO> buscarPorCategoria(int categoriaId, int usuarioId) {
+    	 List<Servico> servicos = servicoRepository.findByCategoriaId(categoriaId);
+
+ 	    // Buscar cursos favoritados pelo usuário
+ 	    List<ServicoFavorito> favoritosDoUsuario = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+
+ 	    // Obter os IDs dos cursos favoritados
+ 	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
+ 	            .map(f -> f.getId().getServico().getId())
+ 	            .collect(Collectors.toSet());
+
+ 	    // Montar DTOs com a flag de favorito
+ 	    return servicos.stream()
+ 	            .map(servico -> {
+ 	                boolean favoritado = idsFavoritados.contains(servico.getId());
+ 	                ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+ 	                dto.setFavoritadoPorUsuario(favoritado);
+ 	                return dto;
+ 	            })
+ 	            .toList();
+    }
+    
+    //METODO PARA LISTAR POR ID CIDADE
+    public List<ServicoSelectDTO> buscarServicoPorCidade(int idCidade, int usuarioId) {
+        List<Servico> servicos = servicoRepository.findServicoByIdCidade(idCidade);
+
+        List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+        Set<Integer> idsFavoritados = favoritos.stream()
+            .map(f -> f.getId().getServico().getId())
+            .collect(Collectors.toSet());
+
+        return servicos.stream()
+            .map(servico -> {
+                ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+                dto.setFavoritadoPorUsuario(idsFavoritados.contains(servico.getId()));
+                return dto;
+            })
+            .sorted(Comparator.comparing(ServicoSelectDTO::getNomeServico, String.CASE_INSENSITIVE_ORDER))
             .toList();
     }
+
+    
+    //METODO PARA LISTAR POR ID ESTADO
+    public List<ServicoSelectDTO> buscarServicoPorEstado(int idEstado, int usuarioId) {
+        List<Servico> servicos = servicoRepository.findServicoByIdEstado(idEstado);
+
+        List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+        Set<Integer> idsFavoritados = favoritos.stream()
+            .map(f -> f.getId().getServico().getId())
+            .collect(Collectors.toSet());
+
+        return servicos.stream()
+            .map(servico -> {
+                ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+                dto.setFavoritadoPorUsuario(idsFavoritados.contains(servico.getId()));
+                return dto;
+            })
+            .sorted(Comparator.comparing(ServicoSelectDTO::getNomeServico, String.CASE_INSENSITIVE_ORDER))
+            .toList();
+    }
+    
+    //METODO PARA LISTAR POR NOME CIDADE
+    public List<ServicoSelectDTO> buscarServicoPorNomeCidade(String nomeCidade, int usuarioId) {
+        List<Servico> servicos = servicoRepository.findByCidadeNomeIgnoreCase(nomeCidade);
+
+        List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+        Set<Integer> idsFavoritados = favoritos.stream()
+            .map(f -> f.getId().getServico().getId())
+            .collect(Collectors.toSet());
+
+        return servicos.stream()
+            .map(servico -> {
+                ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+                dto.setFavoritadoPorUsuario(idsFavoritados.contains(servico.getId()));
+                return dto;
+            })
+            .sorted(Comparator.comparing(ServicoSelectDTO::getNomeServico, String.CASE_INSENSITIVE_ORDER))
+            .toList();
+    }
+
+    //METODO PARA LISTAR POR NOME ESTADO
+    public List<ServicoSelectDTO> buscarServicoPorNomeEstado(String nomeEstado, int usuarioId) {
+        List<Servico> servicos = servicoRepository.findByCidadeEstadoNomeIgnoreCase(nomeEstado);
+
+        List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+        Set<Integer> idsFavoritados = favoritos.stream()
+            .map(f -> f.getId().getServico().getId())
+            .collect(Collectors.toSet());
+
+        return servicos.stream()
+            .map(servico -> {
+                ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+                dto.setFavoritadoPorUsuario(idsFavoritados.contains(servico.getId()));
+                return dto;
+            })
+            .sorted(Comparator.comparing(ServicoSelectDTO::getNomeServico, String.CASE_INSENSITIVE_ORDER))
+            .toList();
+    }
+
 }

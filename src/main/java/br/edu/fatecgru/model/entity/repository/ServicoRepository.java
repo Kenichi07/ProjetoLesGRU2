@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import br.edu.fatecgru.model.entity.Curso;
 import br.edu.fatecgru.model.entity.Servico;
 
 @Repository
@@ -31,14 +32,10 @@ public interface ServicoRepository extends JpaRepository<Servico, Integer> {
 
 	List<Servico> findByCategoriaNome(String nomeCategoria);
 	
-	@Query("""
-		    SELECT s FROM Servico s
-		    WHERE s.id NOT IN (
-		        SELECT sf.id.servico.id FROM ServicoFavorito sf
-		        WHERE sf.id.usuario.id = :usuarioId
-		    )
-		    ORDER BY s.preco ASC
-		""")
-	List<Servico> findTop8MaisBaratosNaoFavoritados(@Param("usuarioId") int usuarioId, Package pageable);
+	List<Servico> findByCategoriaId(Integer categoriaId);
+	
+	List<Servico> findByCidadeNomeIgnoreCase(String nomeCidade);
+
+	List<Servico> findByCidadeEstadoNomeIgnoreCase(String nomeEstado);
 
 }
