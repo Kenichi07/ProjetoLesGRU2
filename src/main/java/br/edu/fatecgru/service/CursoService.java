@@ -190,24 +190,6 @@ public class CursoService {
 	            .toList();
 	}
 	
-	//METODO PARA BUSCAR POR NOME DO CURSO, NOME CATEGORIA, NOME CIDADE E NOME ESTADO
-	public List<CursoSelectDTO> buscarCursosPorTermo(String termo, int usuarioId) {
-	    List<Curso> cursos = cursoRepository.buscarPorNomeOuCategoriaOuCidadeOuEstado(termo);
-
-	    Set<Integer> idsFavoritados = cursoFavoritoRepository.findByIdUsuarioId(usuarioId)
-	        .stream()
-	        .map(f -> f.getId().getCurso().getId())
-	        .collect(Collectors.toSet());
-
-	    return cursos.stream()
-	        .map(curso -> {
-	            boolean favoritado = idsFavoritados.contains(curso.getId());
-	            CursoSelectDTO dto = new CursoSelectDTO(curso);
-	            dto.setFavoritadoPorUsuario(favoritado);
-	            return dto;
-	        })
-	        .toList();
-	}
 
 
 
