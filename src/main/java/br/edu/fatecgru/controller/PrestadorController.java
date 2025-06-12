@@ -85,8 +85,8 @@ public class PrestadorController {
 
 	@GetMapping("/educacional")
     public String educacional(HttpSession session, Model model) {
-		List<CursoDTO> curso = cursoService.buscarCursosMaisBaratos();
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		List<CursoSelectDTO> curso = cursoService.buscarOitoPrimeirosCursosNaoFavoritados(prestador.getId());
 		List<CursoSelectDTO> cursoF = cursoFservice.listarCursosFavoritosPorUsuario(prestador.getId());
 	    model.addAttribute("prestador", prestador);
 		model.addAttribute("cursos", curso);
@@ -109,6 +109,22 @@ public class PrestadorController {
 		model.addAttribute("cursos", curso);
         return "cursopresta";
     }
+	
+	@GetMapping("/{id}/favoritarCurso")
+    public String favoritarCurso(HttpSession session, Model model, @PathVariable int id) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		cursoFservice.favoritar(prestador.getId(), id);
+	    model.addAttribute("prestador", prestador);
+        return "redirect:/prestador/cursos";
+	}
+	
+	@GetMapping("/{id}/desfavoritarCurso")
+    public String desfavoritarCurso(HttpSession session, Model model, @PathVariable int id) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		cursoFservice.favoritar(prestador.getId(), id);
+	    model.addAttribute("prestador", prestador);
+        return "redirect:/prestador/cursos";
+	}
 	
 	@GetMapping("/{id}/curso")
     public String curso(HttpSession session, Model model, @PathVariable int id) {
@@ -210,4 +226,20 @@ public class PrestadorController {
 		return "cursopresta";
 	}
 	
+	
+	@GetMapping("/{id}/favoritar")
+    public String favoritar(HttpSession session, Model model, @PathVariable int id) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		cursoFservice.favoritar(prestador.getId(), id);
+	    model.addAttribute("prestador", prestador);
+        return "redirect:/prestador/educacional";
+	}
+	
+	@GetMapping("/{id}/desfavoritar")
+    public String desfavoritar(HttpSession session, Model model, @PathVariable int id) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		cursoFservice.desfavoritar(prestador.getId(), id);
+	    model.addAttribute("prestador", prestador);
+        return "redirect:/prestador/educacional";
+	}
 }

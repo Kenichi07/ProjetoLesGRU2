@@ -118,6 +118,7 @@ insert into servico (id, nome, descricao, preco, cidade_id,prestadorservico_id, 
 insert into servico (id, nome, descricao, preco, cidade_id, prestadorservico_id, categoria_id) VALUES (6, "Desenvolvimento Mobile", "Criação de aplicativos Android e iOS", 2000.00, 2, 3, 1);
 
 insert into servico (id, nome, descricao, preco, cidade_id, prestadorservico_id, categoria_id) VALUES (7, "Reforma de Banheiro", "Modernização e reforma completa de banheiros", 2500.00, 3, 4, 2);
+
 insert into servico (id, nome, descricao, preco, cidade_id, prestadorservico_id, categoria_id) VALUES (8, "Aulas de Inglês", "Curso de inglês para todos os níveis", 300.00, 5, 6, 3);
 
 insert into servico (id, nome, descricao, preco, cidade_id, prestadorservico_id, categoria_id) VALUES (9, "Corte de Cabelo Masculino", "Corte clássico e moderno para homens", 80.00, 2, 3, 4);

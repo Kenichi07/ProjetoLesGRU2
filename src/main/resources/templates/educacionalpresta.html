@@ -41,6 +41,7 @@
                 <h3 th:text="${curso.nome}"></h3>
 								<label class="heart-checkbox">
 								  <input type="checkbox" />
+									<a th:href="@{/prestador/{id}/favoritar(id=${curso.id})}">
 								  <svg
 								    class="heart"
 								    viewBox="0 0 24 24"
@@ -56,6 +57,7 @@
 								      1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
 								    />
 								  </svg>
+									</a>
 								</label>
 
 		          </div>
@@ -77,6 +79,7 @@
                 <h3 th:text="${curso.nome}"></h3>
 								<label class="heart-checkbox">
 								  <input type="checkbox" />
+									<a th:href="@{/prestador/{id}/desfavoritar(id=${curso.id})}">
 								  <svg
 								    class="Heart"
 								    viewBox="0 0 24 24"
@@ -92,6 +95,7 @@
 								      1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
 								    />
 								  </svg>
+									</a>
 								</label>
               </div>
 							<p th:text="${curso.nomeCategoria}"></p>
