@@ -55,3 +55,21 @@ function toggleFavorito(checkbox) {
     });
 }
 
+// Mostrar e esconder o filtro
+const filterButton = document.getElementById('filterButton');
+const filterDropdown = document.getElementById('filterDropdown');
+
+filterButton.addEventListener('click', (event) => {
+    event.stopPropagation(); // Impede o clique de propagar e fechar o menu imediatamente
+    filterDropdown.classList.toggle('hidden');
+});
+
+// Fecha o dropdown ao clicar fora
+document.addEventListener('click', (event) => {
+    if (!filterDropdown.classList.contains('hidden')) {
+        filterDropdown.classList.add('hidden');
+    }
+});
+
+
+
