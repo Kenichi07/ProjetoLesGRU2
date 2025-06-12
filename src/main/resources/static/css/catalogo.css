@@ -138,6 +138,33 @@ body {
   transform: scale(0.95);
 }
 
+.filter-dropdown {
+    position: absolute;
+    top: 45px; /* ajuste conforme necessário */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    width: 150px;
+    z-index: 100;
+}
+
+.filter-dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.filter-dropdown a:hover {
+    background-color: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}
+
 
 .section {
     margin-bottom: 60px;

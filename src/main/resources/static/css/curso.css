@@ -93,9 +93,78 @@ body {
 
 /* Container */
 .container {
-    padding: 80px;
+    padding: 30px 80px;
 		margin: 0px 100px;
 }
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 4px 8px;
+  background-color: white;
+  width: 400px;
+	margin-bottom: 30px;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.search-box button {
+  background: linear-gradient(to bottom, #2f57ef, #3068fa);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  padding: 8px 10px;
+  margin-left: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.search-box button:hover {
+  background: linear-gradient(to bottom, #2749c7, #2458de);
+}
+
+.search-box button:active {
+  transform: scale(0.95);
+}
+
+.filter-dropdown {
+    position: absolute;
+    top: 45px; /* ajuste conforme necessário */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    width: 150px;
+    z-index: 100;
+}
+
+.filter-dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.filter-dropdown a:hover {
+    background-color: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}
+
 
 .section {
     margin-bottom: 30px;
