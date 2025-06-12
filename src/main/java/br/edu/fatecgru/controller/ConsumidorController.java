@@ -194,7 +194,7 @@ public class ConsumidorController {
 	@GetMapping("/buscar")
 	public String buscarPorNome(@RequestParam("nome") String nome, HttpSession session, Model model) {
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
-		List<CursoSelectDTO> cursos = cursoService.buscarCursosPorTermo(nome, consumidor.getId());
+		List<CursoSelectDTO> cursos = cursoService.buscarPorNomeOuCategoria(nome, consumidor.getId());
 		model.addAttribute("consumidor", consumidor);
 		model.addAttribute("cursos", cursos);
 		return "cursoconsu";
@@ -203,7 +203,7 @@ public class ConsumidorController {
 	@GetMapping("/buscarServico")
 	public String buscarPorNomeServico(@RequestParam("nome") String nome, HttpSession session, Model model) {
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
-		List<ServicoSelectDTO> servicos = servicoService.buscarServicoPorNome(nome, consumidor.getId());
+		List<ServicoSelectDTO> servicos = servicoService.buscarPorTermo(nome, consumidor.getId());
 		model.addAttribute("prestador", consumidor);
 		model.addAttribute("servicos", servicos);
 		return "catalogo";

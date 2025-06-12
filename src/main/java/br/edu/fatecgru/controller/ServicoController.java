@@ -24,20 +24,5 @@ public class ServicoController {
 	    return servicoService.buscarTodosServico();
 	    
 	}
-	
-	
-	//Reformular
-	
-	@GetMapping("/cidade/{idCidade}")
-	public List<ServicoDTO> buscarPorCidade(@PathVariable int idCidade) {
-		return  servicoService.buscarServicoPorCidade(idCidade);
-	    
-	}
-	
-	@GetMapping("/estado/{idEstado}")
-	public List<ServicoDTO> buscarPorEstado(@PathVariable int idEstado) {
-		return servicoService.buscarServicoPorEstado(idEstado);
-	    
-	}
 
 }
