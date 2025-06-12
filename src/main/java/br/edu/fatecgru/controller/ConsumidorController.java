@@ -87,8 +87,8 @@ public class ConsumidorController {
 	
 	@GetMapping("/home")
     public String home(HttpSession session, Model model) {
-		List<ServicoDTO> servicos = servicoService.buscarServicosMaisBaratos();
 		ConsumidorServico consu = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		List<ServicoSelectDTO> servicos = servicoService.buscarServicosMaisBaratos2(consu.getId());
 		List<ServicoSelectDTO> servicoF = servicoFservice.listarServicosFavoritosPorUsuario(consu.getId());
 	    model.addAttribute("consu", consu);
 	    model.addAttribute("servicos",servicos);
@@ -98,8 +98,8 @@ public class ConsumidorController {
 
 	@GetMapping("/educacional")
     public String educacional(HttpSession session, Model model) {
-		List<CursoDTO> curso = cursoService.buscarCursosMaisBaratos();
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		List<CursoSelectDTO> curso = cursoService.buscarOitoPrimeirosCursosNaoFavoritados(consumidor.getId());
 		List<CursoSelectDTO> cursoF = cursoFservice.listarCursosFavoritosPorUsuario(consumidor.getId());
 	    model.addAttribute("consumidor", consumidor);
 		model.addAttribute("cursos", curso);

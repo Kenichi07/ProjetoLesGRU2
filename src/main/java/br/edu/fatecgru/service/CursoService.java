@@ -1,5 +1,6 @@
 package br.edu.fatecgru.service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -133,6 +134,33 @@ public class CursoService {
 	        .toList();
 	}
 
-	
+	public List<CursoSelectDTO> buscarOitoPrimeirosCursosNaoFavoritados(int usuarioId) {
+	    // Buscar todos os cursos
+	    List<Curso> todosCursos = cursoRepository.findAll();
+
+	    // Buscar os cursos favoritados pelo usuário
+	    List<CursoFavorito> favoritosDoUsuario = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
+
+	    // Obter os IDs dos cursos favoritados
+	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
+	            .map(f -> f.getId().getCurso().getId())
+	            .collect(Collectors.toSet());
+
+	    // Filtrar cursos que NÃO estão favoritados e ordenar alfabeticamente
+	    List<Curso> naoFavoritados = todosCursos.stream()
+	            .filter(curso -> !idsFavoritados.contains(curso.getId()))
+	            .sorted(Comparator.comparing(Curso::getNome)) // ordenar por nome A-Z
+	            .limit(8) // pegar os 8 primeiros
+	            .toList();
+
+	    // Montar DTOs com flag "favoritado" como false
+	    return naoFavoritados.stream()
+	            .map(curso -> {
+	                CursoSelectDTO dto = new CursoSelectDTO(curso);
+	                dto.setFavoritadoPorUsuario(false); // sabemos que não são favoritados
+	                return dto;
+	            })
+	            .toList();
+	}
 
 }

@@ -1,5 +1,6 @@
 package br.edu.fatecgru.service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -165,6 +166,36 @@ public class ServicoService {
 	    return servicoRepository.findTop8ByOrderByPrecoAsc()
 	            .stream()
 	            .map(ServicoDTO::new)
+	            .toList();
+	}
+	
+
+	public List<ServicoSelectDTO> buscarServicosMaisBaratos2(int usuarioId) {
+	    // Buscar todos os serviços
+	    List<Servico> todosServicos = servicoRepository.findAll();
+
+	    // Buscar os serviços favoritados pelo usuário
+	    List<ServicoFavorito> favoritosDoUsuario = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+
+	    // Obter os IDs dos serviços favoritados
+	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
+	            .map(f -> f.getId().getServico().getId())
+	            .collect(Collectors.toSet());
+
+	    // Filtrar serviços que NÃO estão favoritados
+	    List<Servico> naoFavoritados = todosServicos.stream()
+	            .filter(servico -> !idsFavoritados.contains(servico.getId()))
+	            .sorted(Comparator.comparing(Servico::getValor)) // ordenar por preço crescente
+	            .limit(8) // pegar os 8 mais baratos
+	            .toList();
+
+	    // Montar DTOs com flag "favoritado" como false
+	    return naoFavoritados.stream()
+	            .map(servico -> {
+	                ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+	                dto.setFavoritadoPorUsuario(false); // sabemos que não são favoritados
+	                return dto;
+	            })
 	            .toList();
 	}
 

@@ -41,7 +41,7 @@
                     <div class="card-header">
                         <h3 th:text="${servico.NomeServico}"></h3>
 												<label class="heart-checkbox">
-												  <input type="checkbox" />
+												  <input type="checkbox" th:checked="${servico.isFavoritadoPorUsuario}"/>
 													<a th:href="@{/consumidor/{id}/favoritarServico(id=${servico.id})}">
 												  <svg
 												    class="heart"
@@ -62,7 +62,7 @@
 												</label>
                     </div>
 										<p th:text="${servico.Descricao}"></p>
-										<p th:text="${#numbers.formatCurrency(servico.Valor)}"></p>
+										<p th:text="${#numbers.formatCurrency(servico.Preco)}"></p>
                     <a th:href="@{/consumidor/{id}/servico(id=${servico.id})}" class="card-link">Ver Mais...</a>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                     <div class="card-header">
                         <h3 th:text="${servico.NomeServico}"></h3>
 												<label class="heart-checkbox">
-												  <input type="checkbox" />
+												  <input type="checkbox" th:checked="${servico.isFavoritadoPorUsuario}"/>
 													<a th:href="@{/consumidor/{id}/desfavoritarServico(id=${servico.id})}">
 												  <svg
 												    class="Heart"

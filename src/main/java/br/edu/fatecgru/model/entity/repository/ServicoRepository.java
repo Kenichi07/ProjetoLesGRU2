@@ -30,5 +30,15 @@ public interface ServicoRepository extends JpaRepository<Servico, Integer> {
 	List<Servico> findByPrecoBetween(Float min, Float max);
 
 	List<Servico> findByCategoriaNome(String nomeCategoria);
+	
+	@Query("""
+		    SELECT s FROM Servico s
+		    WHERE s.id NOT IN (
+		        SELECT sf.id.servico.id FROM ServicoFavorito sf
+		        WHERE sf.id.usuario.id = :usuarioId
+		    )
+		    ORDER BY s.preco ASC
+		""")
+	List<Servico> findTop8MaisBaratosNaoFavoritados(@Param("usuarioId") int usuarioId, Package pageable);
 
 }
