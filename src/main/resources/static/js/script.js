@@ -71,5 +71,3 @@ document.addEventListener('click', (event) => {
     }
 });
 
-
-

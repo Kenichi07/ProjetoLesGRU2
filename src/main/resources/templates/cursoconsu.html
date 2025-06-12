@@ -24,8 +24,8 @@
 				<div class="dropdown">	  
 					<img src="/imagem/Group.png" alt="Profile" class="dropbtn" onclick="toggleDropdown()">
 				  <div id="myDropdown" class="dropdown-content">
-				    <a href="/perfil">Perfil</a>
-				    <a href="/logout">Sair</a>
+				    <a th:href="@{/consumidor/perfil}">Perfil</a>
+				    <a th:href="@{/consumidor/sair}">Sair</a>
 				  </div>
 				</div>
     </header>
@@ -33,25 +33,28 @@
     <main class="container">
 			
 			<div class="search-box" style="position: relative;">
-			    <input type="text" placeholder="Pesquisar Serviço" />
-			    <button class="search-btn">
-			        <a>
+			    <form action="/consumidor/buscar" method="get" class="search-form">
+			        <input type="text" name="nome" placeholder="Pesquisar Curso" />
+			        <button class="search-btn" type="submit">
 			            <img src="/imagem/lupa.png" alt="Logo">
-			        </a>
-			    </button>
-			    <button class="filter-btn" id="filterButton">
-			        <a>
-			            <img src="/imagem/filtro.png" alt="Logo">
-			        </a>
-			    </button>
+			        </button>
 
-			    <!-- Dropdown do filtro -->
-			    <div id="filterDropdown" class="filter-dropdown hidden">
-			        <a href="#">Preço</a>
-			        <a href="#">Categoria</a>
-			        <a href="#">Avaliação</a>
-			    </div>
+			        <div class="filter-container" style="position: relative;">
+			            <button class="filter-btn" id="filterButton" type="button">
+			                <img src="/imagem/filtro.png" alt="Logo">
+			            </button>
+
+			            <!-- Dropdown do filtro -->
+			            <div id="filterDropdown" class="filter-dropdown hidden">
+			                <a href="#">Preço</a>
+			                <a href="#">Categoria</a>
+			                <a href="#">Avaliação</a>
+			            </div>
+			        </div>
+			    </form>
 			</div>
+
+
 
 			
       <div class="section">

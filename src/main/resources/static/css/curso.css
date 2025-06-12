@@ -97,51 +97,61 @@ body {
 		margin: 0px 100px;
 }
 
-.search-box {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 4px 8px;
-  background-color: white;
-  width: 400px;
-	margin-bottom: 30px;
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre input e botões */
+		margin-bottom: 10px;
 }
 
-.search-box input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 8px;
-  font-size: 14px;
+.search-form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.search-box button {
-  background: linear-gradient(to bottom, #2f57ef, #3068fa);
-  border: none;
-  border-radius: 6px;
-  color: white;
-  padding: 8px 10px;
-  margin-left: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
+.search-form button {
+    background-color: #3366FF;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.search-box button:hover {
-  background: linear-gradient(to bottom, #2749c7, #2458de);
+.search-form button img {
+    width: 16px;
+    height: 16px;
 }
 
-.search-box button:active {
-  transform: scale(0.95);
+.search-form button:hover {
+    background-color: #254EDA;
+}
+
+.filter-container {
+    position: relative; /* para o dropdown ficar relativo ao botão */
 }
 
 .filter-dropdown {
     position: absolute;
+    top: 100%; /* logo abaixo do botão */
+    left: 0;   /* alinhado com o botão de filtro */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.filter-dropdown {
+    position: absolute;
     top: 45px; /* ajuste conforme necessário */
-    right: 0;
+    right: 1;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 5px;

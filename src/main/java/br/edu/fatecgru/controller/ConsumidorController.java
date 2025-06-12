@@ -3,6 +3,7 @@ package br.edu.fatecgru.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,7 @@ import br.edu.fatecgru.DTO.ServicoSelectDTO;
 import br.edu.fatecgru.DTO.UsuarioCadastroDTO;
 import br.edu.fatecgru.model.entity.Administrador;
 import br.edu.fatecgru.model.entity.ConsumidorServico;
+import br.edu.fatecgru.model.entity.Curso;
 import br.edu.fatecgru.model.entity.CursoFavorito;
 import br.edu.fatecgru.model.entity.PrestadorServico;
 import br.edu.fatecgru.model.entity.ServicoFavorito;
@@ -188,4 +191,12 @@ public class ConsumidorController {
         return "redirect:/consumidor/home";
 	}
 	
+	@GetMapping("/buscar")
+	public String buscarPorNome(@RequestParam("nome") String nome, HttpSession session, Model model) {
+		
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		model.addAttribute("consumidor", consumidor);
+		
+		return "redirect:/consumidor/cursos";
+	}
 }
