@@ -204,7 +204,7 @@ public class PrestadorController {
 	@GetMapping("/buscar")
 	public String buscarPorNome(@RequestParam("nome") String nome, HttpSession session, Model model) {
 		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
-		List<CursoSelectDTO> cursos = cursoService.buscarPorNome(nome, prestador.getId());
+		List<CursoSelectDTO> cursos = cursoService.buscarPorNomeOuCategoria(nome, prestador.getId());
 		model.addAttribute("prestador", prestador);
 		model.addAttribute("cursos", cursos);
 		return "cursopresta";
