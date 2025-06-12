@@ -50,6 +50,7 @@
                     <div class="card-header">
                         <h3 th:text="${servico.NomeServico}"></h3>
 												<label class="heart-checkbox">
+													<a th:href="@{/consumidor/{id}/alterarServico(id=${servico.id})}">
 												  <input type="checkbox"  th:checked="${servico.isFavoritadoPorUsuario}" />
 												  <svg
 												    class="heart"
@@ -66,6 +67,7 @@
 												      1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
 												    />
 												  </svg>
+													</a>
 												</label>
                     </div>
 										<p th:text="${servico.Descricao}"></p>

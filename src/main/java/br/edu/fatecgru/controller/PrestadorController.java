@@ -227,5 +227,31 @@ public class PrestadorController {
 	    model.addAttribute("prestador", prestador);
         return "redirect:/prestador/educacional";
 	}
+	
+	@GetMapping("/{id}/alterar")
+    public String alterar(HttpSession session, Model model, @PathVariable int id) {
+		PrestadorServico prestador = (PrestadorServico) session.getAttribute("usuarioLogado");
+		List<CursoSelectDTO> dto = cursoFservice.buscarTodosCursos(prestador.getId());
+		
+		// Encontrar o curso selecionado na lista
+	    Optional<CursoSelectDTO> cursoSelecionado = dto.stream()
+	            .filter(c -> c.getId() == id)
+	            .findFirst();
+		
+	 // Verificar se está favoritado ou não
+	    if (cursoSelecionado.isPresent()) {
+	        CursoSelectDTO curso = cursoSelecionado.get();
+	        if (curso.isFavoritadoPorUsuario()) {
+	            // Já está favoritado -> vamos desfavoritar
+	            cursoFservice.desfavoritar(prestador.getId(), id);
+	        } else {
+	            // Ainda não está favoritado -> vamos favoritar
+	            cursoFservice.favoritar(prestador.getId(), id);
+	        }
+	    }
+		
+	    model.addAttribute("prestador", prestador);
+        return "redirect:/prestador/cursos";
+	}
 
 }

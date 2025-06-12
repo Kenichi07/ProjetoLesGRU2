@@ -1,6 +1,7 @@
 package br.edu.fatecgru.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -207,5 +208,57 @@ public class ConsumidorController {
 		model.addAttribute("prestador", consumidor);
 		model.addAttribute("servicos", servicos);
 		return "catalogo";
+	}
+	
+	@GetMapping("/{id}/alterar")
+    public String alterar(HttpSession session, Model model, @PathVariable int id) {
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		List<CursoSelectDTO> dto = cursoFservice.buscarTodosCursos(consumidor.getId());
+		
+		// Encontrar o curso selecionado na lista
+	    Optional<CursoSelectDTO> cursoSelecionado = dto.stream()
+	            .filter(c -> c.getId() == id)
+	            .findFirst();
+		
+	 // Verificar se está favoritado ou não
+	    if (cursoSelecionado.isPresent()) {
+	        CursoSelectDTO curso = cursoSelecionado.get();
+	        if (curso.isFavoritadoPorUsuario()) {
+	            // Já está favoritado -> vamos desfavoritar
+	            cursoFservice.desfavoritar(consumidor.getId(), id);
+	        } else {
+	            // Ainda não está favoritado -> vamos favoritar
+	            cursoFservice.favoritar(consumidor.getId(), id);
+	        }
+	    }
+		
+	    model.addAttribute("consumidor", consumidor);
+        return "redirect:/consumidor/cursos";
+	}
+	
+	@GetMapping("/{id}/alterarServico")
+    public String alterarServico(HttpSession session, Model model, @PathVariable int id) {
+		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
+		List<ServicoSelectDTO> dto = servicoFservice.buscarTodosServicos(consumidor.getId());
+		
+		// Encontrar o curso selecionado na lista
+	    Optional<ServicoSelectDTO> servicoSelecionado = dto.stream()
+	            .filter(c -> c.getId() == id)
+	            .findFirst();
+		
+	 // Verificar se está favoritado ou não
+	    if (servicoSelecionado.isPresent()) {
+	    	ServicoSelectDTO servico = servicoSelecionado.get();
+	        if (servico.isFavoritadoPorUsuario()) {
+	            // Já está favoritado -> vamos desfavoritar
+	        	servicoFservice.desfavoritar(consumidor.getId(), id);
+	        } else {
+	            // Ainda não está favoritado -> vamos favoritar
+	        	servicoFservice.favoritar(consumidor.getId(), id);
+	        }
+	    }
+		
+	    model.addAttribute("consumidor", consumidor);
+        return "redirect:/consumidor/catalogo";
 	}
 }
