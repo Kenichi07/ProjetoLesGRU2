@@ -28,14 +28,7 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 
 	List<Curso> findByNomeContainingIgnoreCaseOrCategoriaNomeContainingIgnoreCase(String nome, String nomeCategoria);
 
-	@Query("SELECT DISTINCT c FROM Curso c " +
-		       "JOIN c.categoria cat " +
-		       "JOIN c.cidade cid " +
-		       "JOIN cid.estado est " +
-		       "WHERE LOWER(c.nome) LIKE LOWER(CONCAT('%', :termo, '%')) " +
-		       "OR LOWER(cat.nome) LIKE LOWER(CONCAT('%', :termo, '%')) " +
-		       "OR LOWER(cid.nome) LIKE LOWER(CONCAT('%', :termo, '%')) " +
-		       "OR LOWER(est.nome) LIKE LOWER(CONCAT('%', :termo, '%'))")
 	List<Curso> buscarPorNomeOuCategoriaOuCidadeOuEstado(@Param("termo") String termo);
+	
 
 }

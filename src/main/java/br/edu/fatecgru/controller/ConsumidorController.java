@@ -194,7 +194,7 @@ public class ConsumidorController {
 	@GetMapping("/buscar")
 	public String buscarPorNome(@RequestParam("nome") String nome, HttpSession session, Model model) {
 		ConsumidorServico consumidor = (ConsumidorServico) session.getAttribute("usuarioLogado");
-		List<CursoSelectDTO> cursos = cursoService.buscarPorNomeOuCategoria(nome, consumidor.getId());
+		List<CursoSelectDTO> cursos = cursoService.buscarCursosPorTermo(nome, consumidor.getId());
 		model.addAttribute("consumidor", consumidor);
 		model.addAttribute("cursos", cursos);
 		return "cursoconsu";
