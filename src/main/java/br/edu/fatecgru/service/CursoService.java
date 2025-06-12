@@ -165,6 +165,29 @@ public class CursoService {
 	            })
 	            .toList();
 	}
+	
+	public List<CursoSelectDTO> buscarPorNomeOuCategoria(String termo, int usuarioId) {
+	    // Buscar cursos com nome ou nome da categoria contendo o termo (ignora maiúsculas/minúsculas)
+	    List<Curso> cursos = cursoRepository.findByNomeContainingIgnoreCaseOrCategoriaNomeContainingIgnoreCase(termo,termo);
+
+	    // Buscar cursos favoritados pelo usuário
+	    List<CursoFavorito> favoritosDoUsuario = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
+
+	    // Obter os IDs dos cursos favoritados
+	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
+	            .map(f -> f.getId().getCurso().getId())
+	            .collect(Collectors.toSet());
+
+	    // Montar DTOs com a flag de favorito
+	    return cursos.stream()
+	            .map(curso -> {
+	                boolean favoritado = idsFavoritados.contains(curso.getId());
+	                CursoSelectDTO dto = new CursoSelectDTO(curso);
+	                dto.setFavoritadoPorUsuario(favoritado);
+	                return dto;
+	            })
+	            .toList();
+	}
 
 
 
