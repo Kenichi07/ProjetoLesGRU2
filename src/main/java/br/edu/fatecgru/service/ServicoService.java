@@ -365,4 +365,25 @@ public class ServicoService {
             .toList();
     }
 
+    //METODO BUSCA SERVIÇOS POR TERMO NO NOME, CATEGORIA, CIDADE E ESTADO
+    public List<ServicoSelectDTO> buscarPorTermo(String termo, int usuarioId) {
+        List<Servico> servicos = servicoRepository.buscarPorTermoGeral(termo);
+
+        // Buscar serviços favoritados pelo usuário
+        List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+        Set<Integer> idsFavoritados = favoritos.stream()
+                .map(f -> f.getId().getServico().getId())
+                .collect(Collectors.toSet());
+
+        // Converter para DTO
+        return servicos.stream()
+                .map(servico -> {
+                    boolean favoritado = idsFavoritados.contains(servico.getId());
+                    ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+                    dto.setFavoritadoPorUsuario(favoritado);
+                    return dto;
+                })
+                .toList();
+    }
+
 }

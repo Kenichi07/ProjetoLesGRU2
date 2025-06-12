@@ -38,4 +38,14 @@ public interface ServicoRepository extends JpaRepository<Servico, Integer> {
 
 	List<Servico> findByCidadeEstadoNomeIgnoreCase(String nomeEstado);
 
+	@Query("""
+		    SELECT DISTINCT s FROM Servico s
+		    WHERE 
+		        LOWER(s.nome) LIKE LOWER(CONCAT('%', :termo, '%')) OR
+		        LOWER(s.categoria.nome) LIKE LOWER(CONCAT('%', :termo, '%')) OR
+		        LOWER(s.cidade.nome) LIKE LOWER(CONCAT('%', :termo, '%')) OR
+		        LOWER(s.cidade.estado.nome) LIKE LOWER(CONCAT('%', :termo, '%'))
+		    """)
+		List<Servico> buscarPorTermoGeral(@Param("termo") String termo);
+
 }
