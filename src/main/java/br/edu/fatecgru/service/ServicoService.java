@@ -203,23 +203,22 @@ public class ServicoService {
 	    // Buscar os 8 serviços mais baratos ordenados por preço
 	    List<Servico> servicos = servicoRepository.findTop8ByOrderByPrecoAsc();
 
-	    // Buscar os favoritos do usuário
-	    List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
+	    List<ServicoFavorito> favoritosDoUsuario = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
 
-	    // Criar um set com os IDs dos serviços favoritados
-	    Set<Integer> idsFavoritados = favoritos.stream()
-	            .map(f -> f.getId().getServico().getId())
-	            .collect(Collectors.toSet());
+        Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
+                .map(f -> f.getId().getServico().getId())
+                .collect(Collectors.toSet()); 
 
-	    // Mapear os serviços para DTOs, marcando se são favoritados
-	    return servicos.stream()
-	            .map(servico -> {
-	                ServicoSelectDTO dto = new ServicoSelectDTO(servico);
-	                dto.setFavoritadoPorUsuario(idsFavoritados.contains(servico.getId()));
-	                return dto;
-	            })
-	            .toList();
-	}
+        return servicos.stream()
+                .map(servico -> {
+                    boolean favoritado = idsFavoritados.contains(servico.getId());
+                    ServicoSelectDTO dto = new ServicoSelectDTO(servico);
+                    dto.setFavoritadoPorUsuario(favoritado);
+                    return dto;
+                })
+                .toList();
+        }
+	
 
 	
 	//METODO AUX PARA BUSCAR TODOS SERVICOS CRIADOS PELO PRESTADOR
