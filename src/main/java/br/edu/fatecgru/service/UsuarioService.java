@@ -53,14 +53,7 @@ public class UsuarioService {
 		}
 		return null;
 	}
-	/*public UsuarioDTO autenticarUsuario(LoginDTO dto) {
-	    if (usuarioRepository.existsByEmailAndSenha(dto.getEmail(), dto.getSenha())) {
-	        return new UsuarioDTO(usuarioRepository.findByEmail(dto.getEmail()));
-	    }
-	    return null;
-	}*/
-	//FIM DOS METODOS DE AUTENTICAR
-	
+
 	//METODO PARA CADASTRAR
 	public Usuario cadastrarUsuario(UsuarioCadastroDTO dto) {
 	    if (dto.getPapel().equalsIgnoreCase("ADMINISTRADOR")) {

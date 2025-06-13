@@ -42,18 +42,13 @@ public class CursoService {
 	}
 	
 	public List<CursoSelectDTO> buscarOitoPrimeirosCursos(int usuarioId) {
-	    // Buscar os 8 primeiros cursos ordenados pelo nome (A → Z)
 	    List<Curso> cursos = cursoRepository.findTop8ByOrderByNomeAsc();
-
-	    // Buscar os favoritos do usuário atual
 	    List<CursoFavorito> favoritos = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
 
-	    // Extrair os IDs dos cursos favoritados
 	    Set<Integer> idsFavoritos = favoritos.stream()
 	            .map(f -> f.getId().getCurso().getId())
 	            .collect(Collectors.toSet());
 
-	    // Mapear cursos para DTOs, marcando se são favoritados
 	    return cursos.stream()
 	            .map(curso -> {
 	                CursoSelectDTO dto = new CursoSelectDTO(curso);
@@ -119,18 +114,15 @@ public class CursoService {
 	}
 	
 	public List<CursoSelectDTO> buscarPorNome(String nome, int usuarioId) {
-	    // Buscar cursos com nome correspondente (ignorando maiúsculas/minúsculas)
+	    
 	    List<Curso> cursos = cursoRepository.findByNomeContainingIgnoreCase(nome);
 
-	    // Buscar cursos favoritados pelo usuário
 	    List<CursoFavorito> favoritosDoUsuario = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
 
-	    // Obter os IDs dos cursos favoritados
 	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
 	            .map(f -> f.getId().getCurso().getId())
 	            .collect(Collectors.toSet());
 
-	    // Montar DTOs com a flag de favorito
 	    return cursos.stream()
 	            .map(curso -> {
 	                boolean favoritado = idsFavoritados.contains(curso.getId());
@@ -144,18 +136,15 @@ public class CursoService {
 	
 	//METODO CONSULTA POR NOME DA CATEGORIA
 	public List<CursoSelectDTO> buscarPorCategoriaId(int categoriaId, int usuarioId) {
-	    // Buscar cursos pela categoria pelo ID
+	    
 	    List<Curso> cursos = cursoRepository.findByCategoriaId(categoriaId);
 
-	    // Buscar cursos favoritados pelo usuário
 	    List<CursoFavorito> favoritosDoUsuario = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
 
-	    // Obter os IDs dos cursos favoritados
 	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
 	            .map(f -> f.getId().getCurso().getId())
 	            .collect(Collectors.toSet());
 
-	    // Montar DTOs com a flag de favorito
 	    return cursos.stream()
 	            .map(curso -> {
 	                boolean favoritado = idsFavoritados.contains(curso.getId());
@@ -168,18 +157,15 @@ public class CursoService {
 	
 	//METODO PARA BUSCAR POR NOME DO CURSO E NOME CATEGORIA
 	public List<CursoSelectDTO> buscarPorNomeOuCategoria(String termo, int usuarioId) {
-	    // Buscar cursos com nome ou nome da categoria contendo o termo (ignora maiúsculas/minúsculas)
+	 
 	    List<Curso> cursos = cursoRepository.findByNomeContainingIgnoreCaseOrCategoriaNomeContainingIgnoreCase(termo,termo);
 
-	    // Buscar cursos favoritados pelo usuário
 	    List<CursoFavorito> favoritosDoUsuario = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
 
-	    // Obter os IDs dos cursos favoritados
 	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
 	            .map(f -> f.getId().getCurso().getId())
 	            .collect(Collectors.toSet());
 
-	    // Montar DTOs com a flag de favorito
 	    return cursos.stream()
 	            .map(curso -> {
 	                boolean favoritado = idsFavoritados.contains(curso.getId());
@@ -194,32 +180,24 @@ public class CursoService {
 
 
 	public List<CursoSelectDTO> buscarOitoPrimeirosCursosNaoFavoritados(int usuarioId) {
-	    // Buscar todos os cursos
 	    List<Curso> todosCursos = cursoRepository.findAll();
 
-	    // Buscar os cursos favoritados pelo usuário
 	    List<CursoFavorito> favoritosDoUsuario = cursoFavoritoRepository.findByIdUsuarioId(usuarioId);
 
-	    // Obter os IDs dos cursos favoritados
 	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
 	            .map(f -> f.getId().getCurso().getId())
 	            .collect(Collectors.toSet());
-
-	    // Filtrar cursos que NÃO estão favoritados e ordenar alfabeticamente
 	    List<Curso> naoFavoritados = todosCursos.stream()
 	            .filter(curso -> !idsFavoritados.contains(curso.getId()))
-	            .sorted(Comparator.comparing(Curso::getNome)) // ordenar por nome A-Z
-	            .limit(8) // pegar os 8 primeiros
-	            .toList();
+	            .sorted(Comparator.comparing(Curso::getNome)) 
+	            .limit(8).toList();
 
-	    // Montar DTOs com flag "favoritado" como false
 	    return naoFavoritados.stream()
 	            .map(curso -> {
 	                CursoSelectDTO dto = new CursoSelectDTO(curso);
-	                dto.setFavoritadoPorUsuario(false); // sabemos que não são favoritados
+	                dto.setFavoritadoPorUsuario(false);
 	                return dto;
-	            })
-	            .toList();
+	            }).toList();
 	}
 
 }

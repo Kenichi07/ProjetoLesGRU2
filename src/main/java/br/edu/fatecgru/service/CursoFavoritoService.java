@@ -78,10 +78,8 @@ public class CursoFavoritoService {
                         curso.getDescricao(),
                         curso.getLinkCurso(),
                         curso.getCategoria().getNome(),
-                        true // como veio da lista de favoritos, é true
-                    );
-                })
-                .toList();
+                        true);
+                }).toList();
     }
 
     
@@ -99,8 +97,7 @@ public class CursoFavoritoService {
                     CursoSelectDTO dto = new CursoSelectDTO(curso);
                     dto.setFavoritadoPorUsuario(favoritado);
                     return dto;
-                })
-                .toList();
+                }).toList();
     }
   
 }

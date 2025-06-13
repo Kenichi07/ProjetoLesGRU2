@@ -171,36 +171,27 @@ public class ServicoService {
 	
 
 	public List<ServicoSelectDTO> buscarServicosMaisBaratos2(int usuarioId) {
-	    // Buscar todos os serviços
 	    List<Servico> todosServicos = servicoRepository.findAll();
-
-	    // Buscar os serviços favoritados pelo usuário
 	    List<ServicoFavorito> favoritosDoUsuario = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
-
-	    // Obter os IDs dos serviços favoritados
+	
 	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
 	            .map(f -> f.getId().getServico().getId())
 	            .collect(Collectors.toSet());
 
-	    // Filtrar serviços que NÃO estão favoritados
 	    List<Servico> naoFavoritados = todosServicos.stream()
 	            .filter(servico -> !idsFavoritados.contains(servico.getId()))
-	            .sorted(Comparator.comparing(Servico::getValor)) // ordenar por preço crescente
-	            .limit(8) // pegar os 8 mais baratos
-	            .toList();
+	            .sorted(Comparator.comparing(Servico::getValor)) 
+	            .limit(8).toList();
 
-	    // Montar DTOs com flag "favoritado" como false
 	    return naoFavoritados.stream()
 	            .map(servico -> {
 	                ServicoSelectDTO dto = new ServicoSelectDTO(servico);
-	                dto.setFavoritadoPorUsuario(false); // sabemos que não são favoritados
+	                dto.setFavoritadoPorUsuario(false);
 	                return dto;
-	            })
-	            .toList();
+	            }).toList();
 	}
 
 	public List<ServicoSelectDTO> buscarServicosMaisBaratos(int usuarioId) {
-	    // Buscar os 8 serviços mais baratos ordenados por preço
 	    List<Servico> servicos = servicoRepository.findTop8ByOrderByPrecoAsc();
 
 	    List<ServicoFavorito> favoritosDoUsuario = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
@@ -215,11 +206,9 @@ public class ServicoService {
                     ServicoSelectDTO dto = new ServicoSelectDTO(servico);
                     dto.setFavoritadoPorUsuario(favoritado);
                     return dto;
-                })
-                .toList();
+                }).toList();
         }
 	
-
 	
 	//METODO AUX PARA BUSCAR TODOS SERVICOS CRIADOS PELO PRESTADOR
 	public List<Servico> buscarPorPrestadorId(int idPrestador){
@@ -267,17 +256,13 @@ public class ServicoService {
 
   //METODO BUSCAR POR NOME CATEGORIA
     public List<ServicoSelectDTO> buscarPorCategoria(int categoriaId, int usuarioId) {
-    	 List<Servico> servicos = servicoRepository.findByCategoriaId(categoriaId);
-
- 	    // Buscar cursos favoritados pelo usuário
+    	List<Servico> servicos = servicoRepository.findByCategoriaId(categoriaId);    
  	    List<ServicoFavorito> favoritosDoUsuario = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
 
- 	    // Obter os IDs dos cursos favoritados
  	    Set<Integer> idsFavoritados = favoritosDoUsuario.stream()
  	            .map(f -> f.getId().getServico().getId())
  	            .collect(Collectors.toSet());
 
- 	    // Montar DTOs com a flag de favorito
  	    return servicos.stream()
  	            .map(servico -> {
  	                boolean favoritado = idsFavoritados.contains(servico.getId());
@@ -368,8 +353,6 @@ public class ServicoService {
     //METODO BUSCA SERVIÇOS POR TERMO NO NOME, CATEGORIA, CIDADE E ESTADO
     public List<ServicoSelectDTO> buscarPorTermo(String termo, int usuarioId) {
         List<Servico> servicos = servicoRepository.buscarPorTermoGeral(termo);
-
-        // Buscar serviços favoritados pelo usuário
         List<ServicoFavorito> favoritos = servicoFavoritoRepository.findByIdUsuarioId(usuarioId);
         Set<Integer> idsFavoritados = favoritos.stream()
                 .map(f -> f.getId().getServico().getId())
